@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NITOR | Academic Network</title>
+    
+    <!-- Fonts: Inter for UI, Merriweather for Academic Text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX CSS for Math Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              serif: ['Merriweather', 'serif'],
+            },
+            colors: {
+              slate: {
+                50: '#f8fafc',
+                100: '#f1f5f9',
+                200: '#e2e8f0',
+                300: '#cbd5e1',
+                400: '#94a3b8',
+                500: '#64748b',
+                600: '#475569',
+                700: '#334155',
+                800: '#1e293b',
+                900: '#0f172a',
+                950: '#020617',
+              },
+              indigo: {
+                500: '#6366f1',
+                600: '#4f46e5', // Electric Indigo
+                700: '#4338ca',
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      /* Custom Scrollbar for subtle look */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+      }
+      
+      /* Markdown Content Styles */
+      .prose p {
+        margin-bottom: 0.75em;
+        line-height: 1.6;
+      }
+      .prose ul {
+        list-style-type: disc;
+        padding-left: 1.5em;
+        margin-bottom: 0.75em;
+      }
+      
+      /* KaTeX Overrides for Responsive Scroll */
+      .katex-display {
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 4px 0;
+      }
+      
+      /* Hide scrollbar for elements where we want clean look */
+      .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .hide-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+    </style>
+    <script type="importmap">
+{
+  "imports": {
+    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.9.6",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
+    "react-markdown": "https://aistudiocdn.com/react-markdown@^10.1.0",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
+    "rehype-katex": "https://aistudiocdn.com/rehype-katex@^7.0.0",
+    "remark-math": "https://aistudiocdn.com/remark-math@^6.0.0",
+    "zustand": "https://aistudiocdn.com/zustand@^5.0.3",
+    "zustand/middleware": "https://aistudiocdn.com/zustand@^5.0.3/middleware",
+    "zustand/": "https://aistudiocdn.com/zustand@^5.0.8/",
+    "@supabase/supabase-js": "https://aistudiocdn.com/@supabase/supabase-js@^2.39.3",
+    "dotenv": "https://aistudiocdn.com/dotenv@^17.2.3",
+    "zod": "https://aistudiocdn.com/zod@^3.22.4",
+    "react-hook-form": "https://aistudiocdn.com/react-hook-form@^7.49.3",
+    "@hookform/resolvers/zod": "https://aistudiocdn.com/@hookform/resolvers@^3.3.4/zod",
+    "@hookform/resolvers/": "https://aistudiocdn.com/@hookform/resolvers@^5.2.2/",
+    "jspdf": "https://aistudiocdn.com/jspdf@^2.5.1",
+    "canvas-confetti": "https://aistudiocdn.com/canvas-confetti@^1.9.4"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 antialiased selection:bg-indigo-100 selection:text-indigo-900">
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
