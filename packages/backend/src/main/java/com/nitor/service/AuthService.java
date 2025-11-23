@@ -1,0 +1,148 @@
+package com.nitor.service;
+
+import com.nitor.dto.auth.AuthResponse;
+import com.nitor.dto.auth.LoginRequest;
+import com.nitor.dto.auth.RegisterRequest;
+import com.nitor.dto.profile.ProfileResponse;
+import com.nitor.exception.BadRequestException;
+import com.nitor.exception.ResourceNotFoundException;
+import com.nitor.model.Profile;
+import com.nitor.model.User;
+import com.nitor.repository.ProfileRepository;
+import com.nitor.repository.UserRepository;
+import com.nitor.security.JwtUtil;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.math.BigDecimal;
+import java.util.UUID;
+
+@Slf4j
+@Service
+@RequiredArgsConstructor
+public class AuthService {
+
+    private final UserRepository userRepository;
+    private final ProfileRepository profileRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtUtil jwtUtil;
+    private final AuthenticationManager authenticationManager;
+
+    @Transactional
+    public AuthResponse register(RegisterRequest request) {
+        log.info("Registering new user: {}", request.getEmail());
+
+        // Check if user already exists
+        if (userRepository.existsByEmail(request.getEmail())) {
+            throw new BadRequestException("Email already registered");
+        }
+
+        if (profileRepository.existsByHandle(request.getHandle())) {
+            throw new BadRequestException("Handle already taken");
+        }
+
+        // Create user
+        User user = User.builder()
+                .email(request.getEmail())
+                .passwordHash(passwordEncoder.encode(request.getPassword()))
+                .emailVerified(true) // Auto-verify for demo (in production, send email)
+                .isActive(true)
+                .build();
+
+        user = userRepository.save(user);
+
+        // Create profile
+        Profile profile = Profile.builder()
+                .id(user.getId())
+                .user(user)
+                .fullName(request.getFullName())
+                .handle(request.getHandle())
+                .nitorScore(BigDecimal.ZERO)
+                .verified(false)
+                .onboardingComplete(false)
+                .followersCount(0)
+                .followingCount(0)
+                .publicationsCount(0)
+                .profileVisibility(Profile.ProfileVisibility.PUBLIC)
+                .build();
+
+        profile = profileRepository.save(profile);
+
+        // Generate tokens
+        String accessToken = jwtUtil.generateAccessToken(user.getId(), user.getEmail());
+        String refreshToken = jwtUtil.generateRefreshToken(user.getId(), user.getEmail());
+
+        log.info("User registered successfully: {}", user.getEmail());
+
+        return AuthResponse.builder()
+                .accessToken(accessToken)
+                .refreshToken(refreshToken)
+                .tokenType("Bearer")
+                .user(mapToProfileResponse(profile, user))
+                .needsOnboarding(true)
+                .build();
+    }
+
+    @Transactional(readOnly = true)
+    public AuthResponse login(LoginRequest request) {
+        log.info("User login attempt: {}", request.getEmail());
+
+        // Authenticate user
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        request.getEmail(),
+                        request.getPassword()
+                )
+        );
+
+        // Get user
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new ResourceNotFoundException("User", "email", request.getEmail()));
+
+        // Get profile
+        Profile profile = profileRepository.findById(user.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Profile not found for user"));
+
+        // Generate tokens
+        String accessToken = jwtUtil.generateAccessToken(user.getId(), user.getEmail());
+        String refreshToken = jwtUtil.generateRefreshToken(user.getId(), user.getEmail());
+
+        log.info("User logged in successfully: {}", user.getEmail());
+
+        return AuthResponse.builder()
+                .accessToken(accessToken)
+                .refreshToken(refreshToken)
+                .tokenType("Bearer")
+                .user(mapToProfileResponse(profile, user))
+                .needsOnboarding(!profile.getOnboardingComplete())
+                .build();
+    }
+
+    private ProfileResponse mapToProfileResponse(Profile profile, User user) {
+        return ProfileResponse.builder()
+                .id(profile.getId())
+                .email(user.getEmail())
+                .fullName(profile.getFullName())
+                .handle(profile.getHandle())
+                .institution(profile.getInstitution())
+                .academicTitle(profile.getAcademicTitle())
+                .avatarUrl(profile.getAvatarUrl())
+                .bio(profile.getBio())
+                .orcid(profile.getOrcid())
+                .discipline(profile.getDiscipline())
+                .nitorScore(profile.getNitorScore())
+                .verified(profile.getVerified())
+                .onboardingComplete(profile.getOnboardingComplete())
+                .followersCount(profile.getFollowersCount())
+                .followingCount(profile.getFollowingCount())
+                .publicationsCount(profile.getPublicationsCount())
+                .profileVisibility(profile.getProfileVisibility().name())
+                .build();
+    }
+}
