@@ -1,0 +1,35 @@
+spring:
+  jpa:
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+
+server:
+  error:
+    include-stacktrace: never
+    include-exception: false
+
+logging:
+  level:
+    root: WARN
+    com.nitor: INFO
+    org.springframework.web: WARN
+    org.springframework.security: INFO
+    org.hibernate.SQL: WARN
+
+app:
+  security:
+    rate-limit:
+      enabled: true
+      requests-per-minute: 30
+      requests-per-hour: 500
+
+management:
+  endpoint:
+    health:
+      show-details: never
+
+springdoc:
+  swagger-ui:
+    enabled: false  # Disable Swagger in production

@@ -1,0 +1,21 @@
+# AI Service Dockerfile (Node.js)
+FROM node:20-alpine AS base
+
+WORKDIR /app
+
+# Install dependencies
+COPY package*.json ./
+RUN npm ci --only=production
+
+# Copy source code
+COPY . .
+
+# Expose port
+EXPOSE 3001
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=10s \
+  CMD node healthcheck.js || exit 1
+
+# Run application
+CMD ["node", "src/server.js"]

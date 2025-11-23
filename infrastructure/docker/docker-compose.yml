@@ -1,0 +1,152 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: nitor-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: nitor
+      POSTGRES_USER: nitor
+      POSTGRES_PASSWORD: nitor123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ../../database/migrations:/docker-entrypoint-initdb.d
+    networks:
+      - nitor-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nitor"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: nitor-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - nitor-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # MinIO (S3-compatible storage)
+  minio:
+    image: minio/minio:latest
+    container_name: nitor-minio
+    restart: unless-stopped
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
+    networks:
+      - nitor-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+  # Backend (Java Spring Boot)
+  backend:
+    build:
+      context: ../../packages/backend
+      dockerfile: ../../infrastructure/docker/Dockerfile.backend
+    container_name: nitor-backend
+    restart: unless-stopped
+    environment:
+      SPRING_PROFILE: dev
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: nitor
+      DB_USER: nitor
+      DB_PASSWORD: nitor123
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      MINIO_ENDPOINT: http://minio:9000
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+      AI_SERVICE_URL: http://ai-service:3001
+      JWT_SECRET: nitor-super-secret-key-change-in-production-min-256-bits-required-for-hs256-algorithm
+      CORS_ORIGINS: http://localhost:3000,http://localhost:5173,http://frontend:3000
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+    networks:
+      - nitor-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # AI Microservice (Node.js)
+  ai-service:
+    build:
+      context: ../../packages/ai-service
+      dockerfile: ../../infrastructure/docker/Dockerfile.ai-service
+    container_name: nitor-ai-service
+    restart: unless-stopped
+    environment:
+      PORT: 3001
+      API_KEY: ${GEMINI_API_KEY}
+    ports:
+      - "3001:3001"
+    networks:
+      - nitor-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Frontend (React + Vite)
+  frontend:
+    build:
+      context: ../../packages/frontend
+      dockerfile: ../../infrastructure/docker/Dockerfile.frontend
+    container_name: nitor-frontend
+    restart: unless-stopped
+    environment:
+      VITE_API_URL: http://localhost:8080
+      VITE_AI_SERVICE_URL: http://localhost:3001
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+      - ai-service
+    networks:
+      - nitor-network
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  minio_data:
+    driver: local
+
+networks:
+  nitor-network:
+    driver: bridge

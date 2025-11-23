@@ -1,0 +1,171 @@
+spring:
+  application:
+    name: nitor-backend
+
+  profiles:
+    active: ${SPRING_PROFILE:dev}
+
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:nitor}
+    username: ${DB_USER:nitor}
+    password: ${DB_PASSWORD:nitor123}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        use_sql_comments: true
+        jdbc:
+          time_zone: UTC
+    open-in-view: false
+
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    locations: classpath:db/migration
+    baseline-version: 0
+    validate-on-migrate: true
+
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+      timeout: 60000
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
+
+  mail:
+    host: ${MAIL_HOST:smtp.gmail.com}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          ssl:
+            trust: ${MAIL_HOST:smtp.gmail.com}
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+# Application Configuration
+app:
+  name: Nitor
+  version: 1.0.0
+
+  jwt:
+    secret: ${JWT_SECRET:nitor-super-secret-key-change-in-production-min-256-bits-required-for-hs256-algorithm}
+    expiration: 86400000  # 24 hours in milliseconds
+    refresh-expiration: 604800000  # 7 days in milliseconds
+
+  cors:
+    allowed-origins: ${CORS_ORIGINS:http://localhost:3000,http://localhost:5173}
+    allowed-methods: GET,POST,PUT,DELETE,PATCH,OPTIONS
+    allowed-headers: "*"
+    allow-credentials: true
+    max-age: 3600
+
+  security:
+    rate-limit:
+      enabled: true
+      requests-per-minute: 60
+      requests-per-hour: 1000
+
+  minio:
+    endpoint: ${MINIO_ENDPOINT:http://localhost:9000}
+    access-key: ${MINIO_ACCESS_KEY:minioadmin}
+    secret-key: ${MINIO_SECRET_KEY:minioadmin}
+    bucket-name: nitor-files
+
+  ai-service:
+    url: ${AI_SERVICE_URL:http://localhost:3001}
+    timeout: 30000
+
+  email:
+    from: ${EMAIL_FROM:noreply@nitor.io}
+    verification-url: ${FRONTEND_URL:http://localhost:3000}/verify-email
+    reset-password-url: ${FRONTEND_URL:http://localhost:3000}/reset-password
+
+# Server Configuration
+server:
+  port: ${SERVER_PORT:8080}
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: on_param
+    include-exception: false
+  compression:
+    enabled: true
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain
+
+# Actuator/Monitoring
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+      base-path: /actuator
+  endpoint:
+    health:
+      show-details: when-authorized
+      probes:
+        enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  health:
+    redis:
+      enabled: true
+    db:
+      enabled: true
+
+# Logging
+logging:
+  level:
+    root: INFO
+    com.nitor: DEBUG
+    org.springframework.web: INFO
+    org.springframework.security: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: logs/nitor.log
+    max-size: 10MB
+    max-history: 30
+
+# SpringDoc OpenAPI
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+    operations-sorter: method
+    tags-sorter: alpha
+  show-actuator: true
