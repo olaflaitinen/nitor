@@ -93,6 +93,132 @@ class ApiClient {
     return response.data;
   }
 
+  async updateContent(id: string, data: any) {
+    const response = await this.client.put(`/api/content/${id}`, data);
+    return response.data;
+  }
+
+  async deleteContent(id: string) {
+    await this.client.delete(`/api/content/${id}`);
+  }
+
+  async getUserContent(userId: string, page = 0, size = 20) {
+    const response = await this.client.get(`/api/content/user/${userId}`, {
+      params: { page, size },
+    });
+    return response.data;
+  }
+
+  async searchContent(query: string, page = 0, size = 20) {
+    const response = await this.client.get('/api/content/search', {
+      params: { query, page, size },
+    });
+    return response.data;
+  }
+
+  // Comment endpoints
+  async getComments(contentId: string, page = 0, size = 20) {
+    const response = await this.client.get(`/api/content/${contentId}/comments`, {
+      params: { page, size },
+    });
+    return response.data;
+  }
+
+  async createComment(contentId: string, body: string, parentCommentId?: string) {
+    const response = await this.client.post(`/api/content/${contentId}/comments`, {
+      body,
+      parentCommentId,
+    });
+    return response.data;
+  }
+
+  async updateComment(contentId: string, commentId: string, body: string) {
+    const response = await this.client.put(`/api/content/${contentId}/comments/${commentId}`, { body });
+    return response.data;
+  }
+
+  async deleteComment(contentId: string, commentId: string) {
+    await this.client.delete(`/api/content/${contentId}/comments/${commentId}`);
+  }
+
+  // CV endpoints
+  async getUserCV(userId: string) {
+    const response = await this.client.get(`/api/cv/${userId}`);
+    return response.data;
+  }
+
+  async addEducation(data: any) {
+    const response = await this.client.post('/api/cv/education', data);
+    return response.data;
+  }
+
+  async updateEducation(id: string, data: any) {
+    const response = await this.client.put(`/api/cv/education/${id}`, data);
+    return response.data;
+  }
+
+  async deleteEducation(id: string) {
+    await this.client.delete(`/api/cv/education/${id}`);
+  }
+
+  async addExperience(data: any) {
+    const response = await this.client.post('/api/cv/experience', data);
+    return response.data;
+  }
+
+  async deleteExperience(id: string) {
+    await this.client.delete(`/api/cv/experience/${id}`);
+  }
+
+  async addProject(data: any) {
+    const response = await this.client.post('/api/cv/projects', data);
+    return response.data;
+  }
+
+  async deleteProject(id: string) {
+    await this.client.delete(`/api/cv/projects/${id}`);
+  }
+
+  // Notification endpoints
+  async getNotifications(page = 0, size = 20) {
+    const response = await this.client.get('/api/notifications', {
+      params: { page, size },
+    });
+    return response.data;
+  }
+
+  async getUnreadCount() {
+    const response = await this.client.get('/api/notifications/unread-count');
+    return response.data;
+  }
+
+  async markNotificationAsRead(id: string) {
+    await this.client.put(`/api/notifications/${id}/read`);
+  }
+
+  async markAllNotificationsAsRead() {
+    await this.client.put('/api/notifications/read-all');
+  }
+
+  // File upload endpoints
+  async uploadAvatar(file: File) {
+    const formData = new FormData();
+    formData.append('file', file);
+    const response = await this.client.post('/api/upload/avatar', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+    return response.data.url;
+  }
+
+  async uploadContentMedia(file: File) {
+    const formData = new FormData();
+    formData.append('file', file);
+    const response = await this.client.post('/api/upload/content', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+    return response.data.url;
+  }
+
   // AI endpoints
   async refineText(text: string) {
     const response = await axios.post(`${import.meta.env.VITE_AI_SERVICE_URL || 'http://localhost:3001'}/api/ai/refine-text`, { text });
