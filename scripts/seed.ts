@@ -9,7 +9,7 @@ const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
 if (!supabaseUrl || !supabaseKey) {
-  console.error('❌ Missing Supabase credentials. Ensure NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY (or ANON_KEY) are set in .env.local');
+  console.error('[ERROR] Missing Supabase credentials. Ensure NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY (or ANON_KEY) are set in .env.local');
   (process as any).exit(1);
 }
 
@@ -208,7 +208,7 @@ async function seed() {
     }
 
     // 3. Insert Content
-    console.log('📝 Creating Content...');
+    console.log('[INFO] Creating Content...');
     
     for (const item of CONTENT) {
         const isArticle = item.type === 'article';
@@ -230,11 +230,11 @@ async function seed() {
         if (error) console.error(`Error creating content for ${item.author_id}:`, error.message);
     }
 
-    console.log('✅ Seeding Complete!');
+    console.log('[SUCCESS] Seeding Complete!');
     (process as any).exit(0);
 
   } catch (err) {
-    console.error('❌ Unexpected error during seed:', err);
+    console.error('[ERROR] Unexpected error during seed:', err);
     (process as any).exit(1);
   }
 }

@@ -57,12 +57,12 @@ During onboarding, you'll be asked to:
 
 After onboarding:
 
-- ✅ Complete your profile (Settings → Profile)
-- ✅ Upload a professional photo
-- ✅ Add your ORCID (if available)
-- ✅ Build your CV
-- ✅ Make your first post
-- ✅ Follow researchers in your field
+- [✓] Complete your profile (Settings → Profile)
+- [✓] Upload a professional photo
+- [✓] Add your ORCID (if available)
+- [✓] Build your CV
+- [✓] Make your first post
+- [✓] Follow researchers in your field
 
 ---
 
@@ -181,14 +181,14 @@ $$
 
 ### Best Practices
 
-✅ **DO:**
+[✓] **DO:**
 - Write clear, concise posts
 - Use proper citations
 - Tag content appropriately
 - Engage constructively
 - Maintain professional tone
 
-❌ **DON'T:**
+[✗] **DON'T:**
 - Plagiarize or misrepresent work
 - Share unpublished data without permission
 - Make personal attacks
@@ -433,11 +433,11 @@ NITOR provides a comprehensive CV builder:
 ### Data Security
 
 NITOR protects your data:
-- 🔒 End-to-end encryption
-- 🔒 Secure HTTPS connections
-- 🔒 Regular security audits
-- 🔒 GDPR compliance
-- 🔒 Data export available
+-  End-to-end encryption
+-  Secure HTTPS connections
+-  Regular security audits
+-  GDPR compliance
+-  Data export available
 
 ### Account Recovery
 
@@ -460,36 +460,36 @@ NITOR protects your data:
 
 **Nitor Plus ($12/month) includes:**
 
-✨ **Verified Badge**
+ **Verified Badge**
 - Academic verification checkmark
 - Enhanced profile visibility
 
-✨ **Advanced Analytics**
+ **Advanced Analytics**
 - Detailed engagement metrics
 - Publication impact tracking
 - Network growth insights
 
-✨ **AI Features (51 total)**
+ **AI Features (51 total)**
 - All AI-powered writing tools
 - Unlimited refinements
 - Priority processing
 
-✨ **Premium CV Tools**
+ **Premium CV Tools**
 - Custom templates
 - Multiple export formats
 - Version history
 
-✨ **Priority Support**
+ **Priority Support**
 - 24/7 customer support
 - Priority bug fixes
 - Feature requests
 
-✨ **Storage**
+ **Storage**
 - 50 GB file storage (vs. 3 GB)
 - High-resolution images
 - PDF hosting
 
-✨ **Early Access**
+ **Early Access**
 - Beta features
 - New tools first
 - Exclusive workshops
@@ -650,36 +650,36 @@ A: Credit/debit cards, PayPal (coming soon).
 
 ### Maximize Your Profile
 
-✅ Complete all profile sections
-✅ Add professional photo
-✅ Connect ORCID
-✅ Upload recent publications
-✅ Build your CV
-✅ Write detailed bio
+[✓] Complete all profile sections
+[✓] Add professional photo
+[✓] Connect ORCID
+[✓] Upload recent publications
+[✓] Build your CV
+[✓] Write detailed bio
 
 ### Grow Your Network
 
-✅ Connect with colleagues
-✅ Follow thought leaders
-✅ Join discipline groups
-✅ Attend virtual events
-✅ Engage with content
+[✓] Connect with colleagues
+[✓] Follow thought leaders
+[✓] Join discipline groups
+[✓] Attend virtual events
+[✓] Engage with content
 
 ### Increase Engagement
 
-✅ Post regularly (2-3 times/week)
-✅ Share research updates
-✅ Comment thoughtfully
-✅ Use relevant hashtags
-✅ Cross-post notable publications
+[✓] Post regularly (2-3 times/week)
+[✓] Share research updates
+[✓] Comment thoughtfully
+[✓] Use relevant hashtags
+[✓] Cross-post notable publications
 
 ### Use AI Effectively
 
-✅ Review AI suggestions carefully
-✅ Customize generated content
-✅ Don't rely solely on AI
-✅ Maintain your voice
-✅ Verify technical accuracy
+[✓] Review AI suggestions carefully
+[✓] Customize generated content
+[✓] Don't rely solely on AI
+[✓] Maintain your voice
+[✓] Verify technical accuracy
 
 ---
 
