@@ -111,11 +111,13 @@ Provide academics with modern tools for collaboration, content sharing, and prof
 - **Comment System**: Nested comments with LaTeX support
 - **Mentions**: Tag colleagues in discussions
 
-###  AI-Powered Features
-- **Text Enhancement**: AI-powered writing improvement (Google Gemini 2.0)
-- **Abstract Generation**: Automatic abstract creation
-- **Research Summarization**: Intelligent content summarization
-- **Language Translation**: Multi-language support
+###  AI-Powered Features (51 Total)
+- **Writing Enhancement**: Text refinement, abstract generation, bio enhancement (Gemini 2.5 Pro)
+- **Content Analysis**: Plain language summaries, multi-level summaries, skeleton extraction
+- **Research Tools**: Methods clarity, limitations suggestions, citation detection
+- **Career Development**: Research/teaching statements, CV tailoring, recommendation letters
+- **Collaboration**: Meeting summaries, proposal generation, comment suggestions
+- **Full Documentation**: See [AI_SERVICE.md](docs/AI_SERVICE.md) for complete feature list
 
 ###  Security & Privacy
 - **Two-Factor Authentication (2FA)**: TOTP-based additional security
@@ -280,7 +282,7 @@ nitor/
 |------------|---------|---------|
 | **Node.js** | 20+ | Runtime Environment |
 | **Express.js** | 4.x | Web Framework |
-| **Google Gemini** | 2.0 Flash | AI Model |
+| **Google Gemini** | 2.5 Pro | AI Model (51 Features) |
 | **Axios** | 1.x | HTTP Client |
 
 ### Infrastructure
@@ -396,6 +398,10 @@ Comprehensive documentation is available in the `/docs` directory:
 
 | Document | Description |
 |----------|-------------|
+| [API_DOCUMENTATION.md](docs/API_DOCUMENTATION.md) | Complete REST API reference with 67 endpoints |
+| [DEPLOYMENT_GUIDE.md](docs/DEPLOYMENT_GUIDE.md) | Production deployment procedures and infrastructure setup |
+| [AI_SERVICE.md](docs/AI_SERVICE.md) | AI features documentation with 51 Gemini 2.5 Pro capabilities |
+| [USER_GUIDE.md](docs/USER_GUIDE.md) | End-user guide for researchers and academics |
 | [MONOREPO_SETUP.md](docs/MONOREPO_SETUP.md) | Detailed monorepo setup and architecture |
 | [IMPLEMENTATION_STATUS.md](docs/IMPLEMENTATION_STATUS.md) | Current implementation status and roadmap |
 | [FINAL_SETUP_GUIDE.md](docs/FINAL_SETUP_GUIDE.md) | Production deployment guide |
