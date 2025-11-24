@@ -1,6 +1,7 @@
 package com.nitor.exception;
 
 import com.nitor.dto.common.ErrorResponse;
+import com.nitor.service.RateLimitingService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -105,6 +106,22 @@ public class GlobalExceptionHandler {
                 .build();
 
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(RateLimitingService.RateLimitExceededException.class)
+    public ResponseEntity<ErrorResponse> handleRateLimitExceededException(
+            RateLimitingService.RateLimitExceededException ex, WebRequest request) {
+        log.warn("Rate limit exceeded: {}", ex.getMessage());
+
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.TOO_MANY_REQUESTS.value())
+                .error("Too Many Requests")
+                .message(ex.getMessage())
+                .path(request.getDescription(false).replace("uri=", ""))
+                .build();
+
+        return new ResponseEntity<>(errorResponse, HttpStatus.TOO_MANY_REQUESTS);
     }
 
     @ExceptionHandler(Exception.class)
