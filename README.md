@@ -2,6 +2,19 @@
 
 <div align="center">
 
+<img src="https://media.licdn.com/dms/image/v2/D4E3DAQGOJNJtqB_M5A/image-scale_191_1128/B4EZq0oJeRHcAc-/0/1763967017421/nitor_academic_network_cover?e=1764572400&v=beta&t=Svc2M1U9WHvfBvx0O4EwxBE_u90noj7VkYYZWXWH02A" alt="NITOR Banner" width="100%"/>
+
+<br/>
+
+<img src="https://media.licdn.com/dms/image/v2/D4E0BAQFbwo4K3LqYAg/company-logo_200_200/B4EZq0lf3CKcAI-/0/1763966320547/nitor_academic_network_logo?e=1765411200&v=beta&t=-dxQlSRvKMsOqO03clz8xxrSmxDMiK5d0Br2MdZ28ag" alt="NITOR Logo" width="200"/>
+
+<br/>
+<br/>
+
+**Rigorous. Academic. Connected.**
+
+<br/>
+
 ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
 ![Status](https://img.shields.io/badge/status-production--ready-green.svg)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
@@ -23,7 +36,27 @@
 
 ---
 
-## 📋 Table of Contents
+## About Nitor
+
+Nitor is an academic social networking platform designed for researchers, academics and institutions that require a professional, trusted environment to share and develop scientific work. We provide a focused alternative to general-purpose social media by aligning features with real academic workflows, quality standards and community expectations.
+
+On Nitor, users can build a structured academic profile, maintain a comprehensive CV, and present publications, projects and achievements in a coherent, verifiable way. The platform is built to support long-term scholarly identity, not short-lived content, and is suitable for use by individual researchers, labs, departments and learned societies.
+
+Nitor enables research collaboration through topic-focused posts, comments and discussions that encourage evidence-based exchange rather than informal conversation. Integrated AI-assisted writing tools help users refine abstracts, summaries and research updates while preserving authorship, transparency and academic integrity.
+
+The platform is discipline-agnostic and can be adopted across the full spectrum of research fields, from engineering and computer science to social sciences, law and medicine. It is designed to complement, not replace, institutional repositories, preprint servers and journals, by offering a professional social layer around existing scholarly communication channels.
+
+We place a strong emphasis on governance, privacy and responsible use of AI. Nitor is being developed with departments, research groups and institutional leaders in mind, so that organizations can confidently recommend it as a compliant, sustainable solution for their researchers.
+
+**Our Mission**: To strengthen the global research ecosystem by providing a secure, institution-grade academic network—a place where rigorous work is visible, searchable and connected, and where researchers at all career stages can present their contributions with clarity, credibility and confidence.
+
+**Connect with us**: [LinkedIn](https://www.linkedin.com/company/nitor-academic-network)
+
+---
+
+## Table of Contents
+
+##  Table of Contents
 
 - [Overview](#overview)
 - [Key Features](#key-features)
@@ -41,7 +74,7 @@
 
 ---
 
-## 🎓 Overview
+##  Overview
 
 NITOR is a comprehensive, production-ready academic social network platform designed specifically for researchers, academics, and scientists worldwide. The platform combines rapid knowledge dissemination with rigorous scientific standards, providing a professional space for academic discourse, collaboration, and career development.
 
@@ -55,36 +88,36 @@ Provide academics with modern tools for collaboration, content sharing, and prof
 
 ---
 
-## ✨ Key Features
+##  Key Features
 
-### 🔬 Academic Content Management
+###  Academic Content Management
 - **Research Publications**: Share research papers, preprints, and academic articles
 - **LaTeX Support**: Built-in support for mathematical expressions and scientific notation
 - **Citation Management**: Track citations and academic impact
 - **Peer Review**: Collaborative review and feedback system
 - **Content Versioning**: Track changes and revisions
 
-### 👤 Professional Profiles
+###  Professional Profiles
 - **Comprehensive CVs**: Digital academic CV with automatic formatting
 - **ORCID Integration**: Connect with your ORCID identifier
 - **Publication Tracking**: Automatic publication counting and management
 - **Academic Credentials**: Verified academic titles and affiliations
 - **Profile Visibility Controls**: PUBLIC, CONNECTIONS_ONLY, or PRIVATE
 
-### 🤝 Collaboration & Networking
+###  Collaboration & Networking
 - **Connection System**: Build professional academic networks
 - **Follow Functionality**: Follow researchers in your field
 - **Threaded Discussions**: Engage in scientific discourse
 - **Comment System**: Nested comments with LaTeX support
 - **Mentions**: Tag colleagues in discussions
 
-### 🤖 AI-Powered Features
+###  AI-Powered Features
 - **Text Enhancement**: AI-powered writing improvement (Google Gemini 2.0)
 - **Abstract Generation**: Automatic abstract creation
 - **Research Summarization**: Intelligent content summarization
 - **Language Translation**: Multi-language support
 
-### 🔒 Security & Privacy
+###  Security & Privacy
 - **Two-Factor Authentication (2FA)**: TOTP-based additional security
 - **OAuth 2.0 Integration**: Login with Google, GitHub, LinkedIn
 - **JWT Authentication**: Secure token-based authentication
@@ -92,7 +125,7 @@ Provide academics with modern tools for collaboration, content sharing, and prof
 - **Rate Limiting**: API protection against abuse
 - **Audit Logging**: Complete audit trail of all actions
 
-### 📊 Advanced Features
+###  Advanced Features
 - **Real-time Notifications**: WebSocket-based instant notifications
 - **File Management**: Secure file upload with MinIO S3-compatible storage
 - **Search Functionality**: Advanced search across content and profiles
@@ -102,109 +135,109 @@ Provide academics with modern tools for collaboration, content sharing, and prof
 
 ---
 
-## 🏗 Architecture
+##  Architecture
 
 ### Monorepo Structure
 
 ```
 nitor/
-├── packages/
-│   ├── backend/              # Java Spring Boot REST API
-│   │   ├── src/
-│   │   │   ├── main/
-│   │   │   │   ├── java/com/nitor/
-│   │   │   │   │   ├── controller/    # 14 REST Controllers
-│   │   │   │   │   ├── service/       # Business Logic Layer
-│   │   │   │   │   ├── repository/    # Data Access Layer (25 repositories)
-│   │   │   │   │   ├── model/         # JPA Entities (25 models)
-│   │   │   │   │   ├── dto/           # Data Transfer Objects
-│   │   │   │   │   ├── security/      # JWT & Security Config
-│   │   │   │   │   ├── config/        # Application Configuration
-│   │   │   │   │   ├── exception/     # Exception Handling
-│   │   │   │   │   ├── util/          # Utility Classes
-│   │   │   │   │   ├── seeder/        # Database Seeding
-│   │   │   │   │   ├── annotation/    # Custom Annotations
-│   │   │   │   │   └── interceptor/   # Request Interceptors
-│   │   │   │   └── resources/
-│   │   │   │       ├── db/migration/  # Flyway Migrations
-│   │   │   │       ├── db/seed/       # Seed Data
-│   │   │   │       └── templates/     # Email Templates
-│   │   │   └── test/                  # Unit & Integration Tests
-│   │   └── pom.xml
-│   │
-│   ├── frontend/             # React + TypeScript SPA
-│   │   ├── src/
-│   │   │   ├── components/   # React Components
-│   │   │   ├── pages/        # Page Components
-│   │   │   ├── hooks/        # Custom React Hooks
-│   │   │   ├── services/     # API Services
-│   │   │   ├── store/        # State Management
-│   │   │   ├── types/        # TypeScript Types
-│   │   │   └── utils/        # Utility Functions
-│   │   └── package.json
-│   │
-│   ├── ai-service/           # Node.js AI Microservice
-│   │   ├── src/
-│   │   │   ├── routes/       # API Routes
-│   │   │   ├── services/     # Gemini Integration
-│   │   │   └── middleware/   # Express Middleware
-│   │   └── package.json
-│   │
-│   └── shared/               # Shared TypeScript Types
-│       └── types/
-│
-├── infrastructure/
-│   ├── docker/               # Docker Compose Configurations
-│   ├── kubernetes/           # K8s Manifests (6 files)
-│   └── nginx/                # Nginx Configurations (3 files)
-│
-├── docs/                     # Documentation
-│   ├── MONOREPO_SETUP.md
-│   ├── IMPLEMENTATION_STATUS.md
-│   └── FINAL_SETUP_GUIDE.md
-│
-├── security/                 # Security Policies
-│   └── SECURITY.md
-│
-├── .github/                  # GitHub Actions CI/CD
-│   └── workflows/
-│       └── ci.yml
-│
-├── CONTRIBUTING.md           # Contribution Guidelines
-├── CODE_OF_CONDUCT.md        # Code of Conduct
-├── CHANGELOG.md              # Version History
-├── LICENSE                   # MIT License
-└── README.md                 # This File
+ packages/
+    backend/              # Java Spring Boot REST API
+       src/
+          main/
+             java/com/nitor/
+                controller/    # 14 REST Controllers
+                service/       # Business Logic Layer
+                repository/    # Data Access Layer (25 repositories)
+                model/         # JPA Entities (25 models)
+                dto/           # Data Transfer Objects
+                security/      # JWT & Security Config
+                config/        # Application Configuration
+                exception/     # Exception Handling
+                util/          # Utility Classes
+                seeder/        # Database Seeding
+                annotation/    # Custom Annotations
+                interceptor/   # Request Interceptors
+             resources/
+                 db/migration/  # Flyway Migrations
+                 db/seed/       # Seed Data
+                 templates/     # Email Templates
+          test/                  # Unit & Integration Tests
+       pom.xml
+   
+    frontend/             # React + TypeScript SPA
+       src/
+          components/   # React Components
+          pages/        # Page Components
+          hooks/        # Custom React Hooks
+          services/     # API Services
+          store/        # State Management
+          types/        # TypeScript Types
+          utils/        # Utility Functions
+       package.json
+   
+    ai-service/           # Node.js AI Microservice
+       src/
+          routes/       # API Routes
+          services/     # Gemini Integration
+          middleware/   # Express Middleware
+       package.json
+   
+    shared/               # Shared TypeScript Types
+        types/
+
+ infrastructure/
+    docker/               # Docker Compose Configurations
+    kubernetes/           # K8s Manifests (6 files)
+    nginx/                # Nginx Configurations (3 files)
+
+ docs/                     # Documentation
+    MONOREPO_SETUP.md
+    IMPLEMENTATION_STATUS.md
+    FINAL_SETUP_GUIDE.md
+
+ security/                 # Security Policies
+    SECURITY.md
+
+ .github/                  # GitHub Actions CI/CD
+    workflows/
+        ci.yml
+
+ CONTRIBUTING.md           # Contribution Guidelines
+ CODE_OF_CONDUCT.md        # Code of Conduct
+ CHANGELOG.md              # Version History
+ LICENSE                   # MIT License
+ README.md                 # This File
 ```
 
 ### System Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                          NITOR Platform                          │
-└─────────────────────────────────────────────────────────────────┘
-                                │
-                ┌───────────────┼───────────────┐
-                │               │               │
-        ┌───────▼──────┐ ┌─────▼──────┐ ┌─────▼──────┐
-        │   Frontend   │ │   Backend  │ │ AI Service │
-        │   React 19   │ │  Spring    │ │  Node.js   │
-        │  TypeScript  │ │  Boot 3.2  │ │  Gemini    │
-        └───────┬──────┘ └─────┬──────┘ └─────┬──────┘
-                │               │               │
-                └───────────────┼───────────────┘
-                                │
-            ┌───────────────────┼───────────────────┐
-            │                   │                   │
-    ┌───────▼────────┐  ┌──────▼──────┐  ┌────────▼────────┐
-    │   PostgreSQL   │  │    Redis    │  │     MinIO       │
-    │   Database     │  │    Cache    │  │  File Storage   │
-    └────────────────┘  └─────────────┘  └─────────────────┘
+
+                          NITOR Platform                          
+
+                                
+                
+                                              
+          
+           Frontend       Backend    AI Service 
+           React 19      Spring       Node.js   
+          TypeScript     Boot 3.2     Gemini    
+          
+                                              
+                
+                                
+            
+                                                  
+        
+       PostgreSQL         Redis           MinIO       
+       Database           Cache        File Storage   
+        
 ```
 
 ---
 
-## 🚀 Technology Stack
+##  Technology Stack
 
 ### Backend (Java Spring Boot)
 
@@ -262,7 +295,7 @@ nitor/
 
 ---
 
-## 🚦 Quick Start
+##  Quick Start
 
 ### Prerequisites
 
@@ -357,7 +390,7 @@ docker-compose down
 
 ---
 
-## 📚 Documentation
+##  Documentation
 
 Comprehensive documentation is available in the `/docs` directory:
 
@@ -379,7 +412,7 @@ Comprehensive documentation is available in the `/docs` directory:
 
 ---
 
-## 🔌 API Documentation
+##  API Documentation
 
 NITOR provides a comprehensive REST API with **67 endpoints** across 14 controllers:
 
@@ -446,7 +479,7 @@ curl -X POST http://localhost:8080/api/content \
 
 ---
 
-## 💻 Development
+##  Development
 
 ### Backend Development
 
@@ -561,7 +594,7 @@ AI_SERVICE_URL=http://localhost:3001
 
 ---
 
-## 🧪 Testing
+##  Testing
 
 ### Backend Tests
 
@@ -625,7 +658,7 @@ npm run test:watch
 
 ---
 
-## 🚀 Deployment
+##  Deployment
 
 ### Docker Deployment
 
@@ -714,7 +747,7 @@ logging:
 
 ---
 
-## 🔒 Security
+##  Security
 
 NITOR implements enterprise-grade security practices:
 
@@ -768,7 +801,7 @@ See [SECURITY.md](SECURITY.md) for our security policy and vulnerability disclos
 
 ---
 
-## 🤝 Contributing
+##  Contributing
 
 We welcome contributions from the academic community! Please read our [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
@@ -822,17 +855,17 @@ We welcome contributions from the academic community! Please read our [CONTRIBUT
 
 ### Areas for Contribution
 
-- 🐛 Bug fixes and improvements
-- 📚 Documentation enhancements
-- ✨ New features and functionality
-- 🧪 Additional test coverage
-- 🌍 Internationalization (i18n)
-- ♿ Accessibility improvements
-- 🎨 UI/UX enhancements
+-  Bug fixes and improvements
+-  Documentation enhancements
+-  New features and functionality
+-  Additional test coverage
+-  Internationalization (i18n)
+-  Accessibility improvements
+-  UI/UX enhancements
 
 ---
 
-## 📄 License
+##  License
 
 This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
 
@@ -854,14 +887,14 @@ copies or substantial portions of the Software.
 
 ---
 
-## 📞 Support & Contact
+##  Support & Contact
 
 ### Getting Help
 
-- **📖 Documentation**: Check our comprehensive docs in `/docs`
-- **💬 Discussions**: Use GitHub Discussions for questions
-- **🐛 Issues**: Report bugs via GitHub Issues
-- **📧 Email**: contact@nitor.io (for security issues)
+- ** Documentation**: Check our comprehensive docs in `/docs`
+- ** Discussions**: Use GitHub Discussions for questions
+- ** Issues**: Report bugs via GitHub Issues
+- ** Email**: contact@nitor.io (for security issues)
 
 ### Community
 
@@ -877,7 +910,7 @@ For enterprise support, custom development, or consulting:
 
 ---
 
-## 🙏 Acknowledgments
+##  Acknowledgments
 
 ### Built With
 
@@ -899,7 +932,7 @@ For enterprise support, custom development, or consulting:
 
 ---
 
-## 📊 Project Statistics
+##  Project Statistics
 
 | Metric | Count |
 |--------|-------|
@@ -913,7 +946,7 @@ For enterprise support, custom development, or consulting:
 
 ---
 
-## 🗺 Roadmap
+##  Roadmap
 
 ### Version 1.1 (Q2 2025)
 - [ ] Mobile applications (iOS & Android)
@@ -937,7 +970,7 @@ See [CHANGELOG.md](CHANGELOG.md) for detailed version history.
 
 ---
 
-## ⚖️ Code of Conduct
+##  Code of Conduct
 
 This project adheres to a [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to conduct@nitor.io.
 
@@ -945,10 +978,10 @@ This project adheres to a [Code of Conduct](CODE_OF_CONDUCT.md). By participatin
 
 <div align="center">
 
-**Built with ❤️ for the Academic Community**
+**Built with  for the Academic Community**
 
 **NITOR Development Team** • **Version 1.0.0** • **Production Ready**
 
-[⬆ Back to Top](#nitor---academic-social-network-platform)
+[ Back to Top](#nitor---academic-social-network-platform)
 
 </div>

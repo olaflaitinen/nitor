@@ -15,13 +15,13 @@ const appearanceSchema = z.object({
 type AppearanceFormValues = z.infer<typeof appearanceSchema>;
 
 export const AppearanceTab: React.FC = () => {
-  const { addToast } = useNitorStore();
+  const { addToast, theme, setTheme } = useNitorStore();
   const [isLoading, setIsLoading] = useState(false);
 
   const { register, handleSubmit, setValue, watch } = useForm<AppearanceFormValues>({
     resolver: zodResolver(appearanceSchema),
     defaultValues: {
-      theme: 'system',
+      theme: theme || 'system',
       fontSize: 16,
       latexRendering: 'always',
     }
@@ -34,16 +34,10 @@ export const AppearanceTab: React.FC = () => {
     setIsLoading(true);
     setTimeout(() => {
       console.log('Appearance Settings:', data);
-      if (data.theme === 'dark') {
-          document.documentElement.classList.add('dark');
-      } else if (data.theme === 'light') {
-          document.documentElement.classList.remove('dark');
-      }
-      // Note: System theme requires matchMedia listener, simulated here
-      
+      setTheme(data.theme);
       addToast('Appearance updated successfully', 'success');
       setIsLoading(false);
-    }, 800);
+    }, 300);
   };
 
   return (

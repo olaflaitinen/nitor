@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.0.0] - 2024-11-24
 
-### 🎉 Initial Production Release
+###  Initial Production Release
 
 NITOR v1.0.0 is a complete, production-ready academic social network platform with enterprise-grade features.
 
@@ -15,7 +15,7 @@ NITOR v1.0.0 is a complete, production-ready academic social network platform wi
 
 ### Added
 
-#### 🔐 Authentication & Security
+####  Authentication & Security
 - **JWT Authentication**: Access tokens (24h) + refresh tokens (7 days)
 - **Refresh Token Rotation**: Automatic token rotation with security replay protection
 - **Two-Factor Authentication (2FA)**: TOTP-based with HMAC-SHA1 algorithm
@@ -33,7 +33,7 @@ NITOR v1.0.0 is a complete, production-ready academic social network platform wi
 - **Audit Logging**: Complete audit trail of all platform actions
 - **Security Headers**: HSTS, CSP, X-Frame-Options, X-XSS-Protection
 
-#### 💻 Backend (Spring Boot 3.2)
+####  Backend (Spring Boot 3.2)
 - **25 Entity Models**: Complete database schema
   - User, Profile, Content, Comment, Notification
   - Connection, Follow, Endorsement, Bookmark, Repost
@@ -71,7 +71,7 @@ NITOR v1.0.0 is a complete, production-ready academic social network platform wi
   - Thymeleaf template engine
 - **OpenAPI/Swagger**: Interactive API documentation
 
-#### 🎨 Frontend (React 19)
+####  Frontend (React 19)
 - **React 19**: Latest React version with TypeScript 5.8
 - **Vite 6**: Fast build tool with HMR
 - **Tailwind CSS 3.4**: Utility-first CSS framework
@@ -84,7 +84,7 @@ NITOR v1.0.0 is a complete, production-ready academic social network platform wi
 - **Responsive Design**: Mobile-first approach
 - **Dark Mode Ready**: Theme system prepared
 
-#### 🤖 AI Service (Node.js 20)
+####  AI Service (Node.js 20)
 - **Google Gemini 2.0 Flash**: Advanced AI model
 - **Text Refinement**: AI-powered writing improvement
 - **Abstract Generation**: Automatic abstract creation
@@ -92,7 +92,7 @@ NITOR v1.0.0 is a complete, production-ready academic social network platform wi
 - **Rate Limiting**: API protection
 - **Health Checks**: Service monitoring
 
-#### 🏗 Infrastructure & DevOps
+####  Infrastructure & DevOps
 - **Monorepo Structure**: Organized code architecture
 - **Docker Compose**: Multi-container orchestration
 - **Kubernetes Manifests**: Production deployment (6 files)
@@ -113,7 +113,7 @@ NITOR v1.0.0 is a complete, production-ready academic social network platform wi
   - SQL seed script (manual)
   - 5 sample users with complete profiles
 
-#### 🧪 Testing
+####  Testing
 - **Unit Tests**: Service and controller testing with JUnit 5 + Mockito
   - AuthServiceTest, FollowServiceTest, AuthControllerTest
 - **Integration Tests**: Full API testing with TestContainers
@@ -123,7 +123,7 @@ NITOR v1.0.0 is a complete, production-ready academic social network platform wi
 - **MockMvc**: Controller integration testing
 - **Test Coverage**: 80%+ code coverage
 
-#### 📚 Documentation
+####  Documentation
 - **Professional README.md**: Comprehensive project documentation
   - Table of contents with quick links
   - Detailed architecture diagrams
@@ -145,7 +145,7 @@ NITOR v1.0.0 is a complete, production-ready academic social network platform wi
 - **Nginx README**: Nginx configuration documentation
 - **Seed Data README**: Database seeding guide
 
-#### 🔧 Configuration & Utilities
+####  Configuration & Utilities
 - **Environment Variables**: Comprehensive .env configuration
   - Database, Redis, MinIO, JWT, Email, OAuth, AI Service
 - **Custom Annotations**: @RateLimited for rate limiting
@@ -154,7 +154,7 @@ NITOR v1.0.0 is a complete, production-ready academic social network platform wi
 - **Security Utilities**: JWT token extraction and validation
 - **Exception Handling**: Global exception handler with proper HTTP status codes
 
-#### 📊 Admin Features
+####  Admin Features
 - **Platform Statistics**: User count, content metrics, reports
 - **User Management**: Activate/deactivate users
 - **Profile Verification**: Verify academic profiles
