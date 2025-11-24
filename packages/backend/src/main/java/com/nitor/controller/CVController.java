@@ -2,6 +2,8 @@ package com.nitor.controller;
 
 import com.nitor.dto.cv.CVResponse;
 import com.nitor.dto.cv.EducationRequest;
+import com.nitor.dto.cv.ExperienceRequest;
+import com.nitor.dto.cv.ProjectRequest;
 import com.nitor.model.Education;
 import com.nitor.model.Experience;
 import com.nitor.model.Project;
@@ -18,8 +20,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -78,18 +78,12 @@ public class CVController {
     @SecurityRequirement(name = "bearerAuth")
     @Operation(summary = "Add experience")
     public ResponseEntity<Experience> addExperience(
-            @RequestParam String company,
-            @RequestParam String role,
-            @RequestParam(required = false) String location,
-            @RequestParam(required = false) String description,
-            @RequestParam LocalDate startDate,
-            @RequestParam(required = false) LocalDate endDate,
-            @RequestParam(required = false) Boolean isCurrent,
+            @Valid @RequestBody ExperienceRequest request,
             @AuthenticationPrincipal UserDetails userDetails) {
 
         UUID userId = extractUserIdFromPrincipal(userDetails);
         return ResponseEntity.status(HttpStatus.CREATED).body(
-            cvService.addExperience(userId, company, role, location, description, startDate, endDate, isCurrent)
+            cvService.addExperience(userId, request)
         );
     }
 
@@ -110,15 +104,12 @@ public class CVController {
     @SecurityRequirement(name = "bearerAuth")
     @Operation(summary = "Add project")
     public ResponseEntity<Project> addProject(
-            @RequestParam String title,
-            @RequestParam(required = false) String link,
-            @RequestParam(required = false) List<String> technologies,
-            @RequestParam(required = false) String description,
+            @Valid @RequestBody ProjectRequest request,
             @AuthenticationPrincipal UserDetails userDetails) {
 
         UUID userId = extractUserIdFromPrincipal(userDetails);
         return ResponseEntity.status(HttpStatus.CREATED).body(
-            cvService.addProject(userId, title, link, technologies, description)
+            cvService.addProject(userId, request)
         );
     }
 
