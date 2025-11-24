@@ -16,6 +16,7 @@ public class FileUploadService {
 
     private final MinioClient minioClient;
     private final String bucketName;
+    private final String minioEndpoint;
 
     public FileUploadService(
             @Value("${app.minio.endpoint}") String endpoint,
@@ -24,6 +25,7 @@ public class FileUploadService {
             @Value("${app.minio.bucket-name}") String bucketName) {
 
         this.bucketName = bucketName;
+        this.minioEndpoint = endpoint;
         this.minioClient = MinioClient.builder()
                 .endpoint(endpoint)
                 .credentials(accessKey, secretKey)
@@ -47,7 +49,7 @@ public class FileUploadService {
                             .build()
             );
 
-            String fileUrl = String.format("http://localhost:9000/%s/%s", bucketName, fileName);
+            String fileUrl = String.format("%s/%s/%s", minioEndpoint, bucketName, fileName);
             log.info("File uploaded successfully: {}", fileUrl);
 
             return fileUrl;

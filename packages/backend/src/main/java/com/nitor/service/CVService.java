@@ -2,6 +2,8 @@ package com.nitor.service;
 
 import com.nitor.dto.cv.CVResponse;
 import com.nitor.dto.cv.EducationRequest;
+import com.nitor.dto.cv.ExperienceRequest;
+import com.nitor.dto.cv.ProjectRequest;
 import com.nitor.exception.ResourceNotFoundException;
 import com.nitor.model.Education;
 import com.nitor.model.Experience;
@@ -102,20 +104,19 @@ public class CVService {
 
     // Experience endpoints
     @Transactional
-    public Experience addExperience(UUID userId, String company, String role, String location,
-                                   String description, LocalDate startDate, LocalDate endDate, Boolean isCurrent) {
+    public Experience addExperience(UUID userId, ExperienceRequest request) {
         Profile profile = profileRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("Profile", "id", userId));
 
         Experience experience = Experience.builder()
                 .user(profile)
-                .company(company)
-                .role(role)
-                .location(location)
-                .description(description)
-                .startDate(startDate)
-                .endDate(endDate)
-                .isCurrent(isCurrent != null ? isCurrent : false)
+                .company(request.getCompany())
+                .role(request.getRole())
+                .location(request.getLocation())
+                .description(request.getDescription())
+                .startDate(request.getStartDate())
+                .endDate(request.getEndDate())
+                .isCurrent(request.getIsCurrent() != null ? request.getIsCurrent() : false)
                 .build();
 
         return experienceRepository.save(experience);
@@ -135,16 +136,16 @@ public class CVService {
 
     // Project endpoints
     @Transactional
-    public Project addProject(UUID userId, String title, String link, List<String> technologies, String description) {
+    public Project addProject(UUID userId, ProjectRequest request) {
         Profile profile = profileRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("Profile", "id", userId));
 
         Project project = Project.builder()
                 .user(profile)
-                .title(title)
-                .link(link)
-                .technologies(technologies)
-                .description(description)
+                .title(request.getTitle())
+                .link(request.getLink())
+                .technologies(request.getTechnologies())
+                .description(request.getDescription())
                 .build();
 
         return projectRepository.save(project);
