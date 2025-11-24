@@ -3,6 +3,7 @@ package com.nitor.controller;
 import com.nitor.dto.comment.CommentResponse;
 import com.nitor.dto.comment.CreateCommentRequest;
 import com.nitor.service.CommentService;
+import com.nitor.util.SecurityUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -25,6 +26,7 @@ import java.util.UUID;
 public class CommentController {
 
     private final CommentService commentService;
+    private final SecurityUtils securityUtils;
 
     @GetMapping
     @Operation(summary = "Get content comments")
@@ -74,6 +76,7 @@ public class CommentController {
     }
 
     private UUID extractUserIdFromPrincipal(UserDetails userDetails) {
-        return UUID.randomUUID(); // TODO: Implement proper user ID extraction from JWT
+        String email = userDetails.getUsername();
+        return securityUtils.getUserIdFromEmail(email);
     }
 }

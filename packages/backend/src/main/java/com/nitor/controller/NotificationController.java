@@ -2,6 +2,7 @@ package com.nitor.controller;
 
 import com.nitor.model.Notification;
 import com.nitor.service.NotificationService;
+import com.nitor.util.SecurityUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -23,6 +24,7 @@ import java.util.UUID;
 public class NotificationController {
 
     private final NotificationService notificationService;
+    private final SecurityUtils securityUtils;
 
     @GetMapping
     @Operation(summary = "Get user notifications")
@@ -61,6 +63,7 @@ public class NotificationController {
     }
 
     private UUID extractUserIdFromPrincipal(UserDetails userDetails) {
-        return UUID.randomUUID(); // TODO: Implement proper user ID extraction from JWT
+        String email = userDetails.getUsername();
+        return securityUtils.getUserIdFromEmail(email);
     }
 }
