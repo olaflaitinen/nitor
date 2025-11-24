@@ -33,6 +33,7 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
     private final AuthenticationManager authenticationManager;
+    private final RefreshTokenService refreshTokenService;
 
     @Transactional
     public AuthResponse register(RegisterRequest request) {
@@ -76,7 +77,7 @@ public class AuthService {
 
         // Generate tokens
         String accessToken = jwtUtil.generateAccessToken(user.getId(), user.getEmail());
-        String refreshToken = jwtUtil.generateRefreshToken(user.getId(), user.getEmail());
+        String refreshToken = refreshTokenService.createRefreshToken(user.getId()).getToken();
 
         log.info("User registered successfully: {}", user.getEmail());
 
@@ -111,7 +112,7 @@ public class AuthService {
 
         // Generate tokens
         String accessToken = jwtUtil.generateAccessToken(user.getId(), user.getEmail());
-        String refreshToken = jwtUtil.generateRefreshToken(user.getId(), user.getEmail());
+        String refreshToken = refreshTokenService.createRefreshToken(user.getId()).getToken();
 
         log.info("User logged in successfully: {}", user.getEmail());
 
