@@ -299,6 +299,8 @@ nitor/
 
 ##  Quick Start
 
+**For complete deployment instructions, see [LOCAL_DEPLOYMENT.md](docs/LOCAL_DEPLOYMENT.md)**
+
 ### Prerequisites
 
 **Required:**
@@ -331,6 +333,7 @@ nano .env  # or use your preferred editor
 **Required Configuration:**
 - Database credentials
 - JWT secret key (minimum 256 bits)
+- Gemini API key
 - Email service (SendGrid recommended)
 - OAuth credentials (optional)
 - MinIO access keys
@@ -338,26 +341,22 @@ nano .env  # or use your preferred editor
 #### 3. Start All Services
 
 ```bash
-# Using Docker Compose (recommended for quick start)
-docker-compose up -d
-
-# Or using the convenience script
+# Using Docker Compose (recommended)
 ./scripts/start-dev.sh
+
+# Or directly with docker-compose
+docker-compose -f infrastructure/docker/docker-compose.yml up -d
 ```
 
-#### 4. Initialize Database
-
-Database migrations run automatically on first startup via Flyway.
-
-**Optional: Load Seed Data (Development)**
+#### 4. Verify Deployment
 
 ```bash
-# Using Java seeder (automatic in dev profile)
-cd packages/backend
-./mvnw spring-boot:run -Dspring-boot.run.profiles=dev
+# Run verification script
+./scripts/verify-deployment.sh
 
-# Or using SQL script
-psql -U postgres -d nitor -f packages/backend/src/main/resources/db/seed/seed-dev-data.sql
+# Or manually check services
+curl http://localhost:8080/actuator/health  # Backend
+curl http://localhost:3001/health           # AI Service
 ```
 
 #### 5. Access the Application
@@ -367,7 +366,8 @@ psql -U postgres -d nitor -f packages/backend/src/main/resources/db/seed/seed-de
 | **Frontend** | http://localhost:5173 | React Application |
 | **Backend API** | http://localhost:8080 | REST API |
 | **API Docs** | http://localhost:8080/swagger-ui.html | Interactive API Documentation |
-| **AI Service** | http://localhost:3001 | Gemini AI Service |
+| **AI Service** | http://localhost:3001 | Gemini AI Service (51 Features) |
+| **MinIO Console** | http://localhost:9001 | File Storage Console |
 | **Health Check** | http://localhost:8080/actuator/health | System Health Status |
 | **Metrics** | http://localhost:8080/actuator/prometheus | Prometheus Metrics |
 
@@ -376,19 +376,25 @@ psql -U postgres -d nitor -f packages/backend/src/main/resources/db/seed/seed-de
 ```
 Email: test@example.com
 Password: password123
-```
 
-Or create a new account via the registration endpoint.
+MinIO Console:
+Username: minioadmin
+Password: minioadmin
+```
 
 ### Stopping Services
 
 ```bash
-# Docker Compose
-docker-compose down
-
-# Or using the script
+# Using convenience script
 ./scripts/stop-dev.sh
+
+# Or directly with docker-compose
+docker-compose -f infrastructure/docker/docker-compose.yml down
 ```
+
+### Troubleshooting
+
+For detailed troubleshooting and deployment options, see [LOCAL_DEPLOYMENT.md](docs/LOCAL_DEPLOYMENT.md)
 
 ---
 
@@ -398,6 +404,7 @@ Comprehensive documentation is available in the `/docs` directory:
 
 | Document | Description |
 |----------|-------------|
+| [LOCAL_DEPLOYMENT.md](docs/LOCAL_DEPLOYMENT.md) | Complete local deployment guide with Docker and manual setup |
 | [API_DOCUMENTATION.md](docs/API_DOCUMENTATION.md) | Complete REST API reference with 67 endpoints |
 | [DEPLOYMENT_GUIDE.md](docs/DEPLOYMENT_GUIDE.md) | Production deployment procedures and infrastructure setup |
 | [AI_SERVICE.md](docs/AI_SERVICE.md) | AI features documentation with 51 Gemini 2.5 Pro capabilities |

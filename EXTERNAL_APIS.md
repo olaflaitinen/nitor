@@ -4,7 +4,7 @@ This document lists all external APIs and services required for NITOR to functio
 
 ## Current Status
 
-### ✅ Already Configured
+### [✓] Already Configured
 
 1. **Google Gemini AI API**
    - Status: Configured
@@ -58,7 +58,7 @@ This document lists all external APIs and services required for NITOR to functio
    - Username
    - Password/API key
 
-### 🟡 Optional (Recommended for Production)
+### [●] Optional (Recommended for Production)
 
 3. **OAuth Social Login Providers**
    - Status: Not implemented (JWT-only authentication currently)
@@ -140,20 +140,20 @@ This document lists all external APIs and services required for NITOR to functio
 ## Implementation Priority
 
 ### 1. Critical (Must Have)
-- ✅ Google Gemini AI - **DONE**
+- [✓] Google Gemini AI - **DONE**
 - 🔴 **Email SMTP** - **REQUIRED NOW**
 
 ### 2. High Priority (Production)
-- 🟡 Cloud Storage (AWS S3 or Cloudflare R2)
-- 🟡 Error Tracking (Sentry)
+- [●] Cloud Storage (AWS S3 or Cloudflare R2)
+- [●] Error Tracking (Sentry)
 
 ### 3. Medium Priority (UX Improvement)
-- 🟡 OAuth Providers (Google, GitHub, LinkedIn)
-- 🟡 CDN
+- [●] OAuth Providers (Google, GitHub, LinkedIn)
+- [●] CDN
 
 ### 4. Low Priority (Analytics)
-- 🟡 Google Analytics
-- 🟡 Monitoring dashboards
+- [●] Google Analytics
+- [●] Monitoring dashboards
 
 ## Configuration Instructions
 
@@ -193,20 +193,20 @@ For production, replace MinIO with a cloud provider (AWS S3 recommended).
 ## Current System Works Without
 
 The following features work with only Gemini API:
-- ✅ User registration (email verification disabled for now)
-- ✅ JWT authentication
-- ✅ Profile management
-- ✅ Content creation
-- ✅ Comments
-- ✅ CV management
-- ✅ AI text enhancement
-- ✅ File uploads (MinIO self-hosted)
+- [✓] User registration (email verification disabled for now)
+- [✓] JWT authentication
+- [✓] Profile management
+- [✓] Content creation
+- [✓] Comments
+- [✓] CV management
+- [✓] AI text enhancement
+- [✓] File uploads (MinIO self-hosted)
 
 The following features require Email SMTP:
-- ❌ Email verification
-- ❌ Password reset
-- ❌ Welcome emails
-- ❌ Notification emails
+- [✗] Email verification
+- [✗] Password reset
+- [✗] Welcome emails
+- [✗] Notification emails
 
 ## Next Steps
 
