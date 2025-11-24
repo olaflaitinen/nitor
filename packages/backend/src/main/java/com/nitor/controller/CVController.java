@@ -6,6 +6,7 @@ import com.nitor.model.Education;
 import com.nitor.model.Experience;
 import com.nitor.model.Project;
 import com.nitor.service.CVService;
+import com.nitor.util.SecurityUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -28,6 +29,7 @@ import java.util.UUID;
 public class CVController {
 
     private final CVService cvService;
+    private final SecurityUtils securityUtils;
 
     @GetMapping("/{userId}")
     @Operation(summary = "Get user CV")
@@ -133,6 +135,7 @@ public class CVController {
     }
 
     private UUID extractUserIdFromPrincipal(UserDetails userDetails) {
-        return UUID.randomUUID(); // TODO: Implement proper user ID extraction from JWT
+        String email = userDetails.getUsername();
+        return securityUtils.getUserIdFromEmail(email);
     }
 }

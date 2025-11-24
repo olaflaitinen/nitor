@@ -3,6 +3,7 @@ package com.nitor.controller;
 import com.nitor.dto.content.ContentResponse;
 import com.nitor.dto.content.CreateContentRequest;
 import com.nitor.service.ContentService;
+import com.nitor.util.SecurityUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -25,6 +26,7 @@ import java.util.UUID;
 public class ContentController {
 
     private final ContentService contentService;
+    private final SecurityUtils securityUtils;
 
     @GetMapping("/feed")
     @Operation(summary = "Get content feed")
@@ -91,10 +93,8 @@ public class ContentController {
         return ResponseEntity.ok(contentService.searchContent(query, pageable));
     }
 
-    // Helper method - in production, use JWT claims
     private UUID extractUserIdFromPrincipal(UserDetails userDetails) {
-        // This is a placeholder - in real implementation, extract from JWT token
-        // For now, we'll need to lookup user by email
-        return UUID.randomUUID(); // TODO: Implement proper user ID extraction
+        String email = userDetails.getUsername();
+        return securityUtils.getUserIdFromEmail(email);
     }
 }
