@@ -1,4 +1,4 @@
-# NITOR - Academic Social Network Platform
+# NITOR Academic Social Network Platform
 
 <div align="center">
 
@@ -9,7 +9,6 @@
 <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFbwo4K3LqYAg/company-logo_200_200/B4EZq0lf3CKcAI-/0/1763966320547/nitor_academic_network_logo?e=1765411200&v=beta&t=-dxQlSRvKMsOqO03clz8xxrSmxDMiK5d0Br2MdZ28ag" alt="NITOR Logo" width="200"/>
 
 <br/>
-<br/>
 
 **Rigorous. Academic. Connected.**
 
@@ -18,697 +17,321 @@
 ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
 ![Status](https://img.shields.io/badge/status-production--ready-green.svg)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Java](https://img.shields.io/badge/Java-17-orange.svg)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2-brightgreen.svg)
-![React](https://img.shields.io/badge/React-19-blue.svg)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.8-blue.svg)
 
-**A Production-Ready Academic Social Network Platform**
+**Professional Academic Networking Platform**
 
-[Features](#key-features) •
-[Architecture](#architecture) •
 [Quick Start](#quick-start) •
 [Documentation](#documentation) •
-[API](#api-documentation) •
-[Contributing](#contributing)
+[Features](#features) •
+[Architecture](#architecture) •
+[Deployment](#deployment)
 
 </div>
 
 ---
 
-## About Nitor
+## About NITOR
 
-Nitor is an academic social networking platform designed for researchers, academics and institutions that require a professional, trusted environment to share and develop scientific work. We provide a focused alternative to general-purpose social media by aligning features with real academic workflows, quality standards and community expectations.
+NITOR is an enterprise-grade academic social networking platform designed for researchers, academics, and institutions requiring a professional environment for scholarly communication and collaboration.
 
-On Nitor, users can build a structured academic profile, maintain a comprehensive CV, and present publications, projects and achievements in a coherent, verifiable way. The platform is built to support long-term scholarly identity, not short-lived content, and is suitable for use by individual researchers, labs, departments and learned societies.
+The platform provides a focused alternative to general-purpose social media by aligning features with academic workflows, quality standards, and institutional requirements. Built with security, scalability, and research integrity as core principles.
 
-Nitor enables research collaboration through topic-focused posts, comments and discussions that encourage evidence-based exchange rather than informal conversation. Integrated AI-assisted writing tools help users refine abstracts, summaries and research updates while preserving authorship, transparency and academic integrity.
+**Mission:** To strengthen the global research ecosystem by providing a secure, institution-grade academic network where rigorous work is visible, searchable, and connected.
 
-The platform is discipline-agnostic and can be adopted across the full spectrum of research fields, from engineering and computer science to social sciences, law and medicine. It is designed to complement, not replace, institutional repositories, preprint servers and journals, by offering a professional social layer around existing scholarly communication channels.
-
-We place a strong emphasis on governance, privacy and responsible use of AI. Nitor is being developed with departments, research groups and institutional leaders in mind, so that organizations can confidently recommend it as a compliant, sustainable solution for their researchers.
-
-**Our Mission**: To strengthen the global research ecosystem by providing a secure, institution-grade academic network—a place where rigorous work is visible, searchable and connected, and where researchers at all career stages can present their contributions with clarity, credibility and confidence.
-
-**Connect with us**: [LinkedIn](https://www.linkedin.com/company/nitor-academic-network)
+**Connect:** [LinkedIn Company Page](https://www.linkedin.com/company/nitor-academic-network)
 
 ---
 
 ## Table of Contents
 
-##  Table of Contents
-
-- [Overview](#overview)
-- [Key Features](#key-features)
-- [Architecture](#architecture)
+- [Features](#features)
 - [Technology Stack](#technology-stack)
+- [Architecture](#architecture)
 - [Quick Start](#quick-start)
 - [Documentation](#documentation)
-- [API Documentation](#api-documentation)
 - [Development](#development)
-- [Testing](#testing)
 - [Deployment](#deployment)
 - [Security](#security)
-- [Contributing](#contributing)
+- [Support](#support)
 - [License](#license)
 
 ---
 
-##  Overview
+## Features
 
-NITOR is a comprehensive, production-ready academic social network platform designed specifically for researchers, academics, and scientists worldwide. The platform combines rapid knowledge dissemination with rigorous scientific standards, providing a professional space for academic discourse, collaboration, and career development.
+### Core Platform Capabilities
 
-### Vision
+**Academic Content Management**
+- Research publications, preprints, and academic articles
+- LaTeX mathematical notation support
+- Citation management and tracking
+- Version control for content revisions
+- Structured academic profiles with ORCID integration
 
-To create the world's leading platform for academic collaboration, enabling researchers to share knowledge, build professional networks, and accelerate scientific discovery.
+**AI-Powered Research Tools** (51 Features)
+- Writing enhancement with Gemini 2.5 Pro
+- Abstract and summary generation
+- Research statement creation
+- CV optimization and tailoring
+- Citation checking and validation
+- Methods clarity improvement
+- Multi-language translation
 
-### Mission
+**Professional Networking**
+- Connection-based academic networking
+- Researcher discovery by discipline and institution
+- Threaded scientific discussions
+- Collaborative review system
+- Academic credential verification
 
-Provide academics with modern tools for collaboration, content sharing, and professional networking while maintaining the highest standards of scientific integrity and data security.
+**Security & Compliance**
+- Two-Factor Authentication (TOTP)
+- OAuth 2.0 (Google, GitHub, LinkedIn)
+- JWT token-based authentication
+- Refresh token rotation
+- Rate limiting and abuse protection
+- GDPR-compliant data handling
+- Complete audit logging
 
----
-
-##  Key Features
-
-###  Academic Content Management
-- **Research Publications**: Share research papers, preprints, and academic articles
-- **LaTeX Support**: Built-in support for mathematical expressions and scientific notation
-- **Citation Management**: Track citations and academic impact
-- **Peer Review**: Collaborative review and feedback system
-- **Content Versioning**: Track changes and revisions
-
-###  Professional Profiles
-- **Comprehensive CVs**: Digital academic CV with automatic formatting
-- **ORCID Integration**: Connect with your ORCID identifier
-- **Publication Tracking**: Automatic publication counting and management
-- **Academic Credentials**: Verified academic titles and affiliations
-- **Profile Visibility Controls**: PUBLIC, CONNECTIONS_ONLY, or PRIVATE
-
-###  Collaboration & Networking
-- **Connection System**: Build professional academic networks
-- **Follow Functionality**: Follow researchers in your field
-- **Threaded Discussions**: Engage in scientific discourse
-- **Comment System**: Nested comments with LaTeX support
-- **Mentions**: Tag colleagues in discussions
-
-###  AI-Powered Features (51 Total)
-- **Writing Enhancement**: Text refinement, abstract generation, bio enhancement (Gemini 2.5 Pro)
-- **Content Analysis**: Plain language summaries, multi-level summaries, skeleton extraction
-- **Research Tools**: Methods clarity, limitations suggestions, citation detection
-- **Career Development**: Research/teaching statements, CV tailoring, recommendation letters
-- **Collaboration**: Meeting summaries, proposal generation, comment suggestions
-- **Full Documentation**: See [AI_SERVICE.md](docs/AI_SERVICE.md) for complete feature list
-
-###  Security & Privacy
-- **Two-Factor Authentication (2FA)**: TOTP-based additional security
-- **OAuth 2.0 Integration**: Login with Google, GitHub, LinkedIn
-- **JWT Authentication**: Secure token-based authentication
-- **Refresh Token Rotation**: Automatic token rotation for security
-- **Rate Limiting**: API protection against abuse
-- **Audit Logging**: Complete audit trail of all actions
-
-###  Advanced Features
-- **Real-time Notifications**: WebSocket-based instant notifications
-- **File Management**: Secure file upload with MinIO S3-compatible storage
-- **Search Functionality**: Advanced search across content and profiles
-- **Content Moderation**: Admin tools for platform management
-- **Analytics Dashboard**: Platform statistics and metrics
-- **Email Notifications**: SendGrid-powered transactional emails
+**Infrastructure & Performance**
+- Docker containerization
+- Kubernetes orchestration support
+- PostgreSQL 15 with optimized queries
+- Redis 7 caching layer
+- MinIO S3-compatible storage
+- Real-time WebSocket notifications
+- Comprehensive API (67 endpoints)
 
 ---
 
-##  Architecture
+## Technology Stack
+
+### Backend
+- **Framework:** Spring Boot 3.2.5 (Java 17)
+- **Database:** PostgreSQL 15 with Flyway migrations
+- **Cache:** Redis 7
+- **Storage:** MinIO (S3-compatible)
+- **Authentication:** JWT with refresh token rotation
+- **Documentation:** OpenAPI 3.0 / Swagger
+
+### Frontend
+- **Framework:** React 19 with TypeScript 5.8
+- **Build Tool:** Vite 6
+- **Styling:** Tailwind CSS 3.4
+- **State Management:** Zustand 5.0
+- **HTTP Client:** Axios 1.7
+- **Forms:** React Hook Form 7.54
+
+### AI Service
+- **Runtime:** Node.js 20
+- **Framework:** Express.js 4
+- **AI Model:** Google Gemini 2.5 Pro
+- **Features:** 51 AI-powered capabilities
+
+### Infrastructure
+- **Containerization:** Docker 24+
+- **Orchestration:** Kubernetes 1.28+
+- **Reverse Proxy:** Nginx 1.25+
+- **CI/CD:** GitHub Actions
+
+---
+
+## Architecture
+
+### System Components
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                     NITOR Platform                      │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  ┌──────────┐      ┌──────────┐      ┌──────────┐    │
+│  │ Frontend │◄────►│  Backend │◄────►│    AI    │    │
+│  │ React 19 │      │ Spring   │      │  Gemini  │    │
+│  │   Vite   │      │ Boot 3.2 │      │ Node.js  │    │
+│  └──────────┘      └──────────┘      └──────────┘    │
+│                            │                           │
+│              ┌─────────────┼─────────────┐            │
+│              │             │             │            │
+│        ┌─────▼────┐  ┌────▼────┐  ┌────▼────┐       │
+│        │PostgreSQL│  │  Redis  │  │  MinIO  │       │
+│        │    15    │  │    7    │  │ Storage │       │
+│        └──────────┘  └─────────┘  └─────────┘       │
+│                                                         │
+└─────────────────────────────────────────────────────────┘
+```
 
 ### Monorepo Structure
 
 ```
 nitor/
- packages/
-    backend/              # Java Spring Boot REST API
-       src/
-          main/
-             java/com/nitor/
-                controller/    # 14 REST Controllers
-                service/       # Business Logic Layer
-                repository/    # Data Access Layer (25 repositories)
-                model/         # JPA Entities (25 models)
-                dto/           # Data Transfer Objects
-                security/      # JWT & Security Config
-                config/        # Application Configuration
-                exception/     # Exception Handling
-                util/          # Utility Classes
-                seeder/        # Database Seeding
-                annotation/    # Custom Annotations
-                interceptor/   # Request Interceptors
-             resources/
-                 db/migration/  # Flyway Migrations
-                 db/seed/       # Seed Data
-                 templates/     # Email Templates
-          test/                  # Unit & Integration Tests
-       pom.xml
-   
-    frontend/             # React + TypeScript SPA
-       src/
-          components/   # React Components
-          pages/        # Page Components
-          hooks/        # Custom React Hooks
-          services/     # API Services
-          store/        # State Management
-          types/        # TypeScript Types
-          utils/        # Utility Functions
-       package.json
-   
-    ai-service/           # Node.js AI Microservice
-       src/
-          routes/       # API Routes
-          services/     # Gemini Integration
-          middleware/   # Express Middleware
-       package.json
-   
-    shared/               # Shared TypeScript Types
-        types/
-
- infrastructure/
-    docker/               # Docker Compose Configurations
-    kubernetes/           # K8s Manifests (6 files)
-    nginx/                # Nginx Configurations (3 files)
-
- docs/                     # Documentation
-    MONOREPO_SETUP.md
-    IMPLEMENTATION_STATUS.md
-    FINAL_SETUP_GUIDE.md
-
- security/                 # Security Policies
-    SECURITY.md
-
- .github/                  # GitHub Actions CI/CD
-    workflows/
-        ci.yml
-
- CONTRIBUTING.md           # Contribution Guidelines
- CODE_OF_CONDUCT.md        # Code of Conduct
- CHANGELOG.md              # Version History
- LICENSE                   # MIT License
- README.md                 # This File
-```
-
-### System Architecture
-
-```
-
-                          NITOR Platform                          
-
-                                
-                
-                                              
-          
-           Frontend       Backend    AI Service 
-           React 19      Spring       Node.js   
-          TypeScript     Boot 3.2     Gemini    
-          
-                                              
-                
-                                
-            
-                                                  
-        
-       PostgreSQL         Redis           MinIO       
-       Database           Cache        File Storage   
-        
+├── packages/
+│   ├── backend/          # Spring Boot REST API (Java)
+│   ├── frontend/         # React Application (TypeScript)
+│   ├── ai-service/       # AI Microservice (Node.js)
+│   └── shared/           # Shared TypeScript types
+├── infrastructure/
+│   ├── docker/           # Docker Compose configurations
+│   ├── kubernetes/       # Kubernetes manifests
+│   └── nginx/            # Nginx configurations
+├── docs/                 # Comprehensive documentation
+├── scripts/              # Deployment and utility scripts
+└── security/             # Security policies
 ```
 
 ---
 
-##  Technology Stack
-
-### Backend (Java Spring Boot)
-
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| **Java** | 17 | Programming Language |
-| **Spring Boot** | 3.2.5 | Application Framework |
-| **Spring Security** | 3.2.x | Security & Authentication |
-| **Spring Data JPA** | 3.2.x | Data Access Layer |
-| **PostgreSQL** | 15+ | Primary Database |
-| **Redis** | 7+ | Caching Layer |
-| **Flyway** | 10.x | Database Migrations |
-| **JWT (jjwt)** | 0.12.5 | Token Authentication |
-| **Bucket4j** | 8.x | Rate Limiting |
-| **SpringDoc OpenAPI** | 2.5.0 | API Documentation |
-| **Lombok** | 1.18.x | Code Generation |
-| **MinIO SDK** | 8.x | Object Storage Client |
-| **Jackson** | 2.17.x | JSON Processing |
-| **JUnit 5** | 5.10.x | Unit Testing |
-| **Mockito** | 5.x | Mocking Framework |
-| **TestContainers** | 1.19.x | Integration Testing |
-
-### Frontend (React)
-
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| **React** | 19.0.0 | UI Library |
-| **TypeScript** | 5.8.0 | Type Safety |
-| **Vite** | 6.0.0 | Build Tool |
-| **Tailwind CSS** | 3.4.0 | CSS Framework |
-| **Axios** | 1.7.0 | HTTP Client |
-| **React Router** | 7.1.0 | Routing |
-| **Zustand** | 5.0.0 | State Management |
-| **React Query** | 5.0.0 | Data Fetching |
-| **React Hook Form** | 7.54.0 | Form Management |
-
-### AI Service (Node.js)
-
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| **Node.js** | 20+ | Runtime Environment |
-| **Express.js** | 4.x | Web Framework |
-| **Google Gemini** | 2.5 Pro | AI Model (51 Features) |
-| **Axios** | 1.x | HTTP Client |
-
-### Infrastructure
-
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| **Docker** | 24+ | Containerization |
-| **Kubernetes** | 1.28+ | Orchestration |
-| **Nginx** | 1.25+ | Reverse Proxy |
-| **GitHub Actions** | - | CI/CD Pipeline |
-| **Prometheus** | - | Monitoring |
-
----
-
-##  Quick Start
-
-**For complete deployment instructions, see [LOCAL_DEPLOYMENT.md](docs/LOCAL_DEPLOYMENT.md)**
+## Quick Start
 
 ### Prerequisites
 
-**Required:**
 - Docker 24+ and Docker Compose
-- Git
-
-**Optional (for local development):**
-- Java 17+ and Maven 3.8+
-- Node.js 20+ and npm 10+
+- Git 2.30+
+- 8GB RAM (16GB recommended)
+- 20GB free disk space
 
 ### Installation
 
-#### 1. Clone the Repository
-
 ```bash
+# 1. Clone repository
 git clone https://github.com/olaflaitinen/nitor.git
 cd nitor
-```
 
-#### 2. Configure Environment Variables
-
-```bash
-# Copy the example environment file
+# 2. Configure environment
 cp .env.example .env
+nano .env  # Edit with your credentials
 
-# Edit the .env file with your configuration
-nano .env  # or use your preferred editor
-```
-
-**Required Configuration:**
-- Database credentials
-- JWT secret key (minimum 256 bits)
-- Gemini API key
-- Email service (SendGrid recommended)
-- OAuth credentials (optional)
-- MinIO access keys
-
-#### 3. Start All Services
-
-```bash
-# Using Docker Compose (recommended)
+# 3. Start all services
 ./scripts/start-dev.sh
 
-# Or directly with docker-compose
-docker-compose -f infrastructure/docker/docker-compose.yml up -d
-```
-
-#### 4. Verify Deployment
-
-```bash
-# Run verification script
+# 4. Verify deployment
 ./scripts/verify-deployment.sh
-
-# Or manually check services
-curl http://localhost:8080/actuator/health  # Backend
-curl http://localhost:3001/health           # AI Service
 ```
 
-#### 5. Access the Application
+### Access Points
 
 | Service | URL | Description |
 |---------|-----|-------------|
-| **Frontend** | http://localhost:5173 | React Application |
-| **Backend API** | http://localhost:8080 | REST API |
-| **API Docs** | http://localhost:8080/swagger-ui.html | Interactive API Documentation |
-| **AI Service** | http://localhost:3001 | Gemini AI Service (51 Features) |
-| **MinIO Console** | http://localhost:9001 | File Storage Console |
-| **Health Check** | http://localhost:8080/actuator/health | System Health Status |
-| **Metrics** | http://localhost:8080/actuator/prometheus | Prometheus Metrics |
+| Frontend | http://localhost:5173 | React Application |
+| Backend API | http://localhost:8080 | REST API |
+| API Documentation | http://localhost:8080/swagger-ui.html | Interactive API Docs |
+| AI Service | http://localhost:3001 | Gemini AI (51 Features) |
+| MinIO Console | http://localhost:9001 | File Storage Admin |
+| Health Check | http://localhost:8080/actuator/health | System Health |
 
 ### Default Credentials (Development)
 
 ```
-Email: test@example.com
-Password: password123
+Application:
+  Email: test@example.com
+  Password: password123
 
 MinIO Console:
-Username: minioadmin
-Password: minioadmin
+  Username: minioadmin
+  Password: minioadmin
 ```
-
-### Stopping Services
-
-```bash
-# Using convenience script
-./scripts/stop-dev.sh
-
-# Or directly with docker-compose
-docker-compose -f infrastructure/docker/docker-compose.yml down
-```
-
-### Troubleshooting
-
-For detailed troubleshooting and deployment options, see [LOCAL_DEPLOYMENT.md](docs/LOCAL_DEPLOYMENT.md)
 
 ---
 
-##  Documentation
+## Documentation
 
 Comprehensive documentation is available in the `/docs` directory:
 
 | Document | Description |
 |----------|-------------|
-| [LOCAL_DEPLOYMENT.md](docs/LOCAL_DEPLOYMENT.md) | Complete local deployment guide with Docker and manual setup |
-| [API_DOCUMENTATION.md](docs/API_DOCUMENTATION.md) | Complete REST API reference with 67 endpoints |
-| [DEPLOYMENT_GUIDE.md](docs/DEPLOYMENT_GUIDE.md) | Production deployment procedures and infrastructure setup |
-| [AI_SERVICE.md](docs/AI_SERVICE.md) | AI features documentation with 51 Gemini 2.5 Pro capabilities |
-| [USER_GUIDE.md](docs/USER_GUIDE.md) | End-user guide for researchers and academics |
-| [MONOREPO_SETUP.md](docs/MONOREPO_SETUP.md) | Detailed monorepo setup and architecture |
-| [IMPLEMENTATION_STATUS.md](docs/IMPLEMENTATION_STATUS.md) | Current implementation status and roadmap |
-| [FINAL_SETUP_GUIDE.md](docs/FINAL_SETUP_GUIDE.md) | Production deployment guide |
-| [CONTRIBUTING.md](CONTRIBUTING.md) | Contribution guidelines and standards |
-| [SECURITY.md](SECURITY.md) | Security policies and vulnerability reporting |
-| [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) | Community code of conduct |
-| [CHANGELOG.md](CHANGELOG.md) | Version history and release notes |
-| [EXTERNAL_APIS.md](EXTERNAL_APIS.md) | External API integrations guide |
+| [LOCAL_DEPLOYMENT.md](docs/LOCAL_DEPLOYMENT.md) | Complete local deployment guide |
+| [API_DOCUMENTATION.md](docs/API_DOCUMENTATION.md) | REST API reference (67 endpoints) |
+| [DEPLOYMENT_GUIDE.md](docs/DEPLOYMENT_GUIDE.md) | Production deployment procedures |
+| [AI_SERVICE.md](docs/AI_SERVICE.md) | AI features documentation (51 features) |
+| [USER_GUIDE.md](docs/USER_GUIDE.md) | End-user guide for researchers |
+| [IMPLEMENTATION_STATUS.md](docs/IMPLEMENTATION_STATUS.md) | Current implementation status |
 
 ### Additional Resources
 
-- **Backend Seed Data**: [packages/backend/src/main/resources/db/seed/README.md](packages/backend/src/main/resources/db/seed/README.md)
-- **Nginx Configuration**: [infrastructure/nginx/README.md](infrastructure/nginx/README.md)
+- [SECURITY.md](SECURITY.md) - Security policies and reporting
+- [CONTRIBUTING.md](CONTRIBUTING.md) - Contribution guidelines
+- [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) - Community standards
+- [CHANGELOG.md](CHANGELOG.md) - Version history
 
 ---
 
-##  API Documentation
+## Development
 
-NITOR provides a comprehensive REST API with **67 endpoints** across 14 controllers:
+### Local Development Setup
 
-### API Overview
-
-| Controller | Endpoints | Description |
-|------------|-----------|-------------|
-| **AuthController** | 4 | User authentication (register, login, refresh, logout) |
-| **ProfileController** | 6 | User profile management |
-| **ContentController** | 8 | Research content CRUD operations |
-| **CommentController** | 6 | Comment system |
-| **CVController** | 12 | Academic CV management |
-| **NotificationController** | 5 | Notification system |
-| **FileUploadController** | 3 | File upload and management |
-| **InteractionController** | 10 | Content interactions (like, bookmark, repost) |
-| **FollowController** | 5 | User follow system |
-| **SearchController** | 3 | Global search functionality |
-| **OAuthController** | 2 | OAuth 2.0 social login |
-| **AdminController** | 11 | Platform administration |
-| **WebSocketController** | 3 | Real-time WebSocket endpoints |
-
-### Authentication
-
-All protected endpoints require a JWT bearer token:
-
+**Backend Development:**
 ```bash
-curl -H "Authorization: Bearer <your-jwt-token>" \
-  http://localhost:8080/api/profiles/me
-```
-
-### Interactive API Documentation
-
-Full interactive API documentation with request/response examples:
-- **Swagger UI**: http://localhost:8080/swagger-ui.html
-- **OpenAPI Spec**: http://localhost:8080/api-docs
-
-### Example API Calls
-
-#### Register a New User
-
-```bash
-curl -X POST http://localhost:8080/api/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{
-    "email": "researcher@university.edu",
-    "password": "SecurePass123!",
-    "fullName": "Dr. Jane Smith",
-    "handle": "janesmith"
-  }'
-```
-
-#### Create Research Content
-
-```bash
-curl -X POST http://localhost:8080/api/content \
-  -H "Authorization: Bearer <token>" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "body": "Exciting new research findings in quantum computing!",
-    "contentType": "POST",
-    "visibility": "PUBLIC"
-  }'
-```
-
----
-
-##  Development
-
-### Backend Development
-
-```bash
-# Navigate to backend
 cd packages/backend
-
-# Install dependencies
-mvn clean install
-
-# Run in development mode
 mvn spring-boot:run -Dspring-boot.run.profiles=dev
-
-# Run with specific port
-mvn spring-boot:run -Dspring-boot.run.arguments=--server.port=8080
-
-# Build production JAR
-mvn clean package -DskipTests
 ```
 
-**Backend Structure:**
-- **Controllers**: REST API endpoints (`/controller`)
-- **Services**: Business logic (`/service`)
-- **Repositories**: Database access (`/repository`)
-- **Models**: JPA entities (`/model`)
-- **DTOs**: Data transfer objects (`/dto`)
-- **Security**: JWT and authentication (`/security`)
-
-### Frontend Development
-
+**Frontend Development:**
 ```bash
-# Navigate to frontend
 cd packages/frontend
-
-# Install dependencies
 npm install
-
-# Run development server
 npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
-
-# Run linter
-npm run lint
-
-# Run type checking
-npm run type-check
 ```
 
-**Frontend Structure:**
-- **Components**: Reusable UI components (`/components`)
-- **Pages**: Route-level components (`/pages`)
-- **Services**: API client services (`/services`)
-- **Hooks**: Custom React hooks (`/hooks`)
-- **Store**: State management (`/store`)
-
-### AI Service Development
-
+**AI Service Development:**
 ```bash
-# Navigate to AI service
 cd packages/ai-service
-
-# Install dependencies
 npm install
-
-# Run development server
 npm start
-
-# Run with debugging
-npm run dev
 ```
 
-### Environment Variables
-
-Create `.env` file in project root:
+### Testing
 
 ```bash
-# Database
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=nitor
-DB_USER=nitor
-DB_PASSWORD=your_password
-
-# Redis
-REDIS_HOST=localhost
-REDIS_PORT=6379
-
-# JWT
-JWT_SECRET=your-256-bit-secret-key
-
-# Email (SendGrid)
-MAIL_HOST=smtp.sendgrid.net
-MAIL_PORT=587
-MAIL_USERNAME=apikey
-MAIL_PASSWORD=your-sendgrid-api-key
-MAIL_FROM=no-reply@nitor.com
-
-# OAuth (optional)
-GOOGLE_OAUTH_ENABLED=true
-GOOGLE_CLIENT_ID=your-client-id
-GOOGLE_CLIENT_SECRET=your-client-secret
-
-# AI Service
-GEMINI_API_KEY=your-gemini-api-key
-AI_SERVICE_URL=http://localhost:3001
-```
-
----
-
-##  Testing
-
-### Backend Tests
-
-```bash
+# Backend tests
 cd packages/backend
-
-# Run all tests
 mvn test
 
-# Run specific test class
-mvn test -Dtest=AuthServiceTest
-
-# Run tests with coverage
-mvn test jacoco:report
-
-# Run integration tests
-mvn verify -P integration-tests
-
-# Skip tests during build
-mvn clean package -DskipTests
-```
-
-**Test Coverage:**
-- Unit Tests: Service and controller layers
-- Integration Tests: Full API testing with TestContainers
-- Test Database: H2 in-memory database
-
-**Example Test:**
-
-```java
-@Test
-void register_Success() {
-    RegisterRequest request = RegisterRequest.builder()
-        .email("test@example.com")
-        .password("SecurePass123!")
-        .fullName("Test User")
-        .handle("testuser")
-        .build();
-
-    AuthResponse response = authService.register(request);
-
-    assertNotNull(response);
-    assertNotNull(response.getAccessToken());
-}
-```
-
-### Frontend Tests
-
-```bash
+# Frontend tests
 cd packages/frontend
-
-# Run unit tests
 npm test
 
-# Run with coverage
-npm run test:coverage
+# Integration tests
+mvn verify -P integration-tests
+```
 
-# Run in watch mode
-npm run test:watch
+### Building for Production
+
+```bash
+# Backend JAR
+cd packages/backend
+mvn clean package -DskipTests
+
+# Frontend build
+cd packages/frontend
+npm run build
+
+# AI Service
+cd packages/ai-service
+npm install --production
 ```
 
 ---
 
-##  Deployment
+## Deployment
 
-### Docker Deployment
+### Docker Deployment (Recommended)
 
 ```bash
-# Build and start all services
+# Start all services
 docker-compose -f infrastructure/docker/docker-compose.yml up -d
 
 # View logs
-docker-compose logs -f
+docker-compose -f infrastructure/docker/docker-compose.yml logs -f
 
 # Stop services
-docker-compose down
-
-# Rebuild specific service
-docker-compose up -d --build backend
+docker-compose -f infrastructure/docker/docker-compose.yml down
 ```
 
 ### Kubernetes Deployment
 
 ```bash
-# Create namespace
-kubectl apply -f infrastructure/kubernetes/namespace.yaml
-
-# Deploy PostgreSQL
-kubectl apply -f infrastructure/kubernetes/postgres-deployment.yaml
-
-# Deploy Redis
-kubectl apply -f infrastructure/kubernetes/redis-deployment.yaml
-
-# Deploy backend
-kubectl apply -f infrastructure/kubernetes/backend-deployment.yaml
-
-# Deploy frontend
-kubectl apply -f infrastructure/kubernetes/frontend-deployment.yaml
-
-# Deploy ingress
-kubectl apply -f infrastructure/kubernetes/ingress.yaml
+# Apply manifests
+kubectl apply -f infrastructure/kubernetes/
 
 # Check status
 kubectl get pods -n nitor
@@ -717,91 +340,58 @@ kubectl get pods -n nitor
 kubectl logs -f deployment/nitor-backend -n nitor
 ```
 
-### Production Deployment Checklist
+### Production Checklist
 
 - [ ] Configure production database credentials
 - [ ] Set strong JWT secret (256+ bits)
 - [ ] Configure email service (SendGrid)
 - [ ] Set up OAuth credentials
 - [ ] Configure S3/MinIO storage
-- [ ] Enable HTTPS with valid SSL certificates
+- [ ] Enable HTTPS with SSL certificates
 - [ ] Configure Nginx reverse proxy
 - [ ] Set up monitoring (Prometheus + Grafana)
 - [ ] Configure backup strategy
 - [ ] Set up log aggregation
 - [ ] Enable rate limiting
 - [ ] Configure CORS for production domain
-- [ ] Set up CDN for static assets
-- [ ] Configure domain DNS
 - [ ] Test disaster recovery procedures
 
-### Environment-Specific Configuration
-
-**Development:**
-```yaml
-spring:
-  profiles:
-    active: dev
-  jpa:
-    show-sql: true
-```
-
-**Production:**
-```yaml
-spring:
-  profiles:
-    active: prod
-  jpa:
-    show-sql: false
-logging:
-  level:
-    com.nitor: INFO
-```
+For detailed deployment instructions, see [DEPLOYMENT_GUIDE.md](docs/DEPLOYMENT_GUIDE.md)
 
 ---
 
-##  Security
-
-NITOR implements enterprise-grade security practices:
+## Security
 
 ### Authentication & Authorization
 
-- **JWT Tokens**: Access tokens (24h) + refresh tokens (7 days)
-- **Token Rotation**: Automatic refresh token rotation
-- **Two-Factor Authentication**: TOTP-based 2FA with backup codes
-- **OAuth 2.0**: Social login (Google, GitHub, LinkedIn)
-- **BCrypt Hashing**: Password encryption with salt rounds
+- JWT tokens with automatic refresh rotation
+- Two-Factor Authentication (TOTP)
+- OAuth 2.0 social login
+- BCrypt password hashing
+- Session management and invalidation
 
 ### API Security
 
-- **Rate Limiting**: Bucket4j token bucket algorithm
+- Rate limiting (Bucket4j)
   - Auth endpoints: 5 requests/minute
   - API endpoints: 100 requests/minute
-  - Content creation: 10 posts/hour
-- **CORS Protection**: Configurable origin whitelist
-- **Input Validation**: Bean Validation (JSR-380)
-- **SQL Injection Prevention**: Parameterized queries via JPA
-- **XSS Protection**: Content sanitization
+- CORS protection
+- Input validation (JSR-380)
+- SQL injection prevention
+- XSS protection
 
 ### Data Security
 
-- **Encryption at Rest**: Database encryption
-- **Encryption in Transit**: HTTPS/TLS 1.3
-- **Secure File Upload**: File type validation and virus scanning
-- **Audit Logging**: Complete audit trail of all actions
-- **Data Privacy**: GDPR-compliant data handling
-
-### Infrastructure Security
-
-- **Container Security**: Non-root Docker images
-- **Network Security**: Private network for services
-- **Secrets Management**: Environment variables, never committed
-- **Regular Updates**: Dependency vulnerability scanning
+- Encryption at rest
+- HTTPS/TLS 1.3
+- Secure file upload validation
+- Complete audit logging
+- GDPR compliance
 
 ### Security Headers
 
 ```
-Strict-Transport-Security: max-age=31536000; includeSubDomains
+Strict-Transport-Security: max-age=31536000
 X-Frame-Options: SAMEORIGIN
 X-Content-Type-Options: nosniff
 X-XSS-Protection: 1; mode=block
@@ -810,77 +400,89 @@ Content-Security-Policy: default-src 'self'
 
 ### Vulnerability Reporting
 
-See [SECURITY.md](SECURITY.md) for our security policy and vulnerability disclosure process.
+Report security vulnerabilities to: security@nitor.io
+
+See [SECURITY.md](SECURITY.md) for complete security policy.
 
 ---
 
-##  Contributing
+## API Overview
 
-We welcome contributions from the academic community! Please read our [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
+### Endpoints Summary
+
+| Category | Endpoints | Description |
+|----------|-----------|-------------|
+| Authentication | 4 | Register, login, refresh, logout |
+| Profiles | 6 | User profile management |
+| Content | 8 | Research content operations |
+| Comments | 6 | Discussion system |
+| CV Management | 12 | Academic CV operations |
+| Notifications | 5 | Notification system |
+| File Upload | 3 | File management |
+| Interactions | 10 | Likes, bookmarks, reposts |
+| Follow System | 5 | User connections |
+| Search | 3 | Global search |
+| OAuth | 2 | Social authentication |
+| Admin | 11 | Platform administration |
+
+**Total:** 67 REST endpoints + WebSocket support
+
+Interactive API documentation: http://localhost:8080/swagger-ui.html
+
+---
+
+## Project Statistics
+
+| Metric | Value |
+|--------|-------|
+| Code Lines | 25,000+ |
+| API Endpoints | 67 |
+| AI Features | 51 |
+| Database Tables | 25 |
+| Documentation Pages | 8 |
+| Services | 6 (Postgres, Redis, MinIO, Backend, AI, Frontend) |
+| Test Coverage | 80%+ |
+| Supported Languages | English |
+
+---
+
+## Support
+
+### Documentation
+- User Guide: [USER_GUIDE.md](docs/USER_GUIDE.md)
+- API Documentation: [API_DOCUMENTATION.md](docs/API_DOCUMENTATION.md)
+- Deployment Guide: [DEPLOYMENT_GUIDE.md](docs/DEPLOYMENT_GUIDE.md)
+
+### Community
+- GitHub Issues: https://github.com/olaflaitinen/nitor/issues
+- GitHub Discussions: https://github.com/olaflaitinen/nitor/discussions
+
+### Professional Support
+- Email: support@nitor.io
+- Enterprise: enterprise@nitor.io
+- Security: security@nitor.io
+
+---
+
+## Contributing
+
+We welcome contributions from the academic community. Please read [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ### Quick Contribution Guide
 
-1. **Fork the Repository**
-   ```bash
-   git fork https://github.com/olaflaitinen/nitor.git
-   ```
+1. Fork the repository
+2. Create feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit changes (`git commit -m 'feat: add amazing feature'`)
+4. Push to branch (`git push origin feature/amazing-feature`)
+5. Open Pull Request
 
-2. **Create a Feature Branch**
-   ```bash
-   git checkout -b feature/amazing-feature
-   ```
-
-3. **Make Your Changes**
-   - Write clean, documented code
-   - Follow existing code style
-   - Add tests for new features
-   - Update documentation
-
-4. **Commit Changes**
-   ```bash
-   git commit -m "feat: add amazing feature"
-   ```
-
-   Follow [Conventional Commits](https://www.conventionalcommits.org/):
-   - `feat:` New feature
-   - `fix:` Bug fix
-   - `docs:` Documentation
-   - `test:` Tests
-   - `refactor:` Code refactoring
-
-5. **Push to Your Fork**
-   ```bash
-   git push origin feature/amazing-feature
-   ```
-
-6. **Open a Pull Request**
-   - Provide clear description
-   - Link related issues
-   - Ensure CI/CD passes
-
-### Development Standards
-
-- **Code Style**: Follow Google Java Style Guide
-- **Testing**: Maintain >80% code coverage
-- **Documentation**: Update relevant docs
-- **Commits**: Use Conventional Commits
-- **Reviews**: All PRs require 1 approval
-
-### Areas for Contribution
-
--  Bug fixes and improvements
--  Documentation enhancements
--  New features and functionality
--  Additional test coverage
--  Internationalization (i18n)
--  Accessibility improvements
--  UI/UX enhancements
+Follow [Conventional Commits](https://www.conventionalcommits.org/) specification.
 
 ---
 
-##  License
+## License
 
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see [LICENSE](LICENSE) file for details.
 
 ```
 MIT License
@@ -889,112 +491,50 @@ Copyright (c) 2024 NITOR Development Team
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+in the Software without restriction...
 ```
 
 ---
 
-##  Support & Contact
+## Acknowledgments
 
-### Getting Help
+Built with:
+- Spring Framework - Enterprise Java framework
+- React - UI library for web applications
+- Google Gemini - Advanced AI capabilities
+- PostgreSQL - Advanced open source database
+- Redis - In-memory data structure store
 
-- ** Documentation**: Check our comprehensive docs in `/docs`
-- ** Discussions**: Use GitHub Discussions for questions
-- ** Issues**: Report bugs via GitHub Issues
-- ** Email**: contact@nitor.io (for security issues)
-
-### Community
-
-- **GitHub**: [github.com/olaflaitinen/nitor](https://github.com/olaflaitinen/nitor)
-- **Website**: [nitor.io](https://nitor.io) *(coming soon)*
-- **Twitter**: [@nitor_platform](https://twitter.com/nitor_platform) *(coming soon)*
-
-### Professional Support
-
-For enterprise support, custom development, or consulting:
-- Email: enterprise@nitor.io
-- Response time: 24-48 hours
+Special thanks to the academic community for inspiration and feedback.
 
 ---
 
-##  Acknowledgments
-
-### Built With
-
-- **Spring Framework** - The enterprise Java framework
-- **React** - The UI library for web applications
-- **Google Gemini** - Advanced AI capabilities
-- **PostgreSQL** - The world's most advanced open source database
-- **Redis** - In-memory data structure store
-
-### Special Thanks
-
-- The academic community for inspiration and feedback
-- All contributors who have helped improve NITOR
-- Open source maintainers of our dependencies
-
-### Sponsored By
-
-*This section is reserved for future sponsors*
-
----
-
-##  Project Statistics
-
-| Metric | Count |
-|--------|-------|
-| **Total Code Lines** | 25,000+ |
-| **API Endpoints** | 67 |
-| **Database Tables** | 25 |
-| **Test Coverage** | 80%+ |
-| **Documentation Pages** | 12 |
-| **Supported Languages** | English (more coming) |
-| **Contributors** | 1+ |
-
----
-
-##  Roadmap
+## Roadmap
 
 ### Version 1.1 (Q2 2025)
-- [ ] Mobile applications (iOS & Android)
-- [ ] Advanced analytics dashboard
-- [ ] Citation network visualization
-- [ ] Enhanced AI features
+- Mobile applications (iOS & Android)
+- Advanced analytics dashboard
+- Citation network visualization
+- Enhanced AI features
 
 ### Version 1.2 (Q3 2025)
-- [ ] Institutional integrations
-- [ ] Conference management
-- [ ] Grant collaboration tools
-- [ ] Research group features
+- Institutional integrations
+- Conference management
+- Grant collaboration tools
+- Research group features
 
 ### Version 2.0 (Q4 2025)
-- [ ] Blockchain verification
-- [ ] Peer review platform
-- [ ] Academic marketplace
-- [ ] Global collaboration tools
-
-See [CHANGELOG.md](CHANGELOG.md) for detailed version history.
-
----
-
-##  Code of Conduct
-
-This project adheres to a [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to conduct@nitor.io.
+- Blockchain verification
+- Peer review platform
+- Academic marketplace
+- Global collaboration tools
 
 ---
 
 <div align="center">
 
-**Built with  for the Academic Community**
-
 **NITOR Development Team** • **Version 1.0.0** • **Production Ready**
 
-[ Back to Top](#nitor---academic-social-network-platform)
+[Back to Top](#nitor-academic-social-network-platform)
 
 </div>
