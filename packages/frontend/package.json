@@ -23,7 +23,7 @@
     "zod": "^3.22.4",
     "react-hook-form": "^7.49.3",
     "@hookform/resolvers": "^5.2.2",
-    "jspdf": "^2.5.1",
+    "jspdf": "^3.0.4",
     "canvas-confetti": "^1.9.4"
   },
   "devDependencies": {
