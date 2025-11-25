@@ -1,77 +1,188 @@
 # Code of Conduct
 
-## Our Pledge
+## Our Commitment
 
-We as members, contributors, and leaders pledge to make participation in our community a harassment-free experience for everyone, regardless of age, body size, visible or invisible disability, ethnicity, sex characteristics, gender identity and expression, level of experience, education, socio-economic status, nationality, personal appearance, race, religion, or sexual identity and orientation.
+NITOR is committed to providing a professional, respectful, and inclusive environment for all contributors, users, and community members. We value diverse perspectives and are dedicated to maintaining high standards of academic and professional conduct.
 
-We pledge to act and interact in ways that contribute to an open, welcoming, diverse, inclusive, and healthy community.
+---
 
 ## Our Standards
 
-Examples of behavior that contributes to a positive environment for our community include:
+### Professional Behavior
 
-* Demonstrating empathy and kindness toward other people
-* Being respectful of differing opinions, viewpoints, and experiences
-* Giving and gracefully accepting constructive feedback
-* Accepting responsibility and apologizing to those affected by our mistakes, and learning from the experience
-* Focusing on what is best not just for us as individuals, but for the overall community
+**Expected conduct:**
+- Demonstrate respect in all interactions
+- Use professional and inclusive language
+- Provide constructive feedback
+- Accept criticism gracefully
+- Focus on collaborative problem-solving
+- Respect differing viewpoints and experiences
+- Show empathy toward other community members
 
-Examples of unacceptable behavior include:
+**Unacceptable conduct:**
+- Harassment, intimidation, or discrimination of any kind
+- Offensive, derogatory, or inappropriate comments
+- Personal or political attacks
+- Public or private harassment
+- Publishing others' private information without permission
+- Trolling, insulting, or derogatory comments
+- Other conduct inappropriate in a professional setting
 
-* The use of sexualized language or imagery, and sexual attention or advances of any kind
-* Trolling, insulting or derogatory comments, and personal or political attacks
-* Public or private harassment
-* Publishing others' private information, such as a physical or email address, without their explicit permission
-* Other conduct which could reasonably be considered inappropriate in a professional setting
+### Academic Integrity
 
-## Enforcement Responsibilities
+**Research ethics:**
+- Proper attribution of work and ideas
+- Honest representation of contributions
+- Respect for intellectual property
+- Adherence to research ethics standards
+- Transparency in methodologies
+- Responsible data handling
 
-Community leaders are responsible for clarifying and enforcing our standards of acceptable behavior and will take appropriate and fair corrective action in response to any behavior that they deem inappropriate, threatening, offensive, or harmful.
+**Prohibited actions:**
+- Plagiarism or misrepresentation
+- Data fabrication or falsification
+- Unauthorized use of confidential information
+- Misrepresentation of credentials or affiliations
 
-Community leaders have the right and responsibility to remove, edit, or reject comments, commits, code, wiki edits, issues, and other contributions that are not aligned to this Code of Conduct, and will communicate reasons for moderation decisions when appropriate.
+### Technical Standards
+
+**Code contributions:**
+- Follow established coding standards
+- Write clear, maintainable code
+- Provide adequate documentation
+- Include appropriate tests
+- Respect existing architecture
+- Consider security implications
+
+**Communication:**
+- Be clear and concise
+- Provide context for issues and requests
+- Respond professionally to feedback
+- Acknowledge contributions of others
+- Use appropriate channels for different types of communication
+
+---
 
 ## Scope
 
-This Code of Conduct applies within all community spaces, and also applies when an individual is officially representing the community in public spaces. Examples of representing our community include using an official e-mail address, posting via an official social media account, or acting as an appointed representative at an online or offline event.
+This Code of Conduct applies to all project spaces, including:
+
+- GitHub repository (issues, pull requests, discussions)
+- Official communication channels
+- Project events and meetings
+- Social media when representing the project
+- Email and direct communications
+- Any other project-related forums
+
+It also applies when representing the project in public spaces.
+
+---
 
 ## Enforcement
 
-Instances of abusive, harassing, or otherwise unacceptable behavior may be reported to the community leaders responsible for enforcement. All complaints will be reviewed and investigated promptly and fairly.
+### Reporting
 
-All community leaders are obligated to respect the privacy and security of the reporter of any incident.
+If you experience or witness unacceptable behavior:
 
-## Enforcement Guidelines
+**Contact:**
+- Email: conduct@nitor.io
+- GitHub: Report through repository settings
+- Private message to project maintainers
 
-Community leaders will follow these Community Impact Guidelines in determining the consequences for any action they deem in violation of this Code of Conduct:
+**Include:**
+- Description of the incident
+- Context and evidence (if available)
+- Impact on you or others
+- Date, time, and location
+- Any witnesses
 
-### 1. Correction
+**Confidentiality:**
+All reports will be reviewed confidentially. We will respect privacy and security concerns of reporters.
 
-**Community Impact**: Use of inappropriate language or other behavior deemed unprofessional or unwelcome in the community.
+### Response Process
 
-**Consequence**: A private, written warning from community leaders, providing clarity around the nature of the violation and an explanation of why the behavior was inappropriate. A public apology may be requested.
+1. **Receipt Acknowledgment** - Within 24 hours
+2. **Initial Review** - Within 48 hours
+3. **Investigation** - Gather information from all parties
+4. **Decision** - Determine appropriate action
+5. **Communication** - Inform parties of outcome
+6. **Follow-up** - Monitor situation and provide support
 
-### 2. Warning
+### Enforcement Actions
 
-**Community Impact**: A violation through a single incident or series of actions.
+Depending on severity and circumstances:
 
-**Consequence**: A warning with consequences for continued behavior. No interaction with the people involved, including unsolicited interaction with those enforcing the Code of Conduct, for a specified period of time. This includes avoiding interactions in community spaces as well as external channels like social media. Violating these terms may lead to a temporary or permanent ban.
+**Warning**
+- Written notice of violation
+- Explanation of unacceptable behavior
+- Request for behavior modification
+- Warning of consequences for repeated violations
 
-### 3. Temporary Ban
+**Temporary Ban**
+- Suspension from project participation
+- Duration based on severity (1-90 days)
+- Restricted access to project resources
+- Review before reinstatement
 
-**Community Impact**: A serious violation of community standards, including sustained inappropriate behavior.
+**Permanent Ban**
+- Permanent removal from project
+- Blocked from all project spaces
+- No future participation allowed
+- Public record of ban (if appropriate)
 
-**Consequence**: A temporary ban from any sort of interaction or public communication with the community for a specified period of time. No public or private interaction with the people involved, including unsolicited interaction with those enforcing the Code of Conduct, is allowed during this period. Violating these terms may lead to a permanent ban.
+### Appeals
 
-### 4. Permanent Ban
+Decisions may be appealed within 30 days:
+- Email: appeals@nitor.io
+- Include case reference number
+- Provide new information or context
+- Appeal will be reviewed by different maintainer
 
-**Community Impact**: Demonstrating a pattern of violation of community standards, including sustained inappropriate behavior, harassment of an individual, or aggression toward or disparagement of classes of individuals.
+---
 
-**Consequence**: A permanent ban from any sort of public interaction within the community.
+## Maintainer Responsibilities
+
+Project maintainers are responsible for:
+
+- Clarifying standards of acceptable behavior
+- Taking appropriate and fair corrective action
+- Removing, editing, or rejecting contributions that violate this Code of Conduct
+- Communicating reasons for moderation decisions
+- Maintaining confidentiality regarding reporters
+- Leading by example
+
+Maintainers who do not follow or enforce the Code of Conduct may face temporary or permanent consequences.
+
+---
 
 ## Attribution
 
-This Code of Conduct is adapted from the [Contributor Covenant](https://www.contributor-covenant.org), version 2.0, available at https://www.contributor-covenant.org/version/2/0/code_of_conduct.html.
+This Code of Conduct is adapted from:
+- [Contributor Covenant](https://www.contributor-covenant.org/), version 2.1
+- [Academic Code of Conduct](https://www.nsf.gov/od/oecr/conduct.jsp)
+- Industry best practices for open-source projects
 
-Community Impact Guidelines were inspired by [Mozilla's code of conduct enforcement ladder](https://github.com/mozilla/diversity).
+---
 
-For answers to common questions about this code of conduct, see the FAQ at https://www.contributor-covenant.org/faq. Translations are available at https://www.contributor-covenant.org/translations.
+## Updates
+
+This Code of Conduct may be updated periodically to reflect community needs and best practices. Contributors will be notified of significant changes.
+
+**Version:** 2.0.0
+**Last Updated:** 2025-11-25
+**Next Review:** 2026-01-25
+
+---
+
+## Questions
+
+For questions about this Code of Conduct:
+- Email: conduct@nitor.io
+- Review: [Contributing Guidelines](CONTRIBUTING.md)
+- Community: GitHub Discussions
+
+---
+
+## Acknowledgment
+
+By participating in this project, you agree to abide by this Code of Conduct and contribute to a professional, respectful academic community.
