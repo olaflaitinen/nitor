@@ -1,156 +1,313 @@
 # Security Policy
 
-## Supported Versions
+## Overview
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 1.0.x   | :white_check_mark: |
+NITOR maintains enterprise-grade security standards for protecting academic data, researcher information, and institutional assets. This policy outlines security practices, vulnerability reporting procedures, and incident response protocols.
 
-## Reporting a Vulnerability
-
-We take the security of NITOR seriously. If you discover a security vulnerability, please report it responsibly.
-
-### How to Report
-
-**Please DO NOT create a public GitHub issue for security vulnerabilities.**
-
-Instead:
-1. Email security concerns to: security@nitor.io (or repository maintainer)
-2. Include detailed information about the vulnerability
-3. Provide steps to reproduce if applicable
-4. Allow reasonable time for response before public disclosure
-
-### What to Include
-
-- Description of the vulnerability
-- Steps to reproduce
-- Potential impact
-- Suggested fix (if available)
-- Your contact information
-
-### Response Timeline
-
-- **Initial Response**: Within 48 hours
-- **Status Update**: Within 7 days
-- **Fix Timeline**: Varies by severity
-
-## Security Measures
-
-### Authentication & Authorization
-
-- **JWT Tokens**: Access tokens expire in 24 hours, refresh tokens in 7 days
-- **Password Security**: BCrypt hashing with salt
-- **Session Management**: Secure token storage and validation
-- **CORS**: Configured for specific origins only
-
-### Data Protection
-
-- **Database**: PostgreSQL with parameterized queries (JPA)
-- **SQL Injection**: Prevented through ORM usage
-- **XSS Protection**: Input sanitization and output encoding
-- **CSRF**: Token-based protection for state-changing operations
-
-### API Security
-
-- **Rate Limiting**: Implemented to prevent abuse
-- **Input Validation**: All inputs validated using Jakarta Validation
-- **Output Sanitization**: Responses sanitized before sending
-- **Error Handling**: Generic error messages to prevent information leakage
-
-### File Upload Security
-
-- **File Type Validation**: Only allowed file types accepted
-- **File Size Limits**: Maximum 10MB per file
-- **Virus Scanning**: Recommended for production deployment
-- **Secure Storage**: Files stored in MinIO with access controls
-
-### Infrastructure Security
-
-- **HTTPS**: Required for production deployment
-- **Environment Variables**: Sensitive data stored securely
-- **Container Security**: Docker images scanned for vulnerabilities
-- **Dependency Updates**: Regular updates for security patches
-
-## Security Best Practices
-
-### For Developers
-
-1. Never commit sensitive data (API keys, passwords, secrets)
-2. Use environment variables for configuration
-3. Keep dependencies up to date
-4. Follow secure coding guidelines
-5. Review code for security vulnerabilities
-6. Use HTTPS in production
-7. Implement proper error handling
-
-### For Deployment
-
-1. Use strong passwords and API keys
-2. Enable HTTPS/TLS
-3. Configure firewall rules
-4. Regular security updates
-5. Monitor logs for suspicious activity
-6. Implement backup strategy
-7. Use secure container registries
-
-### For Users
-
-1. Use strong, unique passwords
-2. Enable two-factor authentication (when available)
-3. Keep browser and software updated
-4. Be cautious with email links
-5. Report suspicious activity
-
-## Known Security Considerations
-
-### Development Mode
-
-- Default credentials are used (change in production)
-- Debug logging may expose sensitive information
-- CORS is permissive for development
-
-### Production Requirements
-
-- Change all default passwords
-- Use strong JWT secrets (256-bit minimum)
-- Configure restrictive CORS policies
-- Enable HTTPS/TLS
-- Implement proper monitoring
-- Regular security audits
-
-## Security Updates
-
-Security updates will be released as needed. Check:
-- GitHub Security Advisories
-- CHANGELOG.md for security-related changes
-- Release notes for security patches
-
-## Compliance
-
-This project aims to follow:
-- OWASP Top 10 security practices
-- Industry-standard authentication methods
-- Data protection principles
-- Secure development lifecycle
-
-## Third-Party Dependencies
-
-We regularly monitor and update dependencies for security vulnerabilities:
-- Backend: Maven dependency check
-- Frontend: npm audit
-- Automated security scanning in CI/CD
-
-## Contact
-
-For security-related inquiries:
-- Email: security@nitor.io
-- Encrypted communication available upon request
-
-## Acknowledgments
-
-We appreciate responsible disclosure and may acknowledge security researchers who report vulnerabilities (with permission).
+**Security Contact:** security@nitor.io
 
 ---
 
-**Last Updated**: 2025-11-23
-**Version**: 1.0.0
+## Supported Versions
+
+| Version | Status | Security Support |
+|---------|--------|------------------|
+| 1.0.x   | Active | Full support |
+| 0.9.x   | Legacy | Critical fixes only |
+| < 0.9   | Unsupported | No support |
+
+---
+
+## Vulnerability Disclosure
+
+### Reporting Process
+
+**DO NOT** create public GitHub issues for security vulnerabilities.
+
+**Report via:**
+- Email: security@nitor.io
+- Response time: Within 24 hours
+- Status updates: Every 48-72 hours
+
+**Include:**
+- Vulnerability description
+- Reproduction steps
+- Affected components/versions
+- Proof of concept
+- Suggested remediation (optional)
+
+### Severity Classification
+
+**Critical (CVSS 9.0-10.0)**
+- Remote code execution, authentication bypass
+- Resolution: Emergency patch within 24 hours
+
+**High (CVSS 7.0-8.9)**
+- Privilege escalation, data exposure
+- Resolution: Patch within 7 days
+
+**Medium (CVSS 4.0-6.9)**
+- XSS, insecure references, information disclosure
+- Resolution: Next scheduled release (30 days)
+
+**Low (CVSS 0.1-3.9)**
+- Configuration issues, information leakage
+- Resolution: Quarterly release
+
+---
+
+## Security Architecture
+
+### Authentication
+
+**JWT Token Security**
+- HS256 signing (minimum 256-bit keys)
+- Access tokens: 24 hours expiration
+- Refresh tokens: 7 days with rotation
+- Token revocation via Redis blacklist
+
+**Two-Factor Authentication**
+- TOTP-based (RFC 6238)
+- Backup codes for recovery
+- Mandatory for administrative accounts
+
+**OAuth 2.0**
+- Providers: Google, GitHub, LinkedIn
+- Authorization Code flow with PKCE
+- Token refresh rotation
+
+**Password Requirements**
+- Minimum 12 characters
+- Complexity requirements enforced
+- BCrypt hashing (work factor: 12)
+
+### Data Protection
+
+**Encryption**
+- TLS 1.3 for data in transit
+- AES-256 for sensitive data at rest
+- Database field-level encryption for PII
+
+**Data Classification**
+1. Public: Published research, public profiles
+2. Internal: Draft content, connections
+3. Confidential: Email, credentials
+4. Restricted: Admin access, audit logs
+
+### API Security
+
+**Protection Mechanisms**
+- Input validation and sanitization
+- Parameterized queries (SQL injection prevention)
+- XSS protection (Content Security Policy)
+- CSRF tokens (double-submit cookie)
+- Request size limits (10MB)
+
+**Rate Limiting**
+- Authentication: 5 requests/minute
+- API calls: 100 requests/minute
+- Search queries: 50 requests/minute
+
+### Infrastructure
+
+**PostgreSQL Security**
+- Role-based access control
+- SSL/TLS required for connections
+- Audit logging enabled
+- Regular backups with encryption
+
+**Redis Security**
+- Password authentication required
+- ACL-based access control
+- TLS encryption enabled
+
+**MinIO Security**
+- Bucket policies (least privilege)
+- Presigned URLs (15-minute expiration)
+- Content-Type validation
+- File size limits enforced
+
+---
+
+## Production Security Checklist
+
+### Critical Requirements
+
+**Environment Configuration**
+- [ ] Change all default passwords
+- [ ] Generate strong JWT secret (256+ bits)
+- [ ] Enable HTTPS with valid certificates
+- [ ] Configure restrictive CORS origins
+- [ ] Enable audit logging
+- [ ] Set up monitoring and alerting
+
+**Network Security**
+- [ ] Configure firewall rules
+- [ ] Enable rate limiting
+- [ ] Implement DDoS protection
+- [ ] Restrict database access to app servers only
+- [ ] Disable unnecessary services
+
+**Access Control**
+- [ ] Enable 2FA for admin accounts
+- [ ] Implement least privilege principle
+- [ ] Regular access review
+- [ ] Rotate secrets every 90 days
+
+---
+
+## Secure Development
+
+### Code Security Guidelines
+
+**Required Practices**
+- Never commit secrets to version control
+- Use parameterized queries exclusively
+- Validate all user inputs
+- Sanitize all outputs
+- Implement proper error handling
+- Follow OWASP Top 10 guidelines
+
+**Dependency Management**
+```bash
+# Check for vulnerabilities
+npm audit
+mvn dependency-check:check
+
+# Update dependencies
+npm update
+mvn versions:use-latest-releases
+```
+
+### Code Review Checklist
+
+- [ ] Authentication/authorization verified
+- [ ] Input validation implemented
+- [ ] SQL injection prevention confirmed
+- [ ] XSS prevention confirmed
+- [ ] CSRF protection enabled
+- [ ] No sensitive data in logs
+- [ ] Error messages sanitized
+- [ ] No hardcoded secrets
+
+---
+
+## Incident Response
+
+### Response Process
+
+1. **Detection**: Automated monitoring, user reports, disclosure
+2. **Assessment**: Severity classification, impact analysis
+3. **Containment**: Threat isolation, access revocation
+4. **Remediation**: Patching, configuration updates
+5. **Recovery**: Service restoration, integrity verification
+6. **Post-Incident**: Root cause analysis, documentation
+
+### Communication Protocol
+
+**Internal**
+- Security team: Immediate
+- Engineering: Within 1 hour
+- Management: Within 4 hours
+
+**External**
+- Affected users: Within 24 hours
+- Public disclosure: 30 days post-remediation
+- Regulators: As required (GDPR: 72 hours)
+
+---
+
+## Compliance
+
+### Regulatory Standards
+
+**GDPR (General Data Protection Regulation)**
+- Data minimization
+- User consent management
+- Right to erasure
+- Data portability
+- Breach notification (72 hours)
+
+**ISO 27001 Alignment**
+- Information security management
+- Risk assessment procedures
+- Security controls implementation
+
+### Audit Logging
+
+**Logged Events**
+- Authentication attempts
+- Authorization failures
+- Data access operations
+- Configuration changes
+- Administrative actions
+- Security triggers
+
+**Retention**
+- Application logs: 90 days
+- Audit logs: 1 year
+- Security incidents: 7 years
+
+---
+
+## Security Testing
+
+### Automated Testing
+
+- Daily: Dependency vulnerability scanning
+- Daily: Static application security testing (SAST)
+- Weekly: Dynamic application security testing (DAST)
+- Monthly: Container image scanning
+
+### Manual Testing
+
+- Quarterly: Internal security review
+- Annually: External penetration testing
+- As needed: Incident-driven assessments
+
+---
+
+## Security Headers
+
+```
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+Content-Security-Policy: default-src 'self'
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+X-XSS-Protection: 1; mode=block
+Referrer-Policy: strict-origin-when-cross-origin
+```
+
+---
+
+## Resources
+
+### Security Tools
+- Spring Security 6.x
+- BCrypt password hashing
+- OWASP Java Encoder
+- Hibernate Validator
+- Bucket4j rate limiting
+
+### Documentation
+- [OWASP Top 10](https://owasp.org/www-project-top-ten/)
+- [OWASP API Security](https://owasp.org/www-project-api-security/)
+- [NIST Cybersecurity Framework](https://www.nist.gov/cyberframework)
+
+---
+
+## Contact
+
+**Security Team**
+- Email: security@nitor.io
+- Response SLA: 24 hours
+
+**Emergency**
+- Subject: "URGENT: Security Incident"
+- Response: 1 hour (business hours), 4 hours (outside)
+
+---
+
+**Last Updated:** 2025-11-25
+**Version:** 2.0.0
+**Next Review:** 2025-12-25
