@@ -23,7 +23,8 @@ import java.util.UUID;
  * Disable with: spring.data.seed.enabled=false
  */
 @Component
-@Profile("dev")
+@Profile("seed") // Changed from "dev" to prevent automatic seeding - enable with
+                 // spring.profiles.active=seed
 @RequiredArgsConstructor
 @Slf4j
 public class DataSeeder implements CommandLineRunner {
