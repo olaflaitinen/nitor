@@ -1,12 +1,12 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { User, Post } from '../types';
 import { Feed, FeedSkeleton } from './Feed';
 import { Award, Users, BookOpen, GraduationCap, Check, FileText } from 'lucide-react';
-import { MOCK_USERS } from '../constants';
 import { Skeleton } from './ui/Skeleton';
 import { CVManager } from './profile/CVManager';
 import { useNitorStore } from '../store/useNitorStore';
+import { apiClient } from '../src/api/client';
 
 interface ProfileViewProps {
   user?: User; // Optional to allow rendering skeleton without user data
@@ -85,7 +85,42 @@ export const ProfileSkeleton: React.FC = () => {
 export const ProfileView: React.FC<ProfileViewProps> = ({ user, posts, onPostClick, isLoading }) => {
   const [activeTab, setActiveTab] = useState<ProfileTab>('overview');
   const [isFollowing, setIsFollowing] = useState(false);
+  const [connectedUsers, setConnectedUsers] = useState<User[]>([]);
+  const [isLoadingNetwork, setIsLoadingNetwork] = useState(false);
   const { user: currentUser } = useNitorStore();
+
+  // Fetch network connections when network tab is active
+  useEffect(() => {
+    const fetchNetwork = async () => {
+      if (activeTab === 'network' && user && connectedUsers.length === 0) {
+        setIsLoadingNetwork(true);
+        try {
+          // For now, we'll use search to find some users
+          // In production, this would be a dedicated followers/following endpoint
+          const response = await apiClient.searchProfiles('', 0, 10);
+          const mappedUsers: User[] = response.content
+            .filter((u: any) => u.id !== user.id)
+            .map((u: any) => ({
+              id: u.id,
+              name: u.fullName,
+              handle: u.handle,
+              avatarUrl: u.avatarUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(u.fullName)}&background=random`,
+              institution: u.institution || '',
+              nitorScore: u.nitorScore || 0,
+              verified: u.verified || false,
+              bio: u.bio || '',
+            }));
+          setConnectedUsers(mappedUsers);
+        } catch (error) {
+          console.error('Failed to fetch network:', error);
+        } finally {
+          setIsLoadingNetwork(false);
+        }
+      }
+    };
+
+    fetchNetwork();
+  }, [activeTab, user, connectedUsers.length]);
 
   if (isLoading || !user) {
       return <ProfileSkeleton />;
@@ -293,8 +328,21 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ user, posts, onPostCli
                {activeTab === 'network' && (
                   <div className="space-y-4 animate-in slide-in-from-bottom-2 duration-300">
                       <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">Connected Scholars</h3>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          {MOCK_USERS.map((peer) => (
+                      {isLoadingNetwork ? (
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          {[1, 2, 3, 4].map((i) => (
+                            <div key={i} className="flex items-center gap-3 p-4 rounded-xl border border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900">
+                              <Skeleton className="w-12 h-12 rounded-full shrink-0" />
+                              <div className="flex-1 space-y-2">
+                                <Skeleton className="h-4 w-32" />
+                                <Skeleton className="h-3 w-24" />
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      ) : connectedUsers.length > 0 ? (
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          {connectedUsers.map((peer) => (
                               <div key={peer.id} className="flex items-center gap-3 p-4 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-indigo-200 dark:hover:border-indigo-800 hover:shadow-sm transition-all bg-white dark:bg-slate-900 cursor-pointer group">
                                   <img src={peer.avatarUrl} alt={peer.name} className="w-12 h-12 rounded-full object-cover border border-slate-200 dark:border-slate-700" />
                                   <div className="flex-1 min-w-0">
@@ -306,7 +354,12 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ user, posts, onPostCli
                                   </button>
                               </div>
                           ))}
-                      </div>
+                        </div>
+                      ) : (
+                        <div className="bg-slate-50 dark:bg-slate-900 p-8 rounded-xl text-center border border-slate-200 dark:border-slate-800">
+                          <p className="text-slate-500 dark:text-slate-400">No connections yet.</p>
+                        </div>
+                      )}
                   </div>
                )}
            </div>
