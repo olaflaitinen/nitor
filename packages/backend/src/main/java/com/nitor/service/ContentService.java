@@ -37,7 +37,7 @@ public class ContentService {
                 .title(request.getTitle())
                 .abstractText(request.getAbstractText())
                 .keywords(request.getKeywords())
-                .likesCount(0)
+                .endorsementsCount(0)
                 .repostsCount(0)
                 .commentsCount(0)
                 .viewsCount(0)
@@ -78,10 +78,14 @@ public class ContentService {
             throw new ResourceNotFoundException("Not authorized to update this content");
         }
 
-        if (request.getBody() != null) content.setBody(request.getBody());
-        if (request.getTitle() != null) content.setTitle(request.getTitle());
-        if (request.getAbstractText() != null) content.setAbstractText(request.getAbstractText());
-        if (request.getKeywords() != null) content.setKeywords(request.getKeywords());
+        if (request.getBody() != null)
+            content.setBody(request.getBody());
+        if (request.getTitle() != null)
+            content.setTitle(request.getTitle());
+        if (request.getAbstractText() != null)
+            content.setAbstractText(request.getAbstractText());
+        if (request.getKeywords() != null)
+            content.setKeywords(request.getKeywords());
 
         content = contentRepository.save(content);
         return mapToContentResponse(content);
@@ -136,7 +140,7 @@ public class ContentService {
                 .title(content.getTitle())
                 .abstractText(content.getAbstractText())
                 .keywords(content.getKeywords())
-                .likesCount(content.getLikesCount())
+                .likesCount(content.getEndorsementsCount())
                 .repostsCount(content.getRepostsCount())
                 .commentsCount(content.getCommentsCount())
                 .viewsCount(content.getViewsCount())

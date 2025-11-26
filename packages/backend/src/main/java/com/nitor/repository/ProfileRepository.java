@@ -19,10 +19,10 @@ public interface ProfileRepository extends JpaRepository<Profile, UUID> {
     Boolean existsByHandle(String handle);
 
     @Query("SELECT p FROM Profile p WHERE " +
-           "LOWER(p.fullName) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
-           "LOWER(p.handle) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
-           "LOWER(p.institution) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
-           "LOWER(p.discipline) LIKE LOWER(CONCAT('%', :query, '%'))")
+            "LOWER(p.fullName) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
+            "LOWER(p.handle) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
+            "LOWER(p.institution) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
+            "LOWER(p.discipline) LIKE LOWER(CONCAT('%', :query, '%'))")
     Page<Profile> searchProfiles(@Param("query") String query, Pageable pageable);
 
     @Query("SELECT p FROM Profile p WHERE p.verified = true ORDER BY p.nitorScore DESC")
@@ -31,4 +31,8 @@ public interface ProfileRepository extends JpaRepository<Profile, UUID> {
     Page<Profile> findByInstitution(String institution, Pageable pageable);
 
     Page<Profile> findByDiscipline(String discipline, Pageable pageable);
+
+    Optional<Profile> findByUserId(UUID userId);
+
+    long countByVerifiedTrue();
 }

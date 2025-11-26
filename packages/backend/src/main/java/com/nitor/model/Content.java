@@ -12,10 +12,10 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "content", indexes = {
-    @Index(name = "idx_content_author", columnList = "author_id"),
-    @Index(name = "idx_content_type", columnList = "type"),
-    @Index(name = "idx_content_created", columnList = "createdAt"),
-    @Index(name = "idx_content_pinned", columnList = "pinned")
+        @Index(name = "idx_content_author", columnList = "author_id"),
+        @Index(name = "idx_content_type", columnList = "type"),
+        @Index(name = "idx_content_created", columnList = "createdAt"),
+        @Index(name = "idx_content_pinned", columnList = "pinned")
 })
 @Getter
 @Setter
@@ -53,7 +53,7 @@ public class Content {
 
     @Column(nullable = false)
     @Builder.Default
-    private Integer likesCount = 0;
+    private Integer endorsementsCount = 0;
 
     @Column(nullable = false)
     @Builder.Default
@@ -83,7 +83,16 @@ public class Content {
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    @Builder.Default
+    private ContentVisibility visibility = ContentVisibility.PUBLIC;
+
     public enum ContentType {
         POST, ARTICLE
+    }
+
+    public enum ContentVisibility {
+        PUBLIC, PRIVATE, CONNECTIONS_ONLY
     }
 }
