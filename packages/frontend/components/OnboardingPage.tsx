@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { User, Building2, CheckCircle, ArrowRight, GraduationCap, Loader2 } from 'lucide-react';
 import { useNitorStore } from '../store/useNitorStore';
-import { supabase } from '../lib/supabase';
+import { apiClient } from '../src/api/client';
 import { AvatarUploader } from './ui/AvatarUploader';
 import confetti from 'canvas-confetti';
 
@@ -43,24 +43,20 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({ onComplete }) =>
 
   const onSubmit = async (data: OnboardingFormValues) => {
     setIsLoading(true);
-    
-    try {
-        // Real DB Update
-        const { error } = await supabase
-            .from('profiles')
-            .update({
-                full_name: data.fullName,
-                handle: data.handle,
-                institution: data.institution,
-                academic_title: data.role,
-                bio: `${data.role} at ${data.institution}. Researching ${data.discipline}.`,
-                avatar_url: avatarUrl || user?.avatarUrl || `https://ui-avatars.com/api/?name=${data.fullName}&background=6366f1&color=fff`,
-                updated_at: new Date().toISOString(),
-                onboarding_complete: true // IMPORTANT: This flag enables access to the feed
-            })
-            .eq('id', user?.id);
 
-        if (error) throw error;
+    try {
+        const finalAvatarUrl = avatarUrl || user?.avatarUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(data.fullName)}&background=6366f1&color=fff`;
+        const generatedBio = `${data.role} at ${data.institution}. Researching ${data.discipline}.`;
+
+        // Update via API
+        await apiClient.updateProfile(user!.id, {
+            fullName: data.fullName,
+            handle: data.handle,
+            institution: data.institution,
+            academicTitle: data.role,
+            bio: generatedBio,
+            avatarUrl: finalAvatarUrl,
+        });
 
         // Update Local State
         updateUser({
@@ -68,8 +64,8 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({ onComplete }) =>
             handle: data.handle,
             institution: data.institution,
             role: data.role,
-            avatarUrl: avatarUrl || user?.avatarUrl || `https://ui-avatars.com/api/?name=${data.fullName}&background=6366f1&color=fff`,
-            bio: `${data.role} at ${data.institution}. Researching ${data.discipline}.`,
+            avatarUrl: finalAvatarUrl,
+            bio: generatedBio,
         });
 
         // Trigger Celebration
@@ -87,7 +83,7 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({ onComplete }) =>
 
     } catch (err: any) {
         console.error(err);
-        addToast(err.message || "Failed to save profile. Please try again.", "error");
+        addToast(err.response?.data?.message || "Failed to save profile. Please try again.", "error");
         setIsLoading(false);
     }
   };

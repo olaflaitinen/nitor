@@ -5,15 +5,7 @@ import { useNitorStore } from '../../store/useNitorStore';
 import { Experience, Education, Project } from '../../types';
 import { generateCV } from '../../utils/cvGenerator';
 import { AITextEnhancer } from './AITextEnhancer';
-import { supabase, isSupabaseConfigured } from '../../lib/supabase';
-
-// --- Mock Data Fallback ---
-const MOCK_EXP: Experience[] = [
-    { id: '1', company: 'CERN', role: 'Junior Researcher', location: 'Geneva', startDate: '2020-01-01', isCurrent: true, description: 'Analyzing large hadron collider data using Python and C++.' }
-];
-const MOCK_EDU: Education[] = [
-    { id: '1', institution: 'MIT', degree: 'PhD', fieldOfStudy: 'Physics', startDate: '2018-09-01', endDate: '2022-05-01' }
-];
+import { apiClient } from '../../src/api/client';
 
 export const CVManager: React.FC = () => {
   const { user, addToast } = useNitorStore();
