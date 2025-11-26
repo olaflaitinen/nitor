@@ -16,9 +16,8 @@ import { SettingsPage } from './components/SettingsPage';
 import { OnboardingPage } from './components/OnboardingPage';
 import { ToastContainer } from './components/ui/Toast';
 import { Post, ViewMode, User } from './types';
-import { MOCK_POSTS, MOCK_NOTIFICATIONS } from './constants';
 import { useNitorStore } from './store/useNitorStore';
-import { supabase, isSupabaseConfigured } from './lib/supabase';
+import { apiClient } from './src/api/client';
 
 const App: React.FC = () => {
   // Use Global Store
@@ -44,57 +43,40 @@ const App: React.FC = () => {
   // Real Data Fetching
   useEffect(() => {
     const fetchPosts = async () => {
-        if (!isSupabaseConfigured()) {
-            setPosts(MOCK_POSTS);
-            setIsLoading(false);
-            return;
-        }
-
         try {
-            // Fetch Content with Author relation
-            const { data, error } = await supabase
-                .from('content')
-                .select(`
-                    *,
-                    author:profiles(*)
-                `)
-                .order('created_at', { ascending: false })
-                .limit(20);
+            const response = await apiClient.getFeed(0, 20);
 
-            if (error) throw error;
+            // Map backend response to frontend Post format
+            const mappedPosts: Post[] = response.content.map((item: any) => ({
+                id: item.id,
+                author: {
+                    id: item.author.id,
+                    name: item.author.fullName,
+                    handle: item.author.handle,
+                    avatarUrl: item.author.avatarUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(item.author.fullName)}&background=random`,
+                    institution: item.author.institution || '',
+                    nitorScore: item.author.nitorScore || 0,
+                    verified: item.author.verified || false,
+                    bio: item.author.bio || '',
+                },
+                content: item.body,
+                timestamp: new Date(item.createdAt).toLocaleDateString(),
+                likes: item.likesCount || 0,
+                reposts: item.repostsCount || 0,
+                comments: item.commentsCount || 0,
+                isArticle: item.type === 'ARTICLE',
+                title: item.title,
+                abstract: item.abstract,
+                keywords: item.keywords || [],
+                pinned: false,
+                commentsList: []
+            }));
 
-            if (data && data.length > 0) {
-                // Map DB format to App format
-                const mappedPosts: Post[] = data.map(item => ({
-                    id: item.id,
-                    author: {
-                        id: item.author.id,
-                        name: item.author.full_name,
-                        handle: item.author.handle,
-                        avatarUrl: item.author.avatar_url,
-                        institution: item.author.institution,
-                        nitorScore: item.author.nitor_score || 0,
-                        verified: item.author.verified || false,
-                    },
-                    content: item.body,
-                    timestamp: new Date(item.created_at).toLocaleDateString(),
-                    likes: item.likes_count || 0,
-                    reposts: item.reposts_count || 0,
-                    comments: 0, // Relation query needed for count
-                    isArticle: item.type === 'article',
-                    title: item.title,
-                    abstract: item.abstract,
-                    keywords: item.keywords,
-                    pinned: false
-                }));
-                setPosts(mappedPosts);
-            } else {
-                // Fallback to Mocks if DB is empty (Zero State / Fresh Install)
-                setPosts(MOCK_POSTS);
-            }
+            setPosts(mappedPosts);
         } catch (err) {
             console.error("Failed to fetch posts:", err);
-            setPosts(MOCK_POSTS); // Fallback
+            addToast("Failed to load feed", "error");
+            setPosts([]);
         } finally {
             setIsLoading(false);
         }
@@ -105,37 +87,54 @@ const App: React.FC = () => {
     } else {
         setIsLoading(false);
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, addToast]);
 
   // Actions
-  const handleCreatePost = (newPost: Post) => {
-    // Optimistic Update
-    setPosts((prev) => [newPost, ...prev]);
-    closeComposer();
-    
-    // Async Persist
-    if (isSupabaseConfigured()) {
-        supabase.from('content').insert({
-            author_id: user?.id,
-            type: newPost.isArticle ? 'article' : 'post',
-            body: newPost.content,
-            title: newPost.title,
-            abstract: newPost.abstract,
-            keywords: newPost.keywords,
-            created_at: new Date().toISOString()
-        }).then(({ error }) => {
-            if (error) {
-                addToast("Failed to save post to server", "error");
-                console.error(error);
-            } else {
-                addToast('Publication broadcasted successfully', 'success');
-            }
-        });
-    } else {
-        addToast('Publication broadcasted (Demo Mode)', 'success');
+  const handleCreatePost = async (newPost: Post) => {
+    try {
+      // Create content via API
+      const createdContent = await apiClient.createContent({
+        type: newPost.isArticle ? 'ARTICLE' : 'POST',
+        body: newPost.content,
+        title: newPost.title,
+        abstract: newPost.abstract,
+        keywords: newPost.keywords,
+      });
+
+      // Map the response to Post format and add to feed
+      const mappedPost: Post = {
+        id: createdContent.id,
+        author: {
+          id: user!.id,
+          name: user!.name,
+          handle: user!.handle,
+          avatarUrl: user!.avatarUrl,
+          institution: user!.institution || '',
+          nitorScore: user!.nitorScore || 0,
+          verified: user!.verified || false,
+          bio: user!.bio || '',
+        },
+        content: createdContent.body,
+        timestamp: new Date(createdContent.createdAt).toLocaleDateString(),
+        likes: 0,
+        reposts: 0,
+        comments: 0,
+        isArticle: createdContent.type === 'ARTICLE',
+        title: createdContent.title,
+        abstract: createdContent.abstract,
+        keywords: createdContent.keywords || [],
+        pinned: false,
+        commentsList: []
+      };
+
+      setPosts((prev) => [mappedPost, ...prev]);
+      closeComposer();
+      addToast('Publication broadcasted successfully', 'success');
+      setViewMode('feed');
+    } catch (error: any) {
+      console.error("Failed to create post:", error);
+      addToast(error.response?.data?.message || "Failed to create post", "error");
     }
-    
-    setViewMode('feed');
   };
 
   const handleViewPost = (post: Post) => {
@@ -273,7 +272,7 @@ const App: React.FC = () => {
           )}
           
           {viewMode === 'notifications' && (
-              <NotificationsView notifications={MOCK_NOTIFICATIONS} />
+              <NotificationsView />
           )}
 
           {viewMode === 'explore' && (
