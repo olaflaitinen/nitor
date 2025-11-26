@@ -2,9 +2,11 @@ package com.nitor.controller;
 
 import com.nitor.annotation.RateLimited;
 import com.nitor.dto.auth.AuthResponse;
+import com.nitor.dto.auth.ForgotPasswordRequest;
 import com.nitor.dto.auth.LoginRequest;
 import com.nitor.dto.auth.RefreshTokenRequest;
 import com.nitor.dto.auth.RegisterRequest;
+import com.nitor.dto.auth.ResetPasswordRequest;
 import com.nitor.service.AuthService;
 import com.nitor.service.RefreshTokenService;
 import com.nitor.service.RateLimitingService.RateLimitType;
@@ -49,8 +51,7 @@ public class AuthController {
         RefreshTokenResponse response = new RefreshTokenResponse(
                 tokenPair.accessToken(),
                 tokenPair.refreshToken(),
-                "Bearer"
-        );
+                "Bearer");
 
         return ResponseEntity.ok(response);
     }
@@ -62,5 +63,24 @@ public class AuthController {
         return ResponseEntity.ok().build();
     }
 
-    public record RefreshTokenResponse(String accessToken, String refreshToken, String tokenType) {}
+    @PostMapping("/forgot-password")
+    @Operation(summary = "Forgot password", description = "Request password reset email")
+    @RateLimited(type = RateLimitType.AUTH_LOGIN, keyPrefix = "ip")
+    public ResponseEntity<MessageResponse> forgotPassword(@Valid @RequestBody ForgotPasswordRequest request) {
+        authService.forgotPassword(request.getEmail());
+        return ResponseEntity.ok(new MessageResponse("If the email exists, a password reset link has been sent"));
+    }
+
+    @PostMapping("/reset-password")
+    @Operation(summary = "Reset password", description = "Reset password using token")
+    public ResponseEntity<MessageResponse> resetPassword(@Valid @RequestBody ResetPasswordRequest request) {
+        authService.resetPassword(request.getToken(), request.getNewPassword());
+        return ResponseEntity.ok(new MessageResponse("Password has been reset successfully"));
+    }
+
+    public record RefreshTokenResponse(String accessToken, String refreshToken, String tokenType) {
+    }
+
+    public record MessageResponse(String message) {
+    }
 }
