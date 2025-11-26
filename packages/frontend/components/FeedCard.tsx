@@ -4,6 +4,7 @@ import { MessageSquare, Repeat2, Heart, Share, FileText, MoreHorizontal, AlertTr
 import { Post } from '../types';
 import { Skeleton } from './ui/Skeleton';
 import { useNitorStore } from '../store/useNitorStore';
+import { apiClient } from '../src/api/client';
 
 // Lazy load the heavy Math rendering component
 const MathRenderer = React.lazy(() => import('./MathRenderer'));
@@ -20,10 +21,12 @@ export const FeedCard: React.FC<FeedCardProps> = ({ post, onClick }) => {
   const [isReporting, setIsReporting] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [showShareMenu, setShowShareMenu] = useState(false);
-  
-  // Endorse State
+
+  // Interaction State
   const [likes, setLikes] = useState(post.likes);
   const [hasEndorsed, setHasEndorsed] = useState(false);
+  const [reposts, setReposts] = useState(post.reposts);
+  const [hasReposted, setHasReposted] = useState(false);
 
   // Viewport Visibility State for Lazy Loading
   const [isVisible, setIsVisible] = useState(false);
@@ -56,15 +59,69 @@ export const FeedCard: React.FC<FeedCardProps> = ({ post, onClick }) => {
     e.stopPropagation();
   };
 
-  const handleLike = (e: React.MouseEvent) => {
+  const handleLike = async (e: React.MouseEvent) => {
     e.stopPropagation();
+
+    // Optimistic update
     if (hasEndorsed) {
-        setLikes(prev => Math.max(0, prev - 1));
-        setHasEndorsed(false);
+      setLikes(prev => Math.max(0, prev - 1));
+      setHasEndorsed(false);
     } else {
+      setLikes(prev => prev + 1);
+      setHasEndorsed(true);
+    }
+
+    try {
+      if (hasEndorsed) {
+        await apiClient.unendorseContent(post.id);
+      } else {
+        await apiClient.endorseContent(post.id);
+        addToast('Publication endorsed', 'success');
+      }
+    } catch (error: any) {
+      // Revert on error
+      if (hasEndorsed) {
         setLikes(prev => prev + 1);
         setHasEndorsed(true);
-        addToast('Publication endorsed', 'success');
+      } else {
+        setLikes(prev => Math.max(0, prev - 1));
+        setHasEndorsed(false);
+      }
+      console.error('Failed to toggle endorsement:', error);
+      addToast(error.response?.data?.message || 'Failed to endorse content', 'error');
+    }
+  };
+
+  const handleRepost = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+
+    // Optimistic update
+    if (hasReposted) {
+      setReposts(prev => Math.max(0, prev - 1));
+      setHasReposted(false);
+    } else {
+      setReposts(prev => prev + 1);
+      setHasReposted(true);
+    }
+
+    try {
+      if (hasReposted) {
+        await apiClient.unrepostContent(post.id);
+      } else {
+        await apiClient.repostContent(post.id);
+        addToast('Shared to your profile', 'success');
+      }
+    } catch (error: any) {
+      // Revert on error
+      if (hasReposted) {
+        setReposts(prev => prev + 1);
+        setHasReposted(true);
+      } else {
+        setReposts(prev => Math.max(0, prev - 1));
+        setHasReposted(false);
+      }
+      console.error('Failed to toggle repost:', error);
+      addToast(error.response?.data?.message || 'Failed to repost content', 'error');
     }
   };
 
@@ -264,14 +321,14 @@ export const FeedCard: React.FC<FeedCardProps> = ({ post, onClick }) => {
                 <span className="text-xs font-medium">{post.comments}</span>
               </button>
               
-              <button 
-                  onClick={handleInteraction}
-                  className="flex items-center gap-2 group/btn hover:text-green-600 dark:hover:text-green-400 transition-colors"
+              <button
+                  onClick={handleRepost}
+                  className={`flex items-center gap-2 group/btn transition-colors ${hasReposted ? 'text-green-600 dark:text-green-500' : 'hover:text-green-600 dark:hover:text-green-500'}`}
               >
-                <div className="p-2 rounded-full group-hover/btn:bg-green-50 dark:group-hover/btn:bg-green-900/30 transition-colors">
+                <div className={`p-2 rounded-full transition-colors ${hasReposted ? 'bg-green-50 dark:bg-green-900/30' : 'group-hover/btn:bg-green-50 dark:group-hover/btn:bg-green-900/30'}`}>
                   <Repeat2 className="w-4 h-4" />
                 </div>
-                <span className="text-xs font-medium">{post.reposts}</span>
+                <span className="text-xs font-medium">{reposts}</span>
               </button>
               
               <button 

@@ -219,6 +219,74 @@ class ApiClient {
     return response.data.url;
   }
 
+  // Interaction endpoints
+  async endorseContent(contentId: string) {
+    const response = await this.client.post(`/api/content/${contentId}/endorse`);
+    return response.data;
+  }
+
+  async unendorseContent(contentId: string) {
+    await this.client.delete(`/api/content/${contentId}/endorse`);
+  }
+
+  async repostContent(contentId: string, commentary?: string) {
+    const response = await this.client.post(`/api/content/${contentId}/repost`,
+      commentary ? { commentary } : null
+    );
+    return response.data;
+  }
+
+  async unrepostContent(contentId: string) {
+    await this.client.delete(`/api/content/${contentId}/repost`);
+  }
+
+  async getContentStats(contentId: string) {
+    const response = await this.client.get(`/api/content/${contentId}/stats`);
+    return response.data;
+  }
+
+  async bookmarkContent(contentId: string) {
+    await this.client.post(`/api/content/${contentId}/bookmark`);
+  }
+
+  async unbookmarkContent(contentId: string) {
+    await this.client.delete(`/api/content/${contentId}/bookmark`);
+  }
+
+  // Follow endpoints
+  async followUser(userId: string) {
+    const response = await this.client.post(`/api/follow/${userId}`);
+    return response.data;
+  }
+
+  async unfollowUser(userId: string) {
+    await this.client.delete(`/api/follow/${userId}`);
+  }
+
+  async getFollowers(userId: string, page = 0, size = 20) {
+    const response = await this.client.get(`/api/follow/${userId}/followers`, {
+      params: { page, size },
+    });
+    return response.data;
+  }
+
+  async getFollowing(userId: string, page = 0, size = 20) {
+    const response = await this.client.get(`/api/follow/${userId}/following`, {
+      params: { page, size },
+    });
+    return response.data;
+  }
+
+  async getFollowStats(userId: string) {
+    const response = await this.client.get(`/api/follow/${userId}/stats`);
+    return response.data;
+  }
+
+  async isFollowing(userId: string) {
+    const response = await this.client.get(`/api/follow/is-following/${userId}`);
+    return response.data;
+  }
+
   // AI endpoints
   async refineText(text: string) {
     const response = await axios.post(`${import.meta.env.VITE_AI_SERVICE_URL || 'http://localhost:3001'}/api/ai/refine-text`, { text });
