@@ -6,7 +6,7 @@ import * as z from 'zod';
 import { User, Upload, X, Plus, Save, Loader2, Building2, GraduationCap } from 'lucide-react';
 import { useNitorStore } from '../../store/useNitorStore';
 import { AvatarUploader } from '../ui/AvatarUploader';
-import { supabase } from '../../lib/supabase';
+import { apiClient } from '../../src/api/client';
 
 const profileSchema = z.object({
   fullName: z.string().min(2, "Name is too short"),
@@ -42,21 +42,15 @@ export const ProfileTab: React.FC = () => {
 
   const onSubmit = async (data: ProfileFormValues) => {
     setIsLoading(true);
-    
-    try {
-        // Update Database
-        const { error } = await supabase
-            .from('profiles')
-            .update({
-                full_name: data.fullName,
-                institution: data.institution,
-                academic_title: data.role,
-                bio: data.bio,
-                updated_at: new Date().toISOString()
-            })
-            .eq('id', user?.id);
 
-        if (error) throw error;
+    try {
+        // Update via API
+        await apiClient.updateProfile(user!.id, {
+            fullName: data.fullName,
+            institution: data.institution,
+            academicTitle: data.role,
+            bio: data.bio,
+        });
 
         // Update Store
         updateUser({
@@ -65,31 +59,28 @@ export const ProfileTab: React.FC = () => {
             role: data.role,
             bio: data.bio,
         });
-        
+
         addToast('Profile updated successfully', 'success');
     } catch (err: any) {
         console.error(err);
-        addToast('Failed to update profile.', 'error');
+        addToast(err.response?.data?.message || 'Failed to update profile.', 'error');
     } finally {
         setIsLoading(false);
     }
   };
 
   const handleAvatarSave = async (newUrl: string) => {
-    // Update DB with new Base64 string
     try {
-        const { error } = await supabase
-            .from('profiles')
-            .update({ avatar_url: newUrl })
-            .eq('id', user?.id);
-            
-        if (error) throw error;
+        await apiClient.updateProfile(user!.id, {
+            avatarUrl: newUrl
+        });
 
         updateUser({ avatarUrl: newUrl });
         addToast('Profile photo updated', 'success');
         setIsAvatarModalOpen(false);
-    } catch (err) {
-        addToast('Failed to save photo', 'error');
+    } catch (err: any) {
+        console.error(err);
+        addToast(err.response?.data?.message || 'Failed to save photo', 'error');
     }
   };
 
