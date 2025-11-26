@@ -48,7 +48,7 @@ CREATE TABLE profiles (
     followers_count INT DEFAULT 0,
     following_count INT DEFAULT 0,
     publications_count INT DEFAULT 0,
-    profile_visibility VARCHAR(20) DEFAULT 'public' CHECK (profile_visibility IN ('public', 'private', 'followers_only')),
+    profile_visibility VARCHAR(20) DEFAULT 'PUBLIC' CHECK (profile_visibility IN ('PUBLIC', 'PRIVATE', 'FOLLOWERS_ONLY')),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -65,7 +65,7 @@ CREATE INDEX idx_profiles_verified ON profiles(verified);
 CREATE TABLE content (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     author_id UUID NOT NULL REFERENCES profiles(id) ON DELETE CASCADE,
-    type VARCHAR(20) NOT NULL CHECK (type IN ('post', 'article')),
+    type VARCHAR(20) NOT NULL CHECK (type IN ('POST', 'ARTICLE')),
     body TEXT NOT NULL,
     title VARCHAR(500),
     abstract TEXT,
@@ -192,7 +192,7 @@ CREATE TABLE notifications (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     user_id UUID NOT NULL REFERENCES profiles(id) ON DELETE CASCADE,
     actor_id UUID REFERENCES profiles(id) ON DELETE CASCADE,
-    type VARCHAR(50) NOT NULL CHECK (type IN ('citation', 'follow', 'reply', 'endorse', 'mention', 'repost')),
+    type VARCHAR(50) NOT NULL CHECK (type IN ('CITATION', 'FOLLOW', 'REPLY', 'ENDORSE', 'MENTION', 'REPOST')),
     target_id UUID,
     target_type VARCHAR(50),
     target_preview TEXT,
