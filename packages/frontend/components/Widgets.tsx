@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { SearchWidget } from './SearchWidget';
 import { ViewMode } from '../types';
 import { apiClient } from '../src/api/client';
+import { useNitorStore } from '../store/useNitorStore';
 
 interface WidgetsProps {
   onNavigate?: (mode: ViewMode) => void;
@@ -14,11 +15,13 @@ interface ScholarSuggestion {
   handle: string;
   institute: string;
   avatarUrl: string;
+  isFollowing?: boolean;
 }
 
 export const Widgets: React.FC<WidgetsProps> = ({ onNavigate }) => {
   const [suggestedScholars, setSuggestedScholars] = useState<ScholarSuggestion[]>([]);
   const [isLoadingScholars, setIsLoadingScholars] = useState(true);
+  const { addToast } = useNitorStore();
 
   // Fetch suggested scholars from real API
   useEffect(() => {
@@ -43,6 +46,33 @@ export const Widgets: React.FC<WidgetsProps> = ({ onNavigate }) => {
 
     fetchSuggestions();
   }, []);
+
+  const handleFollow = async (scholarId: string) => {
+    const scholar = suggestedScholars.find(s => s.id === scholarId);
+    if (!scholar) return;
+
+    // Optimistic update
+    setSuggestedScholars(prev =>
+      prev.map(s => s.id === scholarId ? { ...s, isFollowing: !s.isFollowing } : s)
+    );
+
+    try {
+      if (scholar.isFollowing) {
+        await apiClient.unfollowUser(scholarId);
+        addToast('Unfollowed successfully', 'success');
+      } else {
+        await apiClient.followUser(scholarId);
+        addToast('Following successfully', 'success');
+      }
+    } catch (error: any) {
+      // Revert on error
+      setSuggestedScholars(prev =>
+        prev.map(s => s.id === scholarId ? { ...s, isFollowing: scholar.isFollowing } : s)
+      );
+      console.error('Failed to toggle follow:', error);
+      addToast(error.response?.data?.message || 'Failed to follow user', 'error');
+    }
+  };
 
   return (
     <div className="flex flex-col gap-6">
@@ -81,8 +111,15 @@ export const Widgets: React.FC<WidgetsProps> = ({ onNavigate }) => {
                     <span className="text-xs text-slate-500 dark:text-slate-400">{scholar.institute}</span>
                   </div>
                 </div>
-                <button className="bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 text-xs font-bold px-3 py-1.5 rounded-full hover:bg-slate-700 dark:hover:bg-slate-300 transition-colors">
-                  Follow
+                <button
+                  onClick={() => handleFollow(scholar.id)}
+                  className={`text-xs font-bold px-3 py-1.5 rounded-full transition-colors ${
+                    scholar.isFollowing
+                      ? 'bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-600'
+                      : 'bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 hover:bg-slate-700 dark:hover:bg-slate-300'
+                  }`}
+                >
+                  {scholar.isFollowing ? 'Following' : 'Follow'}
                 </button>
               </div>
             ))

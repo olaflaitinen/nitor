@@ -87,7 +87,45 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ user, posts, onPostCli
   const [isFollowing, setIsFollowing] = useState(false);
   const [connectedUsers, setConnectedUsers] = useState<User[]>([]);
   const [isLoadingNetwork, setIsLoadingNetwork] = useState(false);
-  const { user: currentUser } = useNitorStore();
+  const { user: currentUser, addToast } = useNitorStore();
+
+  // Check if following this user
+  useEffect(() => {
+    const checkFollowStatus = async () => {
+      if (user && currentUser && user.id !== currentUser.id) {
+        try {
+          const following = await apiClient.isFollowing(user.id);
+          setIsFollowing(following);
+        } catch (error) {
+          console.error('Failed to check follow status:', error);
+        }
+      }
+    };
+
+    checkFollowStatus();
+  }, [user, currentUser]);
+
+  const handleFollow = async () => {
+    if (!user) return;
+
+    // Optimistic update
+    setIsFollowing(prev => !prev);
+
+    try {
+      if (isFollowing) {
+        await apiClient.unfollowUser(user.id);
+        addToast('Unfollowed successfully', 'success');
+      } else {
+        await apiClient.followUser(user.id);
+        addToast('Following successfully', 'success');
+      }
+    } catch (error: any) {
+      // Revert on error
+      setIsFollowing(prev => !prev);
+      console.error('Failed to toggle follow:', error);
+      addToast(error.response?.data?.message || 'Failed to follow user', 'error');
+    }
+  };
 
   // Fetch network connections when network tab is active
   useEffect(() => {
@@ -164,15 +202,16 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ user, posts, onPostCli
                  </div>
              )}
            </div>
-           <button 
-             onClick={() => setIsFollowing(!isFollowing)}
-             className={`
-                mb-4 font-bold px-6 py-2.5 rounded-full shadow-lg transition-all active:scale-95 flex items-center gap-2
-                ${isFollowing 
-                    ? 'bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700' 
-                    : 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-indigo-200 dark:shadow-indigo-900/30'}
-             `}
-           >
+           {user && currentUser && user.id !== currentUser.id && (
+             <button
+               onClick={handleFollow}
+               className={`
+                  mb-4 font-bold px-6 py-2.5 rounded-full shadow-lg transition-all active:scale-95 flex items-center gap-2
+                  ${isFollowing
+                      ? 'bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700'
+                      : 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-indigo-200 dark:shadow-indigo-900/30'}
+               `}
+             >
               {isFollowing ? (
                   <>
                     <Check className="w-4 h-4" />
@@ -181,7 +220,8 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ user, posts, onPostCli
               ) : (
                   'Connect'
               )}
-           </button>
+             </button>
+           )}
         </div>
 
         <div className="mb-8">
