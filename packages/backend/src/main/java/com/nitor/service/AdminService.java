@@ -77,8 +77,7 @@ public class AdminService {
                 activeUsers,
                 verifiedProfiles,
                 totalContent,
-                pendingReports
-        );
+                pendingReports);
     }
 
     /**
@@ -112,8 +111,7 @@ public class AdminService {
                 adminId,
                 "USER_" + (active ? "ACTIVATED" : "DEACTIVATED"),
                 "User " + targetUserId + " " + (active ? "activated" : "deactivated"),
-                targetUserId.toString()
-        );
+                targetUserId);
 
         log.info("User {} {} by admin {}", targetUserId, (active ? "activated" : "deactivated"), adminId);
         return user;
@@ -136,8 +134,7 @@ public class AdminService {
                 adminId,
                 "PROFILE_VERIFIED",
                 "Profile " + profileId + " verified",
-                profileId.toString()
-        );
+                profileId);
 
         log.info("Profile {} verified by admin {}", profileId, adminId);
         return profile;
@@ -159,8 +156,7 @@ public class AdminService {
                 adminId,
                 "CONTENT_REMOVED",
                 "Content removed. Reason: " + reason,
-                contentId.toString()
-        );
+                contentId);
 
         log.info("Content {} removed by admin {}. Reason: {}", contentId, adminId, reason);
     }
@@ -198,8 +194,7 @@ public class AdminService {
                 adminId,
                 "REPORT_UPDATED",
                 "Report " + reportId + " status updated to " + newStatus + ". Resolution: " + resolution,
-                reportId.toString()
-        );
+                reportId);
 
         log.info("Report {} updated to {} by admin {}", reportId, newStatus, adminId);
         return report;
@@ -235,12 +230,12 @@ public class AdminService {
     /**
      * Create audit log entry
      */
-    private void createAuditLog(UUID userId, String action, String details, String resourceId) {
+    private void createAuditLog(UUID userId, String action, String details, UUID resourceId) {
         AuditLog auditLog = AuditLog.builder()
                 .userId(userId)
                 .action(action)
                 .details(details)
-                .resourceId(resourceId)
+                .entityId(resourceId)
                 .ipAddress("system")
                 .userAgent("admin-service")
                 .build();
@@ -256,6 +251,6 @@ public class AdminService {
             long activeUsers,
             long verifiedProfiles,
             long totalContent,
-            long pendingReports
-    ) {}
+            long pendingReports) {
+    }
 }

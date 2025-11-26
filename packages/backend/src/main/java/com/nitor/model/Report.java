@@ -41,11 +41,15 @@ public class Report {
     @Column(columnDefinition = "TEXT")
     private String description;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String status; // PENDING, REVIEWING, RESOLVED, DISMISSED
+    private ReportStatus status; // PENDING, REVIEWING, RESOLVED, DISMISSED
 
-    @Column(name = "reviewed_by")
-    private UUID reviewedBy;
+    @Column(name = "resolved_by")
+    private UUID resolvedBy;
+
+    @Column(name = "resolved_at")
+    private LocalDateTime resolvedAt;
 
     @Column(name = "resolution_note", columnDefinition = "TEXT")
     private String resolutionNote;
@@ -57,4 +61,11 @@ public class Report {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    public enum ReportStatus {
+        PENDING,
+        REVIEWING,
+        RESOLVED,
+        DISMISSED
+    }
 }

@@ -13,11 +13,11 @@ public interface ReportRepository extends JpaRepository<Report, UUID> {
 
     Page<Report> findByStatus(Report.ReportStatus status, Pageable pageable);
 
-    Page<Report> findByReportedByUserId(UUID userId, Pageable pageable);
+    Page<Report> findByReporterId(UUID reporterId, Pageable pageable);
 
-    Page<Report> findByContentId(UUID contentId, Pageable pageable);
+    Page<Report> findByReportedContentId(UUID reportedContentId, Pageable pageable);
 
     long countByStatus(Report.ReportStatus status);
 
-    boolean existsByReportedByUserIdAndContentId(UUID userId, UUID contentId);
+    boolean existsByReporterIdAndReportedContentId(UUID reporterId, UUID reportedContentId);
 }

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -73,16 +72,24 @@ public class DataSeeder implements CommandLineRunner {
         log.info("Seeding users and profiles...");
 
         String[][] usersData = {
-            {"John Doe", "johndoe", "john.doe@university.edu", "Professor", "Computer Science", "Massachusetts Institute of Technology"},
-            {"Jane Smith", "janesmith", "jane.smith@research.org", "Dr.", "Artificial Intelligence", "Stanford University"},
-            {"Alice Johnson", "alicejohnson", "alice.j@college.edu", "Associate Professor", "Quantum Physics", "Harvard University"},
-            {"Bob Williams", "bobwilliams", "bob.w@institute.edu", "Professor", "Neuroscience", "University of Oxford"},
-            {"Carol Martinez", "carolmartinez", "carol.m@university.edu", "Dr.", "Genetics", "University of Cambridge"},
-            {"David Brown", "davidbrown", "david.b@research.org", "Professor", "Astrophysics", "Princeton University"},
-            {"Eva Garcia", "evagarcia", "eva.g@college.edu", "Dr.", "Marine Biology", "University of California, Berkeley"},
-            {"Frank Miller", "frankmiller", "frank.m@institute.edu", "Professor", "Economics", "Yale University"},
-            {"Grace Lee", "gracelee", "grace.l@university.edu", "Dr.", "Psychology", "University of Chicago"},
-            {"Henry Wilson", "henrywilson", "henry.w@research.org", "Professor", "Mathematics", "California Institute of Technology"}
+                { "John Doe", "johndoe", "john.doe@university.edu", "Professor", "Computer Science",
+                        "Massachusetts Institute of Technology" },
+                { "Jane Smith", "janesmith", "jane.smith@research.org", "Dr.", "Artificial Intelligence",
+                        "Stanford University" },
+                { "Alice Johnson", "alicejohnson", "alice.j@college.edu", "Associate Professor", "Quantum Physics",
+                        "Harvard University" },
+                { "Bob Williams", "bobwilliams", "bob.w@institute.edu", "Professor", "Neuroscience",
+                        "University of Oxford" },
+                { "Carol Martinez", "carolmartinez", "carol.m@university.edu", "Dr.", "Genetics",
+                        "University of Cambridge" },
+                { "David Brown", "davidbrown", "david.b@research.org", "Professor", "Astrophysics",
+                        "Princeton University" },
+                { "Eva Garcia", "evagarcia", "eva.g@college.edu", "Dr.", "Marine Biology",
+                        "University of California, Berkeley" },
+                { "Frank Miller", "frankmiller", "frank.m@institute.edu", "Professor", "Economics", "Yale University" },
+                { "Grace Lee", "gracelee", "grace.l@university.edu", "Dr.", "Psychology", "University of Chicago" },
+                { "Henry Wilson", "henrywilson", "henry.w@research.org", "Professor", "Mathematics",
+                        "California Institute of Technology" }
         };
 
         for (String[] userData : usersData) {
@@ -97,7 +104,7 @@ public class DataSeeder implements CommandLineRunner {
             userIds.add(user.getId());
 
             // Create Profile
-            Profile profile = Profile.builder()
+            com.nitor.model.Profile profile = com.nitor.model.Profile.builder()
                     .id(user.getId())
                     .user(user)
                     .fullName(userData[0])
@@ -112,7 +119,7 @@ public class DataSeeder implements CommandLineRunner {
                     .followersCount(0)
                     .followingCount(0)
                     .publicationsCount(0)
-                    .profileVisibility(Profile.ProfileVisibility.PUBLIC)
+                    .profileVisibility(com.nitor.model.Profile.ProfileVisibility.PUBLIC)
                     .build();
             profileRepository.save(profile);
         }
@@ -136,7 +143,7 @@ public class DataSeeder implements CommandLineRunner {
                 UUID userId2 = userIds.get(random.nextInt(userIds.size()));
 
                 if (!userId1.equals(userId2) &&
-                    !connectionRepository.existsByUserIdAndConnectedUserId(userId1, userId2)) {
+                        !connectionRepository.existsByUserIdAndConnectedUserId(userId1, userId2)) {
 
                     Connection connection = Connection.builder()
                             .userId(userId1)
@@ -163,7 +170,7 @@ public class DataSeeder implements CommandLineRunner {
                 UUID followingId = userIds.get(random.nextInt(userIds.size()));
 
                 if (!userId1.equals(followingId) &&
-                    !followRepository.existsByFollowerIdAndFollowingId(userId1, followingId)) {
+                        !followRepository.existsByFollowerIdAndFollowingId(userId1, followingId)) {
 
                     Follow follow = Follow.builder()
                             .followerId(userId1)
@@ -182,16 +189,16 @@ public class DataSeeder implements CommandLineRunner {
         log.info("Seeding content posts...");
 
         String[] contentBodies = {
-            "Excited to share our latest research findings on neural networks! #AI #Research",
-            "Just published a new paper on quantum entanglement. Check it out! #Physics #Science",
-            "Fascinating discussion at today's conference about climate change impacts. #Climate #Environment",
-            "Our lab's breakthrough in CRISPR gene editing is now published in Nature! #Genetics #Biotech",
-            "Looking forward to the upcoming symposium on renewable energy. #Energy #Sustainability",
-            "New insights into black hole formation from our recent observations. #Astrophysics #Space",
-            "Collaboration opportunity: seeking partners for marine conservation project. #MarineBiology #Conservation",
-            "Thoughts on the latest economic trends and their global implications. #Economics #Finance",
-            "Interesting findings from our cognitive psychology study on memory retention. #Psychology #CognitiveScience",
-            "Mathematical proof of a long-standing conjecture finally completed! #Mathematics #Theory"
+                "Excited to share our latest research findings on neural networks! #AI #Research",
+                "Just published a new paper on quantum entanglement. Check it out! #Physics #Science",
+                "Fascinating discussion at today's conference about climate change impacts. #Climate #Environment",
+                "Our lab's breakthrough in CRISPR gene editing is now published in Nature! #Genetics #Biotech",
+                "Looking forward to the upcoming symposium on renewable energy. #Energy #Sustainability",
+                "New insights into black hole formation from our recent observations. #Astrophysics #Space",
+                "Collaboration opportunity: seeking partners for marine conservation project. #MarineBiology #Conservation",
+                "Thoughts on the latest economic trends and their global implications. #Economics #Finance",
+                "Interesting findings from our cognitive psychology study on memory retention. #Psychology #CognitiveScience",
+                "Mathematical proof of a long-standing conjecture finally completed! #Mathematics #Theory"
         };
 
         int postsPerUser = 3;
@@ -199,10 +206,13 @@ public class DataSeeder implements CommandLineRunner {
             for (int i = 0; i < postsPerUser; i++) {
                 String body = contentBodies[random.nextInt(contentBodies.length)];
 
+                // Fetch author profile reference
+                com.nitor.model.Profile author = profileRepository.getReferenceById(authorId);
+
                 Content content = Content.builder()
-                        .authorId(authorId)
+                        .author(author)
                         .body(body + " (Seed data)")
-                        .contentType(Content.ContentType.POST)
+                        .type(Content.ContentType.POST)
                         .visibility(Content.ContentVisibility.PUBLIC)
                         .endorsementsCount(0)
                         .commentsCount(0)
@@ -219,16 +229,16 @@ public class DataSeeder implements CommandLineRunner {
         log.info("Seeding comments...");
 
         String[] commentBodies = {
-            "Great work! Very insightful.",
-            "This is fascinating research.",
-            "Could you elaborate on the methodology?",
-            "Excellent findings! Looking forward to more.",
-            "Interesting perspective on this topic.",
-            "Thank you for sharing this!",
-            "This aligns with our recent findings.",
-            "Would love to collaborate on this.",
-            "Impressive results!",
-            "This could have significant implications."
+                "Great work! Very insightful.",
+                "This is fascinating research.",
+                "Could you elaborate on the methodology?",
+                "Excellent findings! Looking forward to more.",
+                "Interesting perspective on this topic.",
+                "Thank you for sharing this!",
+                "This aligns with our recent findings.",
+                "Would love to collaborate on this.",
+                "Impressive results!",
+                "This could have significant implications."
         };
 
         List<Content> allContent = contentRepository.findAll();
@@ -239,10 +249,11 @@ public class DataSeeder implements CommandLineRunner {
             int numComments = 1 + random.nextInt(3);
             for (int i = 0; i < numComments; i++) {
                 UUID commentAuthorId = userIds.get(random.nextInt(userIds.size()));
+                com.nitor.model.Profile commentAuthor = profileRepository.getReferenceById(commentAuthorId);
 
                 Comment comment = Comment.builder()
-                        .contentId(content.getId())
-                        .authorId(commentAuthorId)
+                        .content(content)
+                        .author(commentAuthor)
                         .body(commentBodies[random.nextInt(commentBodies.length)])
                         .likesCount(0)
                         .build();
@@ -266,8 +277,8 @@ public class DataSeeder implements CommandLineRunner {
             for (int i = 0; i < numEndorsements; i++) {
                 UUID userId = userIds.get(random.nextInt(userIds.size()));
 
-                if (!userId.equals(content.getAuthorId()) &&
-                    !endorsementRepository.existsByUserIdAndContentId(userId, content.getId())) {
+                if (!userId.equals(content.getAuthor().getId()) &&
+                        !endorsementRepository.existsByUserIdAndContentId(userId, content.getId())) {
 
                     Endorsement endorsement = Endorsement.builder()
                             .userId(userId)

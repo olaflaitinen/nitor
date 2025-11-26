@@ -22,7 +22,7 @@ public class SearchService {
 
     public Page<Content> searchContent(String query, Pageable pageable) {
         log.info("Searching content with query: {}", query);
-        return contentRepository.searchByKeyword(query, pageable);
+        return contentRepository.searchContent(query, pageable);
     }
 
     public Page<Profile> searchProfiles(String query, Pageable pageable) {
