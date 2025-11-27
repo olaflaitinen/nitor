@@ -25,6 +25,7 @@ public class Tag {
     @Column(nullable = false, unique = true)
     private String name;
 
+    @Builder.Default
     @Column(name = "usage_count", nullable = false)
     private Integer usageCount = 0;
 

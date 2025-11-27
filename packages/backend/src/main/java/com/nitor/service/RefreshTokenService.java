@@ -17,11 +17,13 @@ import org.springframework.transaction.annotation.Transactional;
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.util.Base64;
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@SuppressWarnings("null")
 public class RefreshTokenService {
 
     private final RefreshTokenRepository refreshTokenRepository;
@@ -41,7 +43,7 @@ public class RefreshTokenService {
         log.info("Creating refresh token for user: {}", userId);
 
         // Verify user exists
-        userRepository.findById(userId)
+        userRepository.findById(Objects.requireNonNull(userId))
                 .orElseThrow(() -> new ResourceNotFoundException("User", "id", userId.toString()));
 
         // Revoke all existing tokens for this user (single device policy)
@@ -62,7 +64,7 @@ public class RefreshTokenService {
                 .revoked(false)
                 .build();
 
-        refreshToken = refreshTokenRepository.save(refreshToken);
+        refreshToken = Objects.requireNonNull(refreshTokenRepository.save(refreshToken));
         log.info("Refresh token created for user: {}", userId);
 
         return refreshToken;
@@ -124,7 +126,7 @@ public class RefreshTokenService {
         RefreshToken newRefreshToken = rotateRefreshToken(refreshTokenString);
 
         // Get user details
-        User user = userRepository.findById(oldRefreshToken.getUserId())
+        User user = userRepository.findById(Objects.requireNonNull(oldRefreshToken.getUserId()))
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
         // Generate new access token
@@ -179,5 +181,6 @@ public class RefreshTokenService {
     /**
      * DTO for returning both access and refresh tokens
      */
-    public record TokenPair(String accessToken, String refreshToken) {}
+    public record TokenPair(String accessToken, String refreshToken) {
+    }
 }

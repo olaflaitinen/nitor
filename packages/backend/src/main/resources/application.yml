@@ -161,7 +161,7 @@ management:
       base-path: /actuator
   endpoint:
     health:
-      show-details: when-authorized
+      show-details: always
       probes:
         enabled: true
   metrics:

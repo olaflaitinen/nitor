@@ -18,13 +18,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@SuppressWarnings("null")
 public class CVService {
 
     private final ProfileRepository profileRepository;
@@ -34,7 +35,7 @@ public class CVService {
 
     @Transactional(readOnly = true)
     public CVResponse getUserCV(UUID userId) {
-        Profile profile = profileRepository.findById(userId)
+        Profile profile = profileRepository.findById(Objects.requireNonNull(userId))
                 .orElseThrow(() -> new ResourceNotFoundException("Profile", "id", userId));
 
         List<Education> education = educationRepository.findByUserOrderByStartDateDesc(profile);
@@ -51,7 +52,7 @@ public class CVService {
     // Education endpoints
     @Transactional
     public Education addEducation(UUID userId, EducationRequest request) {
-        Profile profile = profileRepository.findById(userId)
+        Profile profile = profileRepository.findById(Objects.requireNonNull(userId))
                 .orElseThrow(() -> new ResourceNotFoundException("Profile", "id", userId));
 
         Education education = Education.builder()
@@ -66,12 +67,12 @@ public class CVService {
                 .description(request.getDescription())
                 .build();
 
-        return educationRepository.save(education);
+        return Objects.requireNonNull(educationRepository.save(education));
     }
 
     @Transactional
     public Education updateEducation(UUID educationId, UUID userId, EducationRequest request) {
-        Education education = educationRepository.findById(educationId)
+        Education education = educationRepository.findById(Objects.requireNonNull(educationId))
                 .orElseThrow(() -> new ResourceNotFoundException("Education", "id", educationId));
 
         if (!education.getUser().getId().equals(userId)) {
@@ -87,12 +88,12 @@ public class CVService {
         education.setIsCurrent(request.getIsCurrent() != null ? request.getIsCurrent() : false);
         education.setDescription(request.getDescription());
 
-        return educationRepository.save(education);
+        return Objects.requireNonNull(educationRepository.save(education));
     }
 
     @Transactional
     public void deleteEducation(UUID educationId, UUID userId) {
-        Education education = educationRepository.findById(educationId)
+        Education education = educationRepository.findById(Objects.requireNonNull(educationId))
                 .orElseThrow(() -> new ResourceNotFoundException("Education", "id", educationId));
 
         if (!education.getUser().getId().equals(userId)) {
@@ -105,7 +106,7 @@ public class CVService {
     // Experience endpoints
     @Transactional
     public Experience addExperience(UUID userId, ExperienceRequest request) {
-        Profile profile = profileRepository.findById(userId)
+        Profile profile = profileRepository.findById(Objects.requireNonNull(userId))
                 .orElseThrow(() -> new ResourceNotFoundException("Profile", "id", userId));
 
         Experience experience = Experience.builder()
@@ -119,12 +120,12 @@ public class CVService {
                 .isCurrent(request.getIsCurrent() != null ? request.getIsCurrent() : false)
                 .build();
 
-        return experienceRepository.save(experience);
+        return Objects.requireNonNull(experienceRepository.save(experience));
     }
 
     @Transactional
     public void deleteExperience(UUID experienceId, UUID userId) {
-        Experience experience = experienceRepository.findById(experienceId)
+        Experience experience = experienceRepository.findById(Objects.requireNonNull(experienceId))
                 .orElseThrow(() -> new ResourceNotFoundException("Experience", "id", experienceId));
 
         if (!experience.getUser().getId().equals(userId)) {
@@ -137,7 +138,7 @@ public class CVService {
     // Project endpoints
     @Transactional
     public Project addProject(UUID userId, ProjectRequest request) {
-        Profile profile = profileRepository.findById(userId)
+        Profile profile = profileRepository.findById(Objects.requireNonNull(userId))
                 .orElseThrow(() -> new ResourceNotFoundException("Profile", "id", userId));
 
         Project project = Project.builder()
@@ -148,12 +149,12 @@ public class CVService {
                 .description(request.getDescription())
                 .build();
 
-        return projectRepository.save(project);
+        return Objects.requireNonNull(projectRepository.save(project));
     }
 
     @Transactional
     public void deleteProject(UUID projectId, UUID userId) {
-        Project project = projectRepository.findById(projectId)
+        Project project = projectRepository.findById(Objects.requireNonNull(projectId))
                 .orElseThrow(() -> new ResourceNotFoundException("Project", "id", projectId));
 
         if (!project.getUser().getId().equals(userId)) {

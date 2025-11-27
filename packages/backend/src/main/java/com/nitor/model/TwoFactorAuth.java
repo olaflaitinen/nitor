@@ -26,6 +26,7 @@ public class TwoFactorAuth {
     @Column(name = "user_id", nullable = false, unique = true)
     private UUID userId;
 
+    @Builder.Default
     @Column(nullable = false)
     private Boolean enabled = false;
 
@@ -35,6 +36,7 @@ public class TwoFactorAuth {
     @Column(name = "backup_codes", columnDefinition = "TEXT[]")
     private String[] backupCodes;
 
+    @Builder.Default
     @Column(name = "verified", nullable = false)
     private Boolean verified = false;
 

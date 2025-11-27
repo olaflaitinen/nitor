@@ -19,12 +19,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@SuppressWarnings("null")
 public class CommentService {
 
     private final CommentRepository commentRepository;
@@ -33,15 +35,15 @@ public class CommentService {
 
     @Transactional
     public CommentResponse createComment(UUID contentId, UUID authorId, CreateCommentRequest request) {
-        Content content = contentRepository.findById(contentId)
+        Content content = contentRepository.findById(Objects.requireNonNull(contentId))
                 .orElseThrow(() -> new ResourceNotFoundException("Content", "id", contentId));
 
-        Profile author = profileRepository.findById(authorId)
+        Profile author = profileRepository.findById(Objects.requireNonNull(authorId))
                 .orElseThrow(() -> new ResourceNotFoundException("Profile", "id", authorId));
 
         Comment parentComment = null;
         if (request.getParentCommentId() != null) {
-            parentComment = commentRepository.findById(request.getParentCommentId())
+            parentComment = commentRepository.findById(Objects.requireNonNull(request.getParentCommentId()))
                     .orElseThrow(() -> new ResourceNotFoundException("Comment", "id", request.getParentCommentId()));
         }
 
@@ -54,7 +56,7 @@ public class CommentService {
                 .isDeleted(false)
                 .build();
 
-        comment = commentRepository.save(comment);
+        comment = Objects.requireNonNull(commentRepository.save(comment));
         log.info("Comment created: {} on content {}", comment.getId(), contentId);
 
         return mapToCommentResponse(comment);
@@ -68,7 +70,7 @@ public class CommentService {
 
     @Transactional
     public CommentResponse updateComment(UUID commentId, UUID authorId, CreateCommentRequest request) {
-        Comment comment = commentRepository.findById(commentId)
+        Comment comment = commentRepository.findById(Objects.requireNonNull(commentId))
                 .orElseThrow(() -> new ResourceNotFoundException("Comment", "id", commentId));
 
         if (!comment.getAuthor().getId().equals(authorId)) {
@@ -83,7 +85,7 @@ public class CommentService {
 
     @Transactional
     public void deleteComment(UUID commentId, UUID authorId) {
-        Comment comment = commentRepository.findById(commentId)
+        Comment comment = commentRepository.findById(Objects.requireNonNull(commentId))
                 .orElseThrow(() -> new ResourceNotFoundException("Comment", "id", commentId));
 
         if (!comment.getAuthor().getId().equals(authorId)) {

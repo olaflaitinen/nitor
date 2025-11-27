@@ -12,8 +12,8 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "file_uploads", indexes = {
-    @Index(name = "idx_file_uploads_user", columnList = "user_id"),
-    @Index(name = "idx_file_uploads_created", columnList = "created_at")
+        @Index(name = "idx_file_uploads_user", columnList = "user_id"),
+        @Index(name = "idx_file_uploads_created", columnList = "created_at")
 })
 @Data
 @Builder
@@ -49,6 +49,7 @@ public class FileUpload {
     @Column(name = "file_url")
     private String fileUrl;
 
+    @Builder.Default
     @Column(name = "upload_status", nullable = false)
     private String uploadStatus = "COMPLETED"; // PENDING, COMPLETED, FAILED
 

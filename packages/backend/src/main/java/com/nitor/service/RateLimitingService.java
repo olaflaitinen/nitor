@@ -5,7 +5,6 @@ import io.github.bucket4j.Bucket;
 import io.github.bucket4j.Refill;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
@@ -25,8 +24,6 @@ import java.util.concurrent.ConcurrentHashMap;
 @RequiredArgsConstructor
 @Slf4j
 public class RateLimitingService {
-
-    private final RedisTemplate<String, String> redisTemplate;
 
     // In-memory bucket cache (for development)
     // In production with multiple instances, use Redis-backed buckets
@@ -81,7 +78,7 @@ public class RateLimitingService {
     /**
      * Check if an action is allowed for a specific key and rate limit type
      *
-     * @param key Unique identifier (IP, userId, etc.)
+     * @param key       Unique identifier (IP, userId, etc.)
      * @param limitType Type of rate limit to apply
      * @return true if action is allowed, false if rate limit exceeded
      */
@@ -101,23 +98,22 @@ public class RateLimitingService {
     /**
      * Check if action is allowed and throw exception if not
      *
-     * @param key Unique identifier
+     * @param key       Unique identifier
      * @param limitType Type of rate limit
      * @throws RateLimitExceededException if limit is exceeded
      */
     public void checkLimit(String key, RateLimitType limitType) {
         if (!isAllowed(key, limitType)) {
             throw new RateLimitExceededException(
-                "Rate limit exceeded for " + limitType.name() +
-                ". Please try again later."
-            );
+                    "Rate limit exceeded for " + limitType.name() +
+                            ". Please try again later.");
         }
     }
 
     /**
      * Get remaining tokens for a specific key and limit type
      *
-     * @param key Unique identifier
+     * @param key       Unique identifier
      * @param limitType Type of rate limit
      * @return Number of remaining requests
      */
@@ -131,7 +127,7 @@ public class RateLimitingService {
      * Reset rate limit for a specific key and type
      * Useful for testing or admin override
      *
-     * @param key Unique identifier
+     * @param key       Unique identifier
      * @param limitType Type of rate limit
      */
     public void resetLimit(String key, RateLimitType limitType) {
@@ -150,18 +146,17 @@ public class RateLimitingService {
     /**
      * Create a new bucket with the specified rate limit configuration
      */
+    @SuppressWarnings("deprecation")
     private Bucket createBucket(RateLimitType limitType) {
         Bandwidth limit = Bandwidth.classic(
-            limitType.getCapacity(),
-            Refill.intervally(
                 limitType.getCapacity(),
-                limitType.getRefillPeriod()
-            )
-        );
+                Refill.intervally(
+                        limitType.getCapacity(),
+                        limitType.getRefillPeriod()));
 
         return Bucket.builder()
-            .addLimit(limit)
-            .build();
+                .addLimit(limit)
+                .build();
     }
 
     /**

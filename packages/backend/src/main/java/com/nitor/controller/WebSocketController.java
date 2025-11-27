@@ -28,18 +28,19 @@ public class WebSocketController {
 
     @MessageMapping("/typing")
     public void handleTyping(@Payload String message, SimpMessageHeaderAccessor headerAccessor) {
-        String username = (String) headerAccessor.getSessionAttributes().get("username");
+        var sessionAttributes = headerAccessor.getSessionAttributes();
+        String username = sessionAttributes != null ? (String) sessionAttributes.get("username") : "Unknown";
         log.info("User {} is typing: {}", username, message);
         // Broadcast typing indicator
         messagingTemplate.convertAndSend("/topic/typing", username + " is typing...");
     }
 
+    @SuppressWarnings("null")
     public void sendNotificationToUser(UUID userId, NotificationMessage notification) {
         messagingTemplate.convertAndSendToUser(
                 userId.toString(),
                 "/queue/notifications",
-                notification
-        );
+                notification);
     }
 
     public void broadcastContentUpdate(String contentId) {

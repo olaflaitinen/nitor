@@ -9,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @Component
@@ -25,7 +26,7 @@ public class SecurityUtils {
 
         Object principal = authentication.getPrincipal();
         if (principal instanceof UserDetails) {
-            String email = ((UserDetails) principal).getUsername();
+            // String email = ((UserDetails) principal).getUsername();
             // Email is stored in UserDetails.username
             // We need to look up the user by email to get the UUID
             // This is a limitation - in production, store userId in JWT claims
@@ -38,7 +39,7 @@ public class SecurityUtils {
     public UUID getUserIdFromEmail(String email) {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UnauthorizedException("User not found"));
-        return user.getId();
+        return Objects.requireNonNull(user.getId());
     }
 
     public static String getCurrentUserEmail() {

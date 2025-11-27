@@ -20,6 +20,8 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import java.time.Duration;
 
+import java.util.Objects;
+
 @Configuration
 @EnableCaching
 public class RedisConfig {
@@ -36,7 +38,7 @@ public class RedisConfig {
     @Bean
     public LettuceConnectionFactory redisConnectionFactory() {
         RedisStandaloneConfiguration config = new RedisStandaloneConfiguration();
-        config.setHostName(redisHost);
+        config.setHostName(Objects.requireNonNull(redisHost));
         config.setPort(redisPort);
 
         if (redisPassword != null && !redisPassword.isEmpty()) {
@@ -49,7 +51,7 @@ public class RedisConfig {
     @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory connectionFactory) {
         RedisTemplate<String, Object> template = new RedisTemplate<>();
-        template.setConnectionFactory(connectionFactory);
+        template.setConnectionFactory(Objects.requireNonNull(connectionFactory));
 
         // Use String serializer for keys
         template.setKeySerializer(new StringRedisSerializer());
@@ -77,13 +79,14 @@ public class RedisConfig {
         GenericJackson2JsonRedisSerializer serializer = new GenericJackson2JsonRedisSerializer(mapper);
 
         RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
-            .entryTtl(Duration.ofHours(1))
-            .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))
-            .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(serializer))
-            .disableCachingNullValues();
+                .entryTtl(Objects.requireNonNull(Duration.ofHours(1)))
+                .serializeKeysWith(
+                        RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))
+                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(serializer))
+                .disableCachingNullValues();
 
-        return RedisCacheManager.builder(connectionFactory)
-            .cacheDefaults(config)
-            .build();
+        return RedisCacheManager.builder(Objects.requireNonNull(connectionFactory))
+                .cacheDefaults(config)
+                .build();
     }
 }

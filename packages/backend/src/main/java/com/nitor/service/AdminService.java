@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -28,6 +29,7 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@SuppressWarnings("null")
 public class AdminService {
 
     private final UserRepository userRepository;
@@ -104,7 +106,7 @@ public class AdminService {
         }
 
         user.setIsActive(active);
-        user = userRepository.save(user);
+        user = Objects.requireNonNull(userRepository.save(user));
 
         // Audit log
         createAuditLog(
@@ -128,7 +130,7 @@ public class AdminService {
                 .orElseThrow(() -> new ResourceNotFoundException("Profile not found"));
 
         profile.setVerified(true);
-        profile = profileRepository.save(profile);
+        profile = Objects.requireNonNull(profileRepository.save(profile));
 
         createAuditLog(
                 adminId,
@@ -188,7 +190,7 @@ public class AdminService {
         report.setResolvedAt(LocalDateTime.now());
         report.setResolvedBy(adminId);
 
-        report = reportRepository.save(report);
+        report = Objects.requireNonNull(reportRepository.save(report));
 
         createAuditLog(
                 adminId,
@@ -240,7 +242,7 @@ public class AdminService {
                 .userAgent("admin-service")
                 .build();
 
-        auditLogRepository.save(auditLog);
+        auditLogRepository.save(Objects.requireNonNull(auditLog));
     }
 
     /**

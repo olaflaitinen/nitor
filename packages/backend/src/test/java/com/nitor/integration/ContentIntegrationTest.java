@@ -6,7 +6,6 @@ import com.nitor.dto.auth.RegisterRequest;
 import com.nitor.dto.content.CreateContentRequest;
 import com.nitor.model.Content;
 import com.nitor.model.Profile;
-import com.nitor.model.User;
 import com.nitor.repository.ContentRepository;
 import com.nitor.repository.ProfileRepository;
 import com.nitor.repository.UserRepository;
@@ -16,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -35,6 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
 @Transactional
+@SuppressWarnings({ "null", "nullness" })
 class ContentIntegrationTest {
 
         @Autowired

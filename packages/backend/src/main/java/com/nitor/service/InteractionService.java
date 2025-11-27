@@ -13,26 +13,29 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 @Transactional
+@SuppressWarnings("null")
 public class InteractionService {
 
     private final EndorsementRepository endorsementRepository;
     private final RepostRepository repostRepository;
     private final BookmarkRepository bookmarkRepository;
     private final ContentRepository contentRepository;
-    private final UserRepository userRepository;
     private final ProfileRepository profileRepository;
 
     // ==================== ENDORSEMENTS (LIKES) ====================
 
     public EndorsementResponse endorseContent(UUID contentId, UUID userId) {
         // Check if content exists
-        Content content = contentRepository.findById(contentId)
-            .orElseThrow(() -> new ResourceNotFoundException("Content not found"));
+        // Check if content exists
+        if (!contentRepository.existsById(Objects.requireNonNull(contentId))) {
+            throw new ResourceNotFoundException("Content not found");
+        }
 
         // Check if already endorsed
         if (endorsementRepository.existsByUserIdAndContentId(userId, contentId)) {
@@ -41,24 +44,24 @@ public class InteractionService {
 
         // Create endorsement
         Endorsement endorsement = Endorsement.builder()
-            .userId(userId)
-            .contentId(contentId)
-            .build();
+                .userId(userId)
+                .contentId(contentId)
+                .build();
 
-        endorsement = endorsementRepository.save(endorsement);
+        endorsement = Objects.requireNonNull(endorsementRepository.save(endorsement));
 
         // Get user info for response
         Profile profile = profileRepository.findByUserId(userId)
-            .orElseThrow(() -> new ResourceNotFoundException("Profile not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Profile not found"));
 
         return EndorsementResponse.builder()
-            .id(endorsement.getId())
-            .userId(userId)
-            .contentId(contentId)
-            .createdAt(endorsement.getCreatedAt())
-            .userFullName(profile.getFullName())
-            .userHandle(profile.getHandle())
-            .build();
+                .id(endorsement.getId())
+                .userId(userId)
+                .contentId(contentId)
+                .createdAt(endorsement.getCreatedAt())
+                .userFullName(profile.getFullName())
+                .userHandle(profile.getHandle())
+                .build();
     }
 
     public void unendorseContent(UUID contentId, UUID userId) {
@@ -70,15 +73,15 @@ public class InteractionService {
 
     public Page<EndorsementResponse> getContentEndorsements(UUID contentId, Pageable pageable) {
         return endorsementRepository.findByContentId(contentId, pageable)
-            .map(this::mapToEndorsementResponse);
+                .map(this::mapToEndorsementResponse);
     }
 
     // ==================== REPOSTS ====================
 
     public void repostContent(UUID contentId, UUID userId, RepostRequest request) {
         // Check if content exists
-        contentRepository.findById(contentId)
-            .orElseThrow(() -> new ResourceNotFoundException("Content not found"));
+        contentRepository.findById(Objects.requireNonNull(contentId))
+                .orElseThrow(() -> new ResourceNotFoundException("Content not found"));
 
         // Check if already reposted
         if (repostRepository.existsByUserIdAndContentId(userId, contentId)) {
@@ -87,12 +90,12 @@ public class InteractionService {
 
         // Create repost
         Repost repost = Repost.builder()
-            .userId(userId)
-            .contentId(contentId)
-            .comment(request != null ? request.getComment() : null)
-            .build();
+                .userId(userId)
+                .contentId(contentId)
+                .comment(request != null ? request.getComment() : null)
+                .build();
 
-        repostRepository.save(repost);
+        repostRepository.save(Objects.requireNonNull(repost));
     }
 
     public void unrepostContent(UUID contentId, UUID userId) {
@@ -110,8 +113,8 @@ public class InteractionService {
 
     public void bookmarkContent(UUID contentId, UUID userId) {
         // Check if content exists
-        contentRepository.findById(contentId)
-            .orElseThrow(() -> new ResourceNotFoundException("Content not found"));
+        contentRepository.findById(Objects.requireNonNull(contentId))
+                .orElseThrow(() -> new ResourceNotFoundException("Content not found"));
 
         // Check if already bookmarked
         if (bookmarkRepository.existsByUserIdAndContentId(userId, contentId)) {
@@ -120,11 +123,11 @@ public class InteractionService {
 
         // Create bookmark
         Bookmark bookmark = Bookmark.builder()
-            .userId(userId)
-            .contentId(contentId)
-            .build();
+                .userId(userId)
+                .contentId(contentId)
+                .build();
 
-        bookmarkRepository.save(bookmark);
+        bookmarkRepository.save(Objects.requireNonNull(bookmark));
     }
 
     public void unbookmarkContent(UUID contentId, UUID userId) {
@@ -146,35 +149,43 @@ public class InteractionService {
         long bookmarksCount = bookmarkRepository.countByContentId(contentId);
 
         boolean isEndorsed = currentUserId != null &&
-            endorsementRepository.existsByUserIdAndContentId(currentUserId, contentId);
+                endorsementRepository.existsByUserIdAndContentId(currentUserId, contentId);
         boolean isReposted = currentUserId != null &&
-            repostRepository.existsByUserIdAndContentId(currentUserId, contentId);
+                repostRepository.existsByUserIdAndContentId(currentUserId, contentId);
         boolean isBookmarked = currentUserId != null &&
-            bookmarkRepository.existsByUserIdAndContentId(currentUserId, contentId);
+                bookmarkRepository.existsByUserIdAndContentId(currentUserId, contentId);
 
         return InteractionStatsResponse.builder()
-            .endorsements(endorsementsCount)
-            .reposts(repostsCount)
-            .bookmarks(bookmarksCount)
-            .isEndorsed(isEndorsed)
-            .isReposted(isReposted)
-            .isBookmarked(isBookmarked)
-            .build();
+                .endorsements(endorsementsCount)
+                .reposts(repostsCount)
+                .bookmarks(bookmarksCount)
+                .isEndorsed(isEndorsed)
+                .isReposted(isReposted)
+                .isBookmarked(isBookmarked)
+                .build();
     }
 
     // ==================== HELPERS ====================
 
     private EndorsementResponse mapToEndorsementResponse(Endorsement endorsement) {
         Profile profile = profileRepository.findByUserId(endorsement.getUserId())
-            .orElse(null);
+                .orElse(null);
 
         return EndorsementResponse.builder()
-            .id(endorsement.getId())
-            .userId(endorsement.getUserId())
-            .contentId(endorsement.getContentId())
-            .createdAt(endorsement.getCreatedAt())
-            .userFullName(profile != null ? profile.getFullName() : "Unknown")
-            .userHandle(profile != null ? profile.getHandle() : "unknown")
-            .build();
-    }
-}
+                .id(endorsement.getId())
+                .userId(endorsement.getUserId())
+                .contentId(endorsement.getContentId())
+                .createdAt(endorsement.getCreatedAt())
+                .userFullName(profile != null ? profile.getFullName() : "Unknown")
+                .userHandle(profile != null ? profile.getHandle() : "unknown")
+                .build();
+    }}
+
+    
+    
+            
+            
+            
+            
+
+    

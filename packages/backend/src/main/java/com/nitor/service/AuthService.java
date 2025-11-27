@@ -15,18 +15,19 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.UUID;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@SuppressWarnings("null")
 public class AuthService {
 
         private final UserRepository userRepository;
@@ -57,7 +58,7 @@ public class AuthService {
                                 .isActive(true)
                                 .build();
 
-                user = userRepository.save(user);
+                user = Objects.requireNonNull(userRepository.save(user));
 
                 // Create profile
                 Profile profile = Profile.builder()
@@ -74,7 +75,7 @@ public class AuthService {
                                 .profileVisibility(Profile.ProfileVisibility.PUBLIC)
                                 .build();
 
-                profile = profileRepository.save(profile);
+                profile = profileRepository.save(Objects.requireNonNull(profile));
 
                 // Generate tokens
                 String accessToken = jwtUtil.generateAccessToken(user.getId(), user.getEmail());
@@ -96,7 +97,7 @@ public class AuthService {
                 log.info("User login attempt: {}", request.getEmail());
 
                 // Authenticate user
-                Authentication authentication = authenticationManager.authenticate(
+                authenticationManager.authenticate(
                                 new UsernamePasswordAuthenticationToken(
                                                 request.getEmail(),
                                                 request.getPassword()));
