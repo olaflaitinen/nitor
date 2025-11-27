@@ -225,13 +225,19 @@ export const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
                   />
                   <label className="text-sm text-slate-600 dark:text-slate-400">
                     I agree to the{' '}
-                    <a href="#/terms" className="text-blue-600 dark:text-blue-400 hover:underline">
+                    <span
+                      onClick={() => window.location.hash = '/terms'}
+                      className="text-blue-600 dark:text-blue-400 hover:underline cursor-pointer"
+                    >
                       Terms of Service
-                    </a>{' '}
+                    </span>{' '}
                     and{' '}
-                    <a href="#/integrity" className="text-blue-600 dark:text-blue-400 hover:underline">
+                    <span
+                      onClick={() => window.location.hash = '/integrity'}
+                      className="text-blue-600 dark:text-blue-400 hover:underline cursor-pointer"
+                    >
                       Scientific Integrity Code
-                    </a>
+                    </span>
                   </label>
                 </div>
               )}

@@ -6,8 +6,10 @@ import com.nitor.dto.profile.ProfileResponse;
 import com.nitor.exception.ResourceNotFoundException;
 import com.nitor.model.Content;
 import com.nitor.model.Profile;
+import com.nitor.model.Report;
 import com.nitor.repository.ContentRepository;
 import com.nitor.repository.ProfileRepository;
+import com.nitor.repository.ReportRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -26,6 +28,7 @@ public class ContentService {
 
     private final ContentRepository contentRepository;
     private final ProfileRepository profileRepository;
+    private final ReportRepository reportRepository;
 
     @Transactional
     public ContentResponse createContent(UUID authorId, CreateContentRequest request) {
@@ -150,5 +153,26 @@ public class ContentService {
                 .createdAt(content.getCreatedAt())
                 .updatedAt(content.getUpdatedAt())
                 .build();
+    }
+
+    @Transactional
+    public void reportContent(UUID contentId, UUID reporterId, String reason) {
+        // Verify content exists
+        Content content = contentRepository.findById(contentId)
+                .orElseThrow(() -> new ResourceNotFoundException("Content", "id", contentId));
+
+        if (content.getIsDeleted()) {
+            throw new ResourceNotFoundException("Content has been deleted");
+        }
+
+        Report report = Report.builder()
+                .reporterId(reporterId)
+                .reportedContentId(contentId)
+                .reason(reason)
+                .status(Report.ReportStatus.PENDING)
+                .build();
+
+        reportRepository.save(report);
+        log.info("Content {} reported by user {} for reason: {}", contentId, reporterId, reason);
     }
 }

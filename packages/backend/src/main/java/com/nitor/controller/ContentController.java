@@ -97,4 +97,20 @@ public class ContentController {
         String email = userDetails.getUsername();
         return securityUtils.getUserIdFromEmail(email);
     }
+
+    @PostMapping("/{id}/report")
+    @SecurityRequirement(name = "bearerAuth")
+    @Operation(summary = "Report content")
+    public ResponseEntity<MessageResponse> reportContent(
+            @PathVariable UUID id,
+            @RequestParam String reason,
+            @AuthenticationPrincipal UserDetails userDetails) {
+
+        UUID reporterId = extractUserIdFromPrincipal(userDetails);
+        contentService.reportContent(id, reporterId, reason);
+        return ResponseEntity.ok(new MessageResponse("Content reported successfully"));
+    }
+
+    public record MessageResponse(String message) {
+    }
 }

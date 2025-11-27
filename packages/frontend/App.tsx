@@ -149,21 +149,38 @@ const App: React.FC = () => {
     setViewMode('profile');
   };
 
+  // --- HASH NAVIGATION LISTENER ---
+  const [currentHash, setCurrentHash] = useState(window.location.hash);
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      setCurrentHash(window.location.hash);
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
   // --- PUBLIC / STATIC ROUTES ---
   if (viewMode === 'about') return <AboutPage onBack={() => setViewMode('feed')} />;
   if (viewMode === 'privacy') return <PrivacyPage onBack={() => setViewMode('feed')} />;
   if (viewMode === 'terms') return <TermsPage onBack={() => setViewMode('feed')} />;
   if (viewMode === 'pricing') return <PricingPage onBack={() => setViewMode('feed')} />;
 
-  // --- PASSWORD RESET ROUTES (Public) ---
-  const hash = window.location.hash;
-  if (hash.startsWith('#/forgot-password')) {
-    return <ForgotPasswordPage onBack={() => { window.location.hash = ''; window.location.reload(); }} />;
+  // --- HASH ROUTES (Public) ---
+  if (currentHash.startsWith('#/forgot-password')) {
+    return <ForgotPasswordPage onBack={() => { window.location.hash = ''; }} />;
   }
-  if (hash.startsWith('#/reset-password')) {
-    const urlParams = new URLSearchParams(hash.split('?')[1]);
+  if (currentHash.startsWith('#/reset-password')) {
+    const urlParams = new URLSearchParams(currentHash.split('?')[1]);
     const token = urlParams.get('token') || '';
-    return <ResetPasswordPage onBack={() => { window.location.hash = ''; window.location.reload(); }} token={token} />;
+    return <ResetPasswordPage onBack={() => { window.location.hash = ''; }} token={token} />;
+  }
+  if (currentHash.startsWith('#/terms')) {
+    return <TermsPage onBack={() => { window.location.hash = ''; }} initialSection="tos" />;
+  }
+  if (currentHash.startsWith('#/integrity')) {
+    return <TermsPage onBack={() => { window.location.hash = ''; }} initialSection="integrity" />;
   }
 
   // --- AUTH GUARD ---

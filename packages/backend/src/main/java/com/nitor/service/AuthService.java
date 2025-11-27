@@ -193,4 +193,43 @@ public class AuthService {
 
                 log.info("Password reset successfully for user: {}", user.getEmail());
         }
+
+        @Transactional
+        public void changePassword(String authHeader, String currentPassword, String newPassword) {
+                String token = authHeader.replace("Bearer ", "");
+                String userEmail = jwtUtil.extractUsername(token);
+
+                User user = userRepository.findByEmail(userEmail)
+                                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+
+                // Verify current password
+                if (!passwordEncoder.matches(currentPassword, user.getPasswordHash())) {
+                        throw new BadRequestException("Current password is incorrect");
+                }
+
+                // Validate new password (minimum 8 characters)
+                if (newPassword == null || newPassword.length() < 8) {
+                        throw new BadRequestException("New password must be at least 8 characters");
+                }
+
+                user.setPasswordHash(passwordEncoder.encode(newPassword));
+                user.setUpdatedAt(LocalDateTime.now());
+                userRepository.save(user);
+
+                log.info("Password changed successfully for user: {}", user.getEmail());
+        }
+
+        @Transactional
+        public void deleteAccount(String authHeader) {
+                String token = authHeader.replace("Bearer ", "");
+                String userEmail = jwtUtil.extractUsername(token);
+
+                User user = userRepository.findByEmail(userEmail)
+                                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+
+                // Delete user and associated profile (cascading)
+                userRepository.delete(user);
+
+                log.info("Account deleted for user: {}", user.getEmail());
+        }
 }

@@ -94,4 +94,15 @@ public class ProfileService {
                 .profileVisibility(profile.getProfileVisibility().name())
                 .build();
     }
+
+    @Transactional
+    public void deactivateProfile(UUID profileId) {
+        Profile profile = profileRepository.findById(profileId)
+                .orElseThrow(() -> new ResourceNotFoundException("Profile", "id", profileId));
+
+        profile.setProfileVisibility(Profile.ProfileVisibility.PRIVATE);
+        profileRepository.save(profile);
+
+        log.info("Profile deactivated: {}", profileId);
+    }
 }
