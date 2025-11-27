@@ -123,49 +123,125 @@ export const TermsPage: React.FC<{ onBack: () => void, initialSection?: 'tos' | 
     const handleDownload = () => {
         try {
             const doc = new jsPDF();
+            const pageWidth = doc.internal.pageSize.getWidth();
+            const pageHeight = doc.internal.pageSize.getHeight();
+            const margin = 20;
+            const maxWidth = pageWidth - 2 * margin;
+            let y = margin;
 
-            // Header
-            doc.setFontSize(22);
-            doc.setFont("times", "bold");
-            doc.text("NITOR", 20, 20);
+            // Header with branding
+            doc.setFillColor(79, 70, 229); // Indigo-600
+            doc.rect(0, 0, pageWidth, 40, 'F');
 
-            doc.setFontSize(16);
-            doc.text("Terms of Service & Scientific Integrity Code", 20, 30);
+            doc.setFontSize(32);
+            doc.setFont("helvetica", "bold");
+            doc.setTextColor(255, 255, 255);
+            doc.text("NITOR", margin, 22);
 
-            doc.setFontSize(10);
+            doc.setFontSize(11);
             doc.setFont("helvetica", "normal");
-            doc.text(`Generated: ${new Date().toLocaleDateString()}`, 20, 40);
+            doc.text("Academic Social Network", margin, 30);
 
-            // Content
-            doc.setFontSize(12);
-            const lines = [
-                "1. PREFACE",
-                "Nitor is a platform for professional scientific discourse.",
-                "By using Nitor, you agree to adhere to the highest standards.",
-                "",
-                "2. CONTENT OWNERSHIP",
-                "You retain full ownership of your work (CC-BY 4.0).",
-                "You grant Nitor a license to display and distribute your content.",
-                "",
-                "3. SCIENTIFIC INTEGRITY CODE",
-                "- PLAGIARISM: Strictly prohibited. Includes direct, mosaic, and self-plagiarism.",
-                "- DATA INTEGRITY: P-Hacking and HARKing are violations of this code.",
-                "- AI DISCLOSURE: Use of AI tools must be disclosed.",
-                "",
-                "4. ENFORCEMENT",
-                "Violations may result in immediate suspension or permanent ban.",
-                "",
-                "5. DISCLAIMER",
-                "The service is provided 'as is' without warranty of any kind."
-            ];
+            y = 55;
 
-            let y = 55;
-            lines.forEach(line => {
-                doc.text(line, 20, y);
-                y += 7;
-            });
+            // Document title
+            doc.setFontSize(18);
+            doc.setFont("helvetica", "bold");
+            doc.setTextColor(0, 0, 0);
+            doc.text("Terms of Service & Scientific Integrity Code", margin, y);
+            y += 8;
 
-            doc.save("Nitor_Terms_and_Code.pdf");
+            doc.setFontSize(9);
+            doc.setFont("helvetica", "italic");
+            doc.setTextColor(100, 100, 100);
+            doc.text(`Generated: ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`, margin, y);
+            doc.text(`Version 2.1 | Effective Date: January 1, 2024`, margin, y + 5);
+            y += 15;
+
+            // Function to add section
+            const addSection = (title: string, content: string[]) => {
+                if (y > pageHeight - 40) {
+                    doc.addPage();
+                    y = margin;
+                }
+
+                doc.setFontSize(14);
+                doc.setFont("helvetica", "bold");
+                doc.setTextColor(79, 70, 229);
+                doc.text(title, margin, y);
+                y += 8;
+
+                doc.setFontSize(10);
+                doc.setFont("helvetica", "normal");
+                doc.setTextColor(0, 0, 0);
+
+                content.forEach(paragraph => {
+                    if (y > pageHeight - 30) {
+                        doc.addPage();
+                        y = margin;
+                    }
+
+                    const lines = doc.splitTextToSize(paragraph, maxWidth);
+                    lines.forEach((line: string) => {
+                        if (y > pageHeight - 20) {
+                            doc.addPage();
+                            y = margin;
+                        }
+                        doc.text(line, margin, y);
+                        y += 5;
+                    });
+                    y += 2;
+                });
+                y += 5;
+            };
+
+            // Terms of Service Content
+            addSection("1. ACCOUNT ELIGIBILITY & SECURITY", [
+                "1.1 Academic Standing: Nitor is intended for use by the scientific community. While we do not strictly require an .edu email, we reserve the right to verify credentials (e.g., via ORCID, LinkedIn, or publication history) for 'Verified' status.",
+                "1.2 Identity: You may not impersonate another researcher. Parody accounts must be clearly labeled in the bio. Pseudonyms are permitted for personal safety but may limit eligibility for Nitor Scores.",
+                "1.3 Security: You are responsible for maintaining the confidentiality of your login credentials. Nitor is not liable for loss or damage arising from your failure to protect your account."
+            ]);
+
+            addSection("2. CONTENT OWNERSHIP & LICENSING", [
+                "You Own Your Work: You retain full copyright ownership of all Articles, Posts, Images, and Data you upload to Nitor. We claim no ownership.",
+                "License to Nitor: By posting, you grant Nitor a worldwide, non-exclusive, royalty-free license to host, display, distribute, and reproduce your content for the purpose of operating the Service.",
+                "Public License (CC-BY 4.0): Unless explicitly marked otherwise in your Settings, you agree that your public content is distributed under the Creative Commons Attribution 4.0 International License. This means others may share and adapt your work, provided they give you appropriate credit."
+            ]);
+
+            addSection("3. ACCEPTABLE USE POLICY", [
+                "You agree NOT to use Nitor to:",
+                "- Publish content that constitutes 'Pseudoscience' (claims lacking empirical evidence or falsifiable methodology) with the intent to mislead.",
+                "- Harass, bully, or doxx other researchers. Vigorous academic debate is encouraged; ad hominem attacks are not.",
+                "- Engage in 'Citation Farming' or automated bot activity to inflate metrics.",
+                "- Upload Protected Health Information (PHI) or unanonymized patient data in violation of HIPAA or GDPR."
+            ]);
+
+            addSection("4. SCIENTIFIC INTEGRITY CODE", [
+                "The Nitor Oath: 'I affirm that the research I present on Nitor is my own work, that the data is authentic, and that I have declared all conflicts of interest. I engage in this community to seek truth, not merely status.'",
+                "",
+                "PLAGIARISM: We strictly prohibit Direct Plagiarism (copying without attribution), Mosaic Plagiarism (borrowing phrases without quotation marks), and Self-Plagiarism (republishing your own work without citing the original).",
+                "",
+                "DATA INTEGRITY: P-Hacking (selectively reporting data until nonsignificant results become significant) and HARKing (Hypothesizing After Results are Known) are strictly prohibited.",
+                "",
+                "AI DISCLOSURE: While Nitor provides AI tools for refining text, the core hypothesis and intellectual contribution must be human. AI cannot be listed as an Author. You must disclose if a significant portion of text was AI-generated."
+            ]);
+
+            addSection("5. ENFORCEMENT", [
+                "Level 1 (Minor): Unintentional citation error or minor text overlap. Remedy: Correction notice appended to content.",
+                "Level 2 (Moderate): Self-plagiarism, undisclosed conflicts of interest, or negligent data handling. Remedy: 30-day suspension + Flag on content.",
+                "Level 3 (Severe): Data fabrication, deliberate plagiarism, or image manipulation. Remedy: Permanent ban, 'Retracted' watermark on all content, and notification of user's institution."
+            ]);
+
+            addSection("6. DISCLAIMER & LIMITATION OF LIABILITY", [
+                "THE SERVICE IS PROVIDED 'AS IS'. NITOR DOES NOT GUARANTEE THE ACCURACY OF SCIENTIFIC CONTENT POSTED BY USERS. WE ARE NOT LIABLE FOR EXPERIMENTAL FAILURES, DATA LOSS, OR REPUTATIONAL DAMAGE ARISING FROM USE OF THE PLATFORM."
+            ]);
+
+            // Footer on last page
+            doc.setFontSize(8);
+            doc.setTextColor(150, 150, 150);
+            doc.text("© 2024 Nitor Labs Inc. All rights reserved. | www.nitor.com | legal@nitor.com", pageWidth / 2, pageHeight - 10, { align: 'center' });
+
+            doc.save("Nitor_Legal_Documents.pdf");
             addToast('Legal document downloaded successfully.', 'success');
         } catch (error) {
             console.error(error);
