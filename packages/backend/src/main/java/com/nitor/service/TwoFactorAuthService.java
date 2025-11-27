@@ -14,6 +14,8 @@ import javax.crypto.spec.SecretKeySpec;
 import java.security.SecureRandom;
 import java.util.Base64;
 import java.util.UUID;
+import java.util.Objects;
+import java.util.UUID;
 import java.util.stream.IntStream;
 
 @Service
@@ -45,7 +47,7 @@ public class TwoFactorAuthService {
                 .verified(false)
                 .build();
 
-        return twoFactorAuthRepository.save(twoFactorAuth);
+        return Objects.requireNonNull(twoFactorAuthRepository.save(twoFactorAuth));
     }
 
     @Transactional
@@ -59,7 +61,7 @@ public class TwoFactorAuthService {
 
         twoFactorAuth.setVerified(true);
         twoFactorAuth.setEnabled(true);
-        twoFactorAuthRepository.save(twoFactorAuth);
+        twoFactorAuthRepository.save(Objects.requireNonNull(twoFactorAuth));
 
         log.info("2FA verified and enabled for user: {}", userId);
     }
@@ -159,7 +161,7 @@ public class TwoFactorAuthService {
                 // Invalidate used backup code
                 backupCodes[i] = null;
                 twoFactorAuth.setBackupCodes(backupCodes);
-                twoFactorAuthRepository.save(twoFactorAuth);
+                twoFactorAuthRepository.save(Objects.requireNonNull(twoFactorAuth));
                 log.info("Backup code used for user: {}", twoFactorAuth.getUserId());
                 return true;
             }

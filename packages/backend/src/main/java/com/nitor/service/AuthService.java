@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.UUID;
 
 @Slf4j
@@ -57,7 +58,7 @@ public class AuthService {
                                 .isActive(true)
                                 .build();
 
-                user = userRepository.save(user);
+                user = Objects.requireNonNull(userRepository.save(user));
 
                 // Create profile
                 Profile profile = Profile.builder()
@@ -74,7 +75,7 @@ public class AuthService {
                                 .profileVisibility(Profile.ProfileVisibility.PUBLIC)
                                 .build();
 
-                profile = profileRepository.save(profile);
+                profile = profileRepository.save(Objects.requireNonNull(profile));
 
                 // Generate tokens
                 String accessToken = jwtUtil.generateAccessToken(user.getId(), user.getEmail());
@@ -96,7 +97,7 @@ public class AuthService {
                 log.info("User login attempt: {}", request.getEmail());
 
                 // Authenticate user
-                Authentication authentication = authenticationManager.authenticate(
+                authenticationManager.authenticate(
                                 new UsernamePasswordAuthenticationToken(
                                                 request.getEmail(),
                                                 request.getPassword()));

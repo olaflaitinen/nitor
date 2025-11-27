@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -34,10 +35,10 @@ public class FollowService {
         }
 
         // Check if users exist
-        if (!userRepository.existsById(followerId)) {
+        if (!userRepository.existsById(Objects.requireNonNull(followerId))) {
             throw new ResourceNotFoundException("Follower user not found");
         }
-        if (!userRepository.existsById(followingId)) {
+        if (!userRepository.existsById(Objects.requireNonNull(followingId))) {
             throw new ResourceNotFoundException("Following user not found");
         }
 
@@ -48,11 +49,11 @@ public class FollowService {
 
         // Create follow relationship
         Follow follow = Follow.builder()
-            .followerId(followerId)
-            .followingId(followingId)
-            .build();
+                .followerId(followerId)
+                .followingId(followingId)
+                .build();
 
-        follow = followRepository.save(follow);
+        follow = Objects.requireNonNull(followRepository.save(follow));
 
         return mapToFollowResponse(follow);
     }
@@ -68,13 +69,13 @@ public class FollowService {
     @Transactional(readOnly = true)
     public Page<FollowResponse> getFollowers(UUID userId, Pageable pageable) {
         return followRepository.findByFollowingId(userId, pageable)
-            .map(this::mapToFollowResponse);
+                .map(this::mapToFollowResponse);
     }
 
     @Transactional(readOnly = true)
     public Page<FollowResponse> getFollowing(UUID userId, Pageable pageable) {
         return followRepository.findByFollowerId(userId, pageable)
-            .map(this::mapToFollowResponse);
+                .map(this::mapToFollowResponse);
     }
 
     @Transactional(readOnly = true)
@@ -83,16 +84,16 @@ public class FollowService {
         long followingCount = followRepository.countFollowing(userId);
 
         boolean isFollowing = currentUserId != null &&
-            followRepository.existsByFollowerIdAndFollowingId(currentUserId, userId);
+                followRepository.existsByFollowerIdAndFollowingId(currentUserId, userId);
         boolean isFollowedBy = currentUserId != null &&
-            followRepository.existsByFollowerIdAndFollowingId(userId, currentUserId);
+                followRepository.existsByFollowerIdAndFollowingId(userId, currentUserId);
 
         return FollowStatsResponse.builder()
-            .followersCount(followersCount)
-            .followingCount(followingCount)
-            .isFollowing(isFollowing)
-            .isFollowedBy(isFollowedBy)
-            .build();
+                .followersCount(followersCount)
+                .followingCount(followingCount)
+                .isFollowing(isFollowing)
+                .isFollowedBy(isFollowedBy)
+                .build();
     }
 
     @Transactional(readOnly = true)
@@ -109,19 +110,19 @@ public class FollowService {
 
     private FollowResponse mapToFollowResponse(Follow follow) {
         Profile followerProfile = profileRepository.findByUserId(follow.getFollowerId())
-            .orElse(null);
+                .orElse(null);
         Profile followingProfile = profileRepository.findByUserId(follow.getFollowingId())
-            .orElse(null);
+                .orElse(null);
 
         return FollowResponse.builder()
-            .id(follow.getId())
-            .followerId(follow.getFollowerId())
-            .followingId(follow.getFollowingId())
-            .createdAt(follow.getCreatedAt())
-            .followerFullName(followerProfile != null ? followerProfile.getFullName() : "Unknown")
-            .followerHandle(followerProfile != null ? followerProfile.getHandle() : "unknown")
-            .followingFullName(followingProfile != null ? followingProfile.getFullName() : "Unknown")
-            .followingHandle(followingProfile != null ? followingProfile.getHandle() : "unknown")
-            .build();
+                .id(follow.getId())
+                .followerId(follow.getFollowerId())
+                .followingId(follow.getFollowingId())
+                .createdAt(follow.getCreatedAt())
+                .followerFullName(followerProfile != null ? followerProfile.getFullName() : "Unknown")
+                .followerHandle(followerProfile != null ? followerProfile.getHandle() : "unknown")
+                .followingFullName(followingProfile != null ? followingProfile.getFullName() : "Unknown")
+                .followingHandle(followingProfile != null ? followingProfile.getHandle() : "unknown")
+                .build();
     }
 }

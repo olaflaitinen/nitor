@@ -23,6 +23,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -114,7 +115,7 @@ public class OAuthService {
             User user = createOrUpdateOAuthUser(provider, userInfo.email(), userInfo.name(), userInfo.avatarUrl());
 
             // 4. Get profile
-            Profile profile = profileRepository.findById(user.getId())
+            Profile profile = profileRepository.findById(Objects.requireNonNull(user.getId()))
                     .orElseThrow(() -> new BadRequestException("Profile not found"));
 
             // 5. Generate JWT tokens
@@ -179,7 +180,8 @@ public class OAuthService {
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(params, headers);
 
         // Exchange code for token
-        ResponseEntity<String> response = restTemplate.postForEntity(tokenUri, request, String.class);
+        ResponseEntity<String> response = restTemplate.postForEntity(Objects.requireNonNull(tokenUri), request,
+                String.class);
 
         if (response.getStatusCode() != HttpStatus.OK) {
             throw new BadRequestException("Failed to exchange code for token");
@@ -202,16 +204,15 @@ public class OAuthService {
 
         // Prepare request with Bearer token
         HttpHeaders headers = new HttpHeaders();
-        headers.setBearerAuth(accessToken);
+        headers.setBearerAuth(Objects.requireNonNull(accessToken));
         HttpEntity<String> request = new HttpEntity<>(headers);
 
         // Fetch user info
         ResponseEntity<String> response = restTemplate.exchange(
-                userInfoUri,
+                Objects.requireNonNull(userInfoUri),
                 HttpMethod.GET,
                 request,
-                String.class
-        );
+                String.class);
 
         if (response.getStatusCode() != HttpStatus.OK) {
             throw new BadRequestException("Failed to fetch user info");
@@ -228,8 +229,7 @@ public class OAuthService {
             case "google" -> new OAuthUserInfo(
                     jsonNode.get("email").asText(),
                     jsonNode.get("name").asText(),
-                    jsonNode.has("picture") ? jsonNode.get("picture").asText() : null
-            );
+                    jsonNode.has("picture") ? jsonNode.get("picture").asText() : null);
             case "github" -> {
                 String email = jsonNode.has("email") && !jsonNode.get("email").isNull()
                         ? jsonNode.get("email").asText()
@@ -237,14 +237,13 @@ public class OAuthService {
                 yield new OAuthUserInfo(
                         email,
                         jsonNode.get("name").asText(),
-                        jsonNode.has("avatar_url") ? jsonNode.get("avatar_url").asText() : null
-                );
+                        jsonNode.has("avatar_url") ? jsonNode.get("avatar_url").asText() : null);
             }
             case "linkedin" -> new OAuthUserInfo(
                     fetchLinkedInEmail(), // LinkedIn requires separate API call for email
                     jsonNode.get("localizedFirstName").asText() + " " + jsonNode.get("localizedLastName").asText(),
                     null // LinkedIn profile pictures require separate API call
-            );
+                );
             default -> throw new BadRequestException("Unknown provider: " + provider);
         };
     }
@@ -254,15 +253,14 @@ public class OAuthService {
         // Need to call /user/emails endpoint
         try {
             HttpHeaders headers = new HttpHeaders();
-            headers.setBearerAuth(accessToken);
+            headers.setBearerAuth(Objects.requireNonNull(accessToken));
             HttpEntity<String> request = new HttpEntity<>(headers);
 
             ResponseEntity<String> response = restTemplate.exchange(
                     "https://api.github.com/user/emails",
                     HttpMethod.GET,
                     request,
-                    String.class
-            );
+                    String.class);
 
             JsonNode emails = objectMapper.readTree(response.getBody());
             for (JsonNode emailNode : emails) {
@@ -285,7 +283,8 @@ public class OAuthService {
 
     private String fetchLinkedInEmail() {
         // LinkedIn requires a separate API call to get email
-        // This is a simplified version - in production, you'd need to implement this properly
+        // This is a simplified version - in production, you'd need to implement this
+        // properly
         throw new UnsupportedOperationException("LinkedIn email fetching not yet implemented");
     }
 
@@ -306,7 +305,7 @@ public class OAuthService {
                             .isActive(true)
                             .build();
 
-                    newUser = userRepository.save(newUser);
+                    newUser = Objects.requireNonNull(userRepository.save(newUser));
 
                     Profile newProfile = Profile.builder()
                             .id(newUser.getId())
@@ -323,7 +322,7 @@ public class OAuthService {
                             .profileVisibility(Profile.ProfileVisibility.PUBLIC)
                             .build();
 
-                    profileRepository.save(newProfile);
+                    profileRepository.save(Objects.requireNonNull(newProfile));
 
                     return newUser;
                 });
@@ -380,5 +379,6 @@ public class OAuthService {
                 .build();
     }
 
-    private record OAuthUserInfo(String email, String name, String avatarUrl) {}
+    private record OAuthUserInfo(String email, String name, String avatarUrl) {
+    }
 }

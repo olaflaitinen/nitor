@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 import java.util.UUID;
 
@@ -101,7 +102,7 @@ public class DataSeeder implements CommandLineRunner {
                     .emailVerified(true)
                     .isActive(true)
                     .build();
-            user = userRepository.save(user);
+            user = Objects.requireNonNull(userRepository.save(user));
             userIds.add(user.getId());
 
             // Create Profile
@@ -122,7 +123,7 @@ public class DataSeeder implements CommandLineRunner {
                     .publicationsCount(0)
                     .profileVisibility(com.nitor.model.Profile.ProfileVisibility.PUBLIC)
                     .build();
-            profileRepository.save(profile);
+            profileRepository.save(Objects.requireNonNull(profile));
         }
 
         log.info("Created {} users and profiles", usersData.length);
@@ -151,7 +152,7 @@ public class DataSeeder implements CommandLineRunner {
                             .connectedUserId(userId2)
                             .status(Connection.ConnectionStatus.ACCEPTED)
                             .build();
-                    connectionRepository.save(connection);
+                    connectionRepository.save(Objects.requireNonNull(connection));
                     connectionsCreated++;
 
                     // Create reciprocal connection
@@ -160,7 +161,7 @@ public class DataSeeder implements CommandLineRunner {
                             .connectedUserId(userId1)
                             .status(Connection.ConnectionStatus.ACCEPTED)
                             .build();
-                    connectionRepository.save(reciprocal);
+                    connectionRepository.save(Objects.requireNonNull(reciprocal));
                     connectionsCreated++;
                 }
             }
@@ -177,7 +178,7 @@ public class DataSeeder implements CommandLineRunner {
                             .followerId(userId1)
                             .followingId(followingId)
                             .build();
-                    followRepository.save(follow);
+                    followRepository.save(Objects.requireNonNull(follow));
                     followsCreated++;
                 }
             }
@@ -208,7 +209,7 @@ public class DataSeeder implements CommandLineRunner {
                 String body = contentBodies[random.nextInt(contentBodies.length)];
 
                 // Fetch author profile reference
-                com.nitor.model.Profile author = profileRepository.getReferenceById(authorId);
+                com.nitor.model.Profile author = profileRepository.getReferenceById(Objects.requireNonNull(authorId));
 
                 Content content = Content.builder()
                         .author(author)
@@ -219,7 +220,7 @@ public class DataSeeder implements CommandLineRunner {
                         .commentsCount(0)
                         .repostsCount(0)
                         .build();
-                contentRepository.save(content);
+                contentRepository.save(Objects.requireNonNull(content));
             }
         }
 
@@ -250,7 +251,7 @@ public class DataSeeder implements CommandLineRunner {
             int numComments = 1 + random.nextInt(3);
             for (int i = 0; i < numComments; i++) {
                 UUID commentAuthorId = userIds.get(random.nextInt(userIds.size()));
-                com.nitor.model.Profile commentAuthor = profileRepository.getReferenceById(commentAuthorId);
+                com.nitor.model.Profile commentAuthor = profileRepository.getReferenceById(Objects.requireNonNull(commentAuthorId));
 
                 Comment comment = Comment.builder()
                         .content(content)
@@ -258,7 +259,7 @@ public class DataSeeder implements CommandLineRunner {
                         .body(commentBodies[random.nextInt(commentBodies.length)])
                         .likesCount(0)
                         .build();
-                commentRepository.save(comment);
+                commentRepository.save(Objects.requireNonNull(comment));
                 commentsCreated++;
             }
         }
@@ -285,7 +286,7 @@ public class DataSeeder implements CommandLineRunner {
                             .userId(userId)
                             .contentId(content.getId())
                             .build();
-                    endorsementRepository.save(endorsement);
+                    endorsementRepository.save(Objects.requireNonNull(endorsement));
                     endorsementsCreated++;
                 }
             }

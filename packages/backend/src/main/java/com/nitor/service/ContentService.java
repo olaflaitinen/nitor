@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @Slf4j
@@ -27,7 +28,7 @@ public class ContentService {
 
     @Transactional
     public ContentResponse createContent(UUID authorId, CreateContentRequest request) {
-        Profile author = profileRepository.findById(authorId)
+        Profile author = profileRepository.findById(Objects.requireNonNull(authorId))
                 .orElseThrow(() -> new ResourceNotFoundException("Profile", "id", authorId));
 
         Content content = Content.builder()
@@ -45,7 +46,7 @@ public class ContentService {
                 .isDeleted(false)
                 .build();
 
-        content = contentRepository.save(content);
+        content = Objects.requireNonNull(contentRepository.save(content));
         log.info("Content created: {} by user {}", content.getId(), authorId);
 
         return mapToContentResponse(content);
@@ -59,7 +60,7 @@ public class ContentService {
 
     @Transactional(readOnly = true)
     public ContentResponse getContent(UUID contentId) {
-        Content content = contentRepository.findById(contentId)
+        Content content = contentRepository.findById(Objects.requireNonNull(contentId))
                 .orElseThrow(() -> new ResourceNotFoundException("Content", "id", contentId));
 
         if (content.getIsDeleted()) {
@@ -71,7 +72,7 @@ public class ContentService {
 
     @Transactional
     public ContentResponse updateContent(UUID contentId, UUID authorId, CreateContentRequest request) {
-        Content content = contentRepository.findById(contentId)
+        Content content = contentRepository.findById(Objects.requireNonNull(contentId))
                 .orElseThrow(() -> new ResourceNotFoundException("Content", "id", contentId));
 
         if (!content.getAuthor().getId().equals(authorId)) {
@@ -93,7 +94,7 @@ public class ContentService {
 
     @Transactional
     public void deleteContent(UUID contentId, UUID authorId) {
-        Content content = contentRepository.findById(contentId)
+        Content content = contentRepository.findById(Objects.requireNonNull(contentId))
                 .orElseThrow(() -> new ResourceNotFoundException("Content", "id", contentId));
 
         if (!content.getAuthor().getId().equals(authorId)) {
@@ -107,7 +108,7 @@ public class ContentService {
 
     @Transactional(readOnly = true)
     public Page<ContentResponse> getUserContent(UUID userId, Pageable pageable) {
-        Profile profile = profileRepository.findById(userId)
+        Profile profile = profileRepository.findById(Objects.requireNonNull(userId))
                 .orElseThrow(() -> new ResourceNotFoundException("Profile", "id", userId));
 
         return contentRepository.findByAuthorAndIsDeletedFalse(profile, pageable)

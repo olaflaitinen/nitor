@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @Slf4j
@@ -24,7 +25,7 @@ public class NotificationService {
 
     @Transactional(readOnly = true)
     public Page<Notification> getUserNotifications(UUID userId, Pageable pageable) {
-        Profile profile = profileRepository.findById(userId)
+        Profile profile = profileRepository.findById(Objects.requireNonNull(userId))
                 .orElseThrow(() -> new ResourceNotFoundException("Profile", "id", userId));
 
         return notificationRepository.findByUserOrderByCreatedAtDesc(profile, pageable);
@@ -32,7 +33,7 @@ public class NotificationService {
 
     @Transactional(readOnly = true)
     public Long getUnreadCount(UUID userId) {
-        Profile profile = profileRepository.findById(userId)
+        Profile profile = profileRepository.findById(Objects.requireNonNull(userId))
                 .orElseThrow(() -> new ResourceNotFoundException("Profile", "id", userId));
 
         return notificationRepository.countByUserAndReadFalse(profile);
@@ -40,7 +41,7 @@ public class NotificationService {
 
     @Transactional
     public void markAsRead(UUID notificationId, UUID userId) {
-        Notification notification = notificationRepository.findById(notificationId)
+        Notification notification = notificationRepository.findById(Objects.requireNonNull(notificationId))
                 .orElseThrow(() -> new ResourceNotFoundException("Notification", "id", notificationId));
 
         if (!notification.getUser().getId().equals(userId)) {
@@ -48,12 +49,12 @@ public class NotificationService {
         }
 
         notification.setRead(true);
-        notificationRepository.save(notification);
+        notificationRepository.save(Objects.requireNonNull(notification));
     }
 
     @Transactional
     public void markAllAsRead(UUID userId) {
-        Profile profile = profileRepository.findById(userId)
+        Profile profile = profileRepository.findById(Objects.requireNonNull(userId))
                 .orElseThrow(() -> new ResourceNotFoundException("Profile", "id", userId));
 
         notificationRepository.markAllAsReadForUser(profile);

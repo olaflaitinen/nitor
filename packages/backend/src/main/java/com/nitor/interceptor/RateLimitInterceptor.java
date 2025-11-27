@@ -15,8 +15,11 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import java.util.UUID;
 
+import org.springframework.lang.NonNull;
+
 /**
- * Interceptor that automatically applies rate limiting based on @RateLimited annotation
+ * Interceptor that automatically applies rate limiting based on @RateLimited
+ * annotation
  */
 @Component
 @RequiredArgsConstructor
@@ -27,7 +30,8 @@ public class RateLimitInterceptor implements HandlerInterceptor {
     private final SecurityUtils securityUtils;
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+    public boolean preHandle(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response,
+            @NonNull Object handler) {
         if (!(handler instanceof HandlerMethod)) {
             return true;
         }

@@ -7,6 +7,8 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import org.springframework.lang.NonNull;
+
 /**
  * Web MVC Configuration
  * - CORS settings
@@ -19,19 +21,19 @@ public class WebConfig implements WebMvcConfigurer {
     private final RateLimitInterceptor rateLimitInterceptor;
 
     @Override
-    public void addInterceptors(InterceptorRegistry registry) {
+    public void addInterceptors(@NonNull InterceptorRegistry registry) {
         registry.addInterceptor(rateLimitInterceptor)
                 .addPathPatterns("/api/**");
     }
 
     @Override
-    public void addCorsMappings(CorsRegistry registry) {
+    public void addCorsMappings(@NonNull CorsRegistry registry) {
         registry.addMapping("/api/**")
                 .allowedOrigins(
-                    "http://localhost:5173",  // Vite dev server
-                    "http://localhost:3000",  // Alternative dev port
-                    "https://nitor.io",       // Production
-                    "https://www.nitor.io"    // Production www
+                        "http://localhost:5173", // Vite dev server
+                        "http://localhost:3000", // Alternative dev port
+                        "https://nitor.io", // Production
+                        "https://www.nitor.io" // Production www
                 )
                 .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
                 .allowedHeaders("*")

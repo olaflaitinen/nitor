@@ -6,12 +6,14 @@ import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBr
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 
+import org.springframework.lang.NonNull;
+
 @Configuration
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
-    public void configureMessageBroker(MessageBrokerRegistry config) {
+    public void configureMessageBroker(@NonNull MessageBrokerRegistry config) {
         // Enable simple in-memory message broker
         config.enableSimpleBroker("/topic", "/queue");
         // Prefix for messages from client
@@ -21,7 +23,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     }
 
     @Override
-    public void registerStompEndpoints(StompEndpointRegistry registry) {
+    public void registerStompEndpoints(@NonNull StompEndpointRegistry registry) {
         // Register STOMP endpoint
         registry.addEndpoint("/ws")
                 .setAllowedOriginPatterns("*")
