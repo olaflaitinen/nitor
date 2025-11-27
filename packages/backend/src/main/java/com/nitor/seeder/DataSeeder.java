@@ -28,6 +28,7 @@ import java.util.UUID;
                  // spring.profiles.active=seed
 @RequiredArgsConstructor
 @Slf4j
+@SuppressWarnings("null")
 public class DataSeeder implements CommandLineRunner {
 
     private final UserRepository userRepository;
@@ -295,3 +296,5 @@ public class DataSeeder implements CommandLineRunner {
         log.info("Created {} endorsements", endorsementsCreated);
     }
 }
+
+

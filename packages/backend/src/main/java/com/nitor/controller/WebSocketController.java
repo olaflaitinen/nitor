@@ -35,6 +35,7 @@ public class WebSocketController {
         messagingTemplate.convertAndSend("/topic/typing", username + " is typing...");
     }
 
+    @SuppressWarnings("null")
     public void sendNotificationToUser(UUID userId, NotificationMessage notification) {
         messagingTemplate.convertAndSendToUser(
                 userId.toString(),

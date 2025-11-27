@@ -19,6 +19,7 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 @Transactional
+@SuppressWarnings("null")
 public class InteractionService {
 
     private final EndorsementRepository endorsementRepository;
@@ -178,5 +179,13 @@ public class InteractionService {
                 .userFullName(profile != null ? profile.getFullName() : "Unknown")
                 .userHandle(profile != null ? profile.getHandle() : "unknown")
                 .build();
-    }
-}
+    }}
+
+    
+    
+            
+            
+            
+            
+
+    

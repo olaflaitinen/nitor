@@ -13,7 +13,6 @@ import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.SecureRandom;
 import java.util.Base64;
-import java.util.UUID;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.IntStream;
@@ -21,6 +20,7 @@ import java.util.stream.IntStream;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@SuppressWarnings("null")
 public class TwoFactorAuthService {
 
     private final TwoFactorAuthRepository twoFactorAuthRepository;

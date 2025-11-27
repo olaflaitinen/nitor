@@ -6,7 +6,6 @@ import com.nitor.exception.ResourceNotFoundException;
 import com.nitor.model.Profile;
 import com.nitor.model.User;
 import com.nitor.repository.ProfileRepository;
-import com.nitor.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -20,6 +19,7 @@ import java.util.UUID;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@SuppressWarnings("null")
 public class ProfileService {
 
     private final ProfileRepository profileRepository;

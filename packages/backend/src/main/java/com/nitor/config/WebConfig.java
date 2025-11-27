@@ -21,6 +21,7 @@ public class WebConfig implements WebMvcConfigurer {
     private final RateLimitInterceptor rateLimitInterceptor;
 
     @Override
+    @SuppressWarnings("null")
     public void addInterceptors(@NonNull InterceptorRegistry registry) {
         registry.addInterceptor(rateLimitInterceptor)
                 .addPathPatterns("/api/**");

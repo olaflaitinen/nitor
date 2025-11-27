@@ -5,7 +5,6 @@ import io.github.bucket4j.Bucket;
 import io.github.bucket4j.Refill;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
@@ -25,8 +24,6 @@ import java.util.concurrent.ConcurrentHashMap;
 @RequiredArgsConstructor
 @Slf4j
 public class RateLimitingService {
-
-    // private final RedisTemplate<String, String> redisTemplate;
 
     // In-memory bucket cache (for development)
     // In production with multiple instances, use Redis-backed buckets

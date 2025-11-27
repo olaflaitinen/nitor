@@ -29,6 +29,7 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@SuppressWarnings("null")
 public class OAuthService {
 
     private final UserRepository userRepository;
