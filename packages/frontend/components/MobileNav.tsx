@@ -21,17 +21,17 @@ export const MobileNav: React.FC<MobileNavProps> = ({ currentView, setViewMode }
   ];
 
   return (
-    <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 px-6 py-2 z-50 safe-area-bottom flex justify-between items-center shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
+    <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 px-6 py-2 z-50 safe-area-bottom flex justify-between items-center shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] dark:shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.3)]">
       {navItems.map((item) => {
         const Icon = item.icon;
         const isActive = currentView === item.id;
-        
+
         if (item.special) {
             return (
                 <button
                     key={item.id}
                     onClick={item.action}
-                    className="bg-indigo-600 text-white p-3 rounded-full -mt-8 shadow-lg shadow-indigo-200 hover:bg-indigo-700 transition-transform active:scale-95"
+                    className="bg-indigo-600 dark:bg-indigo-500 text-white p-3 rounded-full -mt-8 shadow-lg shadow-indigo-200 dark:shadow-indigo-900/50 hover:bg-indigo-700 dark:hover:bg-indigo-600 transition-transform active:scale-95"
                     aria-label="Create Post"
                 >
                     <Icon className="w-6 h-6" />
@@ -43,7 +43,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({ currentView, setViewMode }
           <button
             key={item.id}
             onClick={() => setViewMode(item.id as ViewMode)}
-            className={`p-2 rounded-xl transition-colors ${isActive ? 'text-indigo-600 bg-indigo-50' : 'text-slate-400 hover:bg-slate-50'}`}
+            className={`p-2 rounded-xl transition-colors ${isActive ? 'text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30' : 'text-slate-400 dark:text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800'}`}
           >
             <Icon className="w-6 h-6" strokeWidth={isActive ? 2.5 : 2} />
           </button>
