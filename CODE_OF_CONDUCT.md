@@ -1,188 +1,324 @@
 # Code of Conduct
 
-## Our Commitment
+## Our Pledge
 
-NITOR is committed to providing a professional, respectful, and inclusive environment for all contributors, users, and community members. We value diverse perspectives and are dedicated to maintaining high standards of academic and professional conduct.
+In the interest of fostering an open, welcoming, and productive academic environment, we as members, contributors, and leaders of the NITOR platform pledge to make participation in our community a harassment-free experience for everyone, regardless of age, body size, visible or invisible disability, ethnicity, sex characteristics, gender identity and expression, level of experience, education, socio-economic status, nationality, personal appearance, race, religion, or sexual identity and orientation.
+
+We pledge to act and interact in ways that contribute to an open, welcoming, diverse, inclusive, and healthy community focused on advancing scientific knowledge and academic discourse.
 
 ---
 
 ## Our Standards
 
-### Professional Behavior
+### ✅ Expected Behavior
 
-**Expected conduct:**
-- Demonstrate respect in all interactions
-- Use professional and inclusive language
-- Provide constructive feedback
-- Accept criticism gracefully
-- Focus on collaborative problem-solving
-- Respect differing viewpoints and experiences
-- Show empathy toward other community members
+Examples of behavior that contributes to a positive environment for our community include:
 
-**Unacceptable conduct:**
-- Harassment, intimidation, or discrimination of any kind
-- Offensive, derogatory, or inappropriate comments
-- Personal or political attacks
-- Public or private harassment
-- Publishing others' private information without permission
-- Trolling, insulting, or derogatory comments
-- Other conduct inappropriate in a professional setting
+#### **Academic Excellence**
+- 📚 **Maintaining Scientific Rigor**: All research shared must meet academic standards of evidence and methodology
+- 📝 **Proper Attribution**: Always cite sources and give credit to others' work
+- 🔍 **Transparency**: Declare conflicts of interest, data sources, and methodological limitations
+- 🎯 **Constructive Criticism**: Engage in peer review with professionalism and respect
 
-### Academic Integrity
+#### **Professional Conduct**
+- 🤝 **Demonstrating empathy and kindness** toward other community members
+- 💬 **Being respectful** of differing opinions, viewpoints, and experiences
+- ✉️ **Giving and gracefully accepting** constructive feedback
+- 🙏 **Accepting responsibility** and apologizing to those affected by our mistakes
+- 🌱 **Focusing on what is best** not just for us as individuals, but for the overall community
 
-**Research ethics:**
-- Proper attribution of work and ideas
-- Honest representation of contributions
-- Respect for intellectual property
-- Adherence to research ethics standards
-- Transparency in methodologies
-- Responsible data handling
+#### **Inclusive Collaboration**
+- 🌍 **Using welcoming and inclusive language**
+- 🎓 **Respecting varied educational backgrounds** and research methodologies
+- 👥 **Valuing diverse perspectives** from different disciplines and institutions
+- 🤲 **Supporting early-career researchers** and providing mentorship
 
-**Prohibited actions:**
-- Plagiarism or misrepresentation
-- Data fabrication or falsification
-- Unauthorized use of confidential information
-- Misrepresentation of credentials or affiliations
+### ❌ Unacceptable Behavior
 
-### Technical Standards
+The following behaviors are considered violations of our Code of Conduct:
 
-**Code contributions:**
-- Follow established coding standards
-- Write clear, maintainable code
-- Provide adequate documentation
-- Include appropriate tests
-- Respect existing architecture
-- Consider security implications
+#### **Scientific Misconduct**
+- 🚫 **Plagiarism**: Direct, mosaic, or self-plagiarism without proper citation
+- 📊 **Data Fabrication or Falsification**: Creating or altering research data
+- 🔬 **P-Hacking**: Selective reporting of statistical analyses
+- 📈 **HARKing**: Hypothesizing After Results are Known
+- 🖼️ **Image Manipulation**: Improper alteration of research images
+- 🤖 **Undisclosed AI Usage**: Failing to declare significant AI-generated content
+- ⚠️ **Failure to Declare Conflicts**: Not disclosing financial or personal conflicts of interest
 
-**Communication:**
-- Be clear and concise
-- Provide context for issues and requests
-- Respond professionally to feedback
-- Acknowledge contributions of others
-- Use appropriate channels for different types of communication
+#### **Harassment and Discrimination**
+- 💬 **Trolling, insulting, or derogatory comments**, and personal or political attacks
+- 🔞 **Sexual language or imagery**, and sexual attention or advances of any kind
+- 📧 **Public or private harassment**, including doxxing (publishing private information)
+- 🎯 **Targeted campaigns** against individuals or groups
+- 👁️ **Stalking or following** behavior, online or offline
+- 🗣️ **Discriminatory language** or behavior based on protected characteristics
+
+#### **Professional Misconduct**
+- 🎭 **Impersonation** of other researchers or institutions
+- 🤥 **False credentials** or misrepresentation of qualifications
+- 📣 **Citation farming** or manipulating metrics for personal gain
+- 🤐 **Confidentiality violations**: Sharing peer review content without permission
+- 🏢 **Commercial spam** or unauthorized solicitation
+- ⚖️ **Any other conduct** which could reasonably be considered inappropriate in a professional setting
+
+---
+
+## Scientific Integrity Code
+
+As an academic platform, NITOR upholds the highest standards of scientific integrity. All users affirm:
+
+### The Nitor Oath
+
+> *"I affirm that the research I present on Nitor is my own work or properly attributed, that the data is authentic, and that I have declared all conflicts of interest. I engage in this community to seek truth, not merely status, and I commit to the principles of open inquiry, reproducibility, and intellectual honesty."*
+
+### Core Principles
+
+1. **Honesty**: Report research findings truthfully, without fabrication or falsification
+2. **Objectivity**: Avoid bias in research design, data analysis, and interpretation
+3. **Integrity**: Keep promises and agreements; act with sincerity
+4. **Carefulness**: Avoid careless errors and negligence; keep good records
+5. **Openness**: Share data, results, methods, and ideas; be open to criticism
+6. **Respect for Intellectual Property**: Honor patents, copyrights, and other forms of IP
+7. **Confidentiality**: Protect confidential communications and sensitive data
+8. **Responsible Publication**: Publish to advance research and scholarship, not just to advance career
+9. **Responsible Mentoring**: Help educate and train the next generation of researchers
+10. **Social Responsibility**: Consider the social consequences of research
+
+---
+
+## Enforcement Responsibilities
+
+### Moderation Team
+
+Community leaders are responsible for clarifying and enforcing our standards of acceptable behavior and will take appropriate and fair corrective action in response to any behavior that they deem inappropriate, threatening, offensive, or harmful.
+
+### Rights and Responsibilities
+
+Community leaders have the right and responsibility to:
+- Remove, edit, or reject comments, commits, code, wiki edits, issues, and other contributions that are not aligned with this Code of Conduct
+- Temporarily or permanently ban any contributor for behaviors that they deem inappropriate, threatening, offensive, or harmful
+- Communicate reasons for moderation decisions when appropriate
 
 ---
 
 ## Scope
 
-This Code of Conduct applies to all project spaces, including:
+This Code of Conduct applies within all NITOR community spaces, including:
 
-- GitHub repository (issues, pull requests, discussions)
-- Official communication channels
-- Project events and meetings
-- Social media when representing the project
-- Email and direct communications
-- Any other project-related forums
+- **Platform Usage**: All interactions on nitor.com
+- **API Usage**: Programmatic access to NITOR services
+- **GitHub Repository**: Issues, pull requests, discussions
+- **Communication Channels**: Email, Discord, forums, social media
+- **Events**: Conferences, meetups, webinars (virtual or in-person)
+- **Official Representation**: When representing NITOR in public spaces
 
-It also applies when representing the project in public spaces.
-
----
-
-## Enforcement
-
-### Reporting
-
-If you experience or witness unacceptable behavior:
-
-**Contact:**
-- Email: conduct@nitor.io
-- GitHub: Report through repository settings
-- Private message to project maintainers
-
-**Include:**
-- Description of the incident
-- Context and evidence (if available)
-- Impact on you or others
-- Date, time, and location
-- Any witnesses
-
-**Confidentiality:**
-All reports will be reviewed confidentially. We will respect privacy and security concerns of reporters.
-
-### Response Process
-
-1. **Receipt Acknowledgment** - Within 24 hours
-2. **Initial Review** - Within 48 hours
-3. **Investigation** - Gather information from all parties
-4. **Decision** - Determine appropriate action
-5. **Communication** - Inform parties of outcome
-6. **Follow-up** - Monitor situation and provide support
-
-### Enforcement Actions
-
-Depending on severity and circumstances:
-
-**Warning**
-- Written notice of violation
-- Explanation of unacceptable behavior
-- Request for behavior modification
-- Warning of consequences for repeated violations
-
-**Temporary Ban**
-- Suspension from project participation
-- Duration based on severity (1-90 days)
-- Restricted access to project resources
-- Review before reinstatement
-
-**Permanent Ban**
-- Permanent removal from project
-- Blocked from all project spaces
-- No future participation allowed
-- Public record of ban (if appropriate)
-
-### Appeals
-
-Decisions may be appealed within 30 days:
-- Email: appeals@nitor.io
-- Include case reference number
-- Provide new information or context
-- Appeal will be reviewed by different maintainer
+This Code also applies when an individual is officially representing the community in public spaces, such as using an official email address, posting via an official social media account, or acting as an appointed representative at an online or offline event.
 
 ---
 
-## Maintainer Responsibilities
+## Enforcement Process
 
-Project maintainers are responsible for:
+### 1. Reporting Violations
 
-- Clarifying standards of acceptable behavior
-- Taking appropriate and fair corrective action
-- Removing, editing, or rejecting contributions that violate this Code of Conduct
-- Communicating reasons for moderation decisions
-- Maintaining confidentiality regarding reporters
-- Leading by example
+If you experience or witness unacceptable behavior, or have any other concerns, please report it by contacting the community team at:
 
-Maintainers who do not follow or enforce the Code of Conduct may face temporary or permanent consequences.
+📧 **Email**: conduct@nitor.com
+🔒 **Anonymous Form**: https://nitor.com/report-conduct *(Coming Soon)*
+
+All complaints will be reviewed and investigated promptly and fairly. All community leaders are obligated to respect the privacy and security of the reporter.
+
+**When Reporting, Please Include:**
+- Your contact information (if you wish to receive updates)
+- Names (usernames) of individuals involved
+- Description of the behavior and context
+- Links or screenshots (if applicable)
+- Any other information that may be helpful
+
+### 2. Investigation
+
+Upon receiving a report, the moderation team will:
+1. **Acknowledge receipt** within 24 hours
+2. **Conduct investigation** within 7 days
+3. **Interview parties** involved (if necessary)
+4. **Review evidence** including platform logs, screenshots, witness accounts
+5. **Determine appropriate action** based on severity and context
+
+### 3. Enforcement Guidelines
+
+Community leaders will follow these Community Impact Guidelines in determining the consequences for any action they deem in violation of this Code of Conduct:
+
+#### **Level 1: Correction**
+
+**Community Impact**: Use of inappropriate language or other behavior deemed unprofessional or unwelcome in the community.
+
+**Consequence**: A private, written warning from community leaders, providing clarity around the nature of the violation and an explanation of why the behavior was inappropriate. A public apology may be requested.
+
+**Example**: Minor citation error, unintentional discourtesy, first-time minor offense.
+
+**Remedial Action**:
+- Private warning via email
+- Educational resources provided
+- 7-day self-reflection period
+- No platform restrictions
+
+#### **Level 2: Warning**
+
+**Community Impact**: A violation through a single incident or series of actions.
+
+**Consequence**: A warning with consequences for continued behavior. No interaction with the people involved, including unsolicited interaction with those enforcing the Code of Conduct, for a specified period. This includes avoiding interactions in community spaces as well as external channels like social media.
+
+**Example**: Self-plagiarism without proper citation, undisclosed conflicts of interest, repeated inappropriate behavior after warning.
+
+**Remedial Action**:
+- Formal written warning
+- 30-day temporary restriction on posting/commenting
+- Required completion of academic integrity training
+- Content flagged with "Under Review" notice
+- Continued monitoring for 90 days
+
+#### **Level 3: Temporary Ban**
+
+**Community Impact**: A serious violation of community standards, including sustained inappropriate behavior.
+
+**Consequence**: A temporary ban from any sort of interaction or public communication with the community for a specified period. No public or private interaction with the people involved is allowed during this period. Violating these terms may lead to a permanent ban.
+
+**Example**: Deliberate plagiarism, data manipulation, harassment of community members, repeated Level 2 violations.
+
+**Remedial Action**:
+- 90-180 day account suspension
+- All content marked "Author Suspended"
+- Notification sent to user's affiliated institution (for verified academics)
+- Re-application process required after suspension
+- Mandatory ethics training before reinstatement
+
+#### **Level 4: Permanent Ban**
+
+**Community Impact**: Demonstrating a pattern of violation of community standards, including sustained inappropriate behavior, harassment, or aggression toward individuals or classes of individuals.
+
+**Consequence**: A permanent ban from any sort of public interaction within the community.
+
+**Example**: Data fabrication, severe harassment, threats of violence, repeated serious violations, circumventing previous bans.
+
+**Remedial Action**:
+- Permanent account termination
+- All published content marked "RETRACTED - Author Banned"
+- IP ban and device fingerprinting
+- Notification to affiliated institutions
+- Legal action pursued if applicable
+- Public disclosure (username only) in transparency report
+
+---
+
+## Special Considerations for Academic Misconduct
+
+### Plagiarism and Data Integrity
+
+Given NITOR's academic nature, violations of research integrity are treated with particular seriousness:
+
+| Violation Type | First Offense | Repeat Offense |
+|---|---|---|
+| **Unintentional Citation Error** | Correction + Warning | Temporary Ban |
+| **Self-Plagiarism** | Warning + Flag | Temporary Ban |
+| **Direct Plagiarism** | Temporary Ban | Permanent Ban |
+| **Data Fabrication** | Permanent Ban | Permanent Ban + Legal Action |
+| **Image Manipulation** | Permanent Ban | Permanent Ban + Institutional Notice |
+| **P-Hacking/HARKing** | Warning + Training | Temporary Ban |
+
+### Peer Review Ethics
+
+Violations of peer review confidentiality or misuse of the review process will result in:
+- **First Offense**: Removal of review privileges for 6 months
+- **Repeat Offense**: Permanent ban from review system
+- **Severe Cases**: Full account termination
+
+---
+
+## Appeals Process
+
+### Right to Appeal
+
+Any user who receives an enforcement action has the right to appeal the decision.
+
+### Appeal Procedure
+
+1. **Submit Appeal**: Email appeals@nitor.com within 14 days of enforcement action
+2. **Provide Justification**: Explain why you believe the decision was incorrect
+3. **Include Evidence**: Provide any new information or context
+4. **Review**: Independent appeals committee reviews within 30 days
+5. **Final Decision**: Binding decision communicated via email
+
+### Appeals Committee
+
+The appeals committee consists of:
+- Two NITOR community moderators (not involved in original decision)
+- One external academic advisor
+- One community-elected member
+
+Decisions require a 3/4 majority vote.
+
+---
+
+## Transparency and Accountability
+
+### Public Transparency Reports
+
+NITOR publishes quarterly transparency reports including:
+- Number of Code of Conduct reports received
+- Types of violations reported
+- Enforcement actions taken (anonymized)
+- Policy updates and improvements
+
+### Community Input
+
+We welcome community feedback on this Code of Conduct:
+- Annual community survey on moderation practices
+- Open comment periods for policy updates
+- Regular town halls with moderation team
 
 ---
 
 ## Attribution
 
-This Code of Conduct is adapted from:
-- [Contributor Covenant](https://www.contributor-covenant.org/), version 2.1
-- [Academic Code of Conduct](https://www.nsf.gov/od/oecr/conduct.jsp)
-- Industry best practices for open-source projects
+This Code of Conduct is adapted from multiple sources:
+
+- **Contributor Covenant, version 2.1**: https://www.contributor-covenant.org/version/2/1/code_of_conduct.html
+- **Mozilla Community Participation Guidelines**: https://www.mozilla.org/en-US/about/governance/policies/participation/
+- **ACM Code of Ethics**: https://www.acm.org/code-of-ethics
+- **Singapore Statement on Research Integrity**: https://wcrif.org/guidance/singapore-statement
+
+Community Impact Guidelines were inspired by [Mozilla's code of conduct enforcement ladder](https://github.com/mozilla/diversity).
 
 ---
 
-## Updates
+## Questions or Concerns
 
-This Code of Conduct may be updated periodically to reflect community needs and best practices. Contributors will be notified of significant changes.
+If you have questions about this Code of Conduct or wish to report a violation:
 
-**Version:** 2.0.0
-**Last Updated:** 2025-11-25
-**Next Review:** 2026-01-25
-
----
-
-## Questions
-
-For questions about this Code of Conduct:
-- Email: conduct@nitor.io
-- Review: [Contributing Guidelines](CONTRIBUTING.md)
-- Community: GitHub Discussions
+📧 **General Inquiries**: conduct@nitor.com
+🚨 **Report Violation**: report@nitor.com
+🔒 **Anonymous Hotline**: https://nitor.com/hotline *(Coming Soon)*
 
 ---
 
-## Acknowledgment
+## Document Version History
 
-By participating in this project, you agree to abide by this Code of Conduct and contribute to a professional, respectful academic community.
+| Version | Date | Changes |
+|---------|------|---------|
+| 1.0.0 | November 5, 2025 | Initial Code of Conduct |
+| 1.1.0 | November 27, 2025 | Added Scientific Integrity Code, Appeals Process |
+
+**Last Updated**: November 27, 2025
+**Effective Date**: November 5, 2025
+**Next Review**: February 5, 2026
+
+---
+
+<div align="center">
+
+**NITOR Code of Conduct**
+*Building a Better Academic Community Together*
+
+*For questions or clarifications, contact: conduct@nitor.com*
+
+</div>
