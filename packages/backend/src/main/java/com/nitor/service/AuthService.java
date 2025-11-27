@@ -162,7 +162,6 @@ public class AuthService {
 
                         userRepository.save(user);
 
-                        // TODO: In production, send email with reset link
                         // For now, just log the token (dev/demo mode)
                         log.info("Password reset token for {}: {}", email, resetToken);
                         log.info("Reset link: http://localhost:3000/#/reset-password?token={}", resetToken);
