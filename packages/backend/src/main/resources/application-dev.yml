@@ -28,3 +28,8 @@ app:
 springdoc:
   swagger-ui:
     enabled: true
+
+management:
+  health:
+    mail:
+      enabled: false
