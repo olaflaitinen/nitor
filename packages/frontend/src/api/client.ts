@@ -57,6 +57,19 @@ class ApiClient {
     localStorage.removeItem('refreshToken');
   }
 
+  async changePassword(currentPassword: string, newPassword: string) {
+    const response = await this.client.post('/api/auth/change-password', {
+      currentPassword,
+      newPassword
+    });
+    return response.data;
+  }
+
+  async deleteAccount() {
+    const response = await this.client.delete('/api/auth/delete-account');
+    return response.data;
+  }
+
   // Profile endpoints
   async getProfile(id: string) {
     const response = await this.client.get(`/api/profiles/${id}`);
@@ -65,6 +78,11 @@ class ApiClient {
 
   async updateProfile(id: string, data: any) {
     const response = await this.client.put(`/api/profiles/${id}`, data);
+    return response.data;
+  }
+
+  async deactivateProfile(id: string) {
+    const response = await this.client.post(`/api/profiles/${id}/deactivate`);
     return response.data;
   }
 
@@ -251,6 +269,13 @@ class ApiClient {
 
   async unbookmarkContent(contentId: string) {
     await this.client.delete(`/api/content/${contentId}/bookmark`);
+  }
+
+  async reportContent(contentId: string, reason: string) {
+    const response = await this.client.post(`/api/content/${contentId}/report`, null, {
+      params: { reason }
+    });
+    return response.data;
   }
 
   // Follow endpoints

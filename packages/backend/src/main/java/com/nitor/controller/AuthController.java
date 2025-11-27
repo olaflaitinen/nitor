@@ -78,6 +78,26 @@ public class AuthController {
         return ResponseEntity.ok(new MessageResponse("Password has been reset successfully"));
     }
 
+    @PostMapping("/change-password")
+    @Operation(summary = "Change password", description = "Change password for authenticated user")
+    public ResponseEntity<MessageResponse> changePassword(
+            @RequestHeader("Authorization") String authHeader,
+            @Valid @RequestBody ChangePasswordRequest request) {
+        authService.changePassword(authHeader, request.currentPassword(), request.newPassword());
+        return ResponseEntity.ok(new MessageResponse("Password changed successfully"));
+    }
+
+    @DeleteMapping("/delete-account")
+    @Operation(summary = "Delete account", description = "Permanently delete user account")
+    public ResponseEntity<MessageResponse> deleteAccount(
+            @RequestHeader("Authorization") String authHeader) {
+        authService.deleteAccount(authHeader);
+        return ResponseEntity.ok(new MessageResponse("Account deleted successfully"));
+    }
+
+    public record ChangePasswordRequest(String currentPassword, String newPassword) {
+    }
+
     public record RefreshTokenResponse(String accessToken, String refreshToken, String tokenType) {
     }
 

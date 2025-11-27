@@ -51,4 +51,16 @@ public class ProfileController {
             Pageable pageable) {
         return ResponseEntity.ok(profileService.searchProfiles(query, pageable));
     }
+
+    @PostMapping("/{id}/deactivate")
+    @SecurityRequirement(name = "bearerAuth")
+    @Operation(summary = "Deactivate profile")
+    public ResponseEntity<MessageResponse> deactivateProfile(@PathVariable UUID id) {
+        profileService.deactivateProfile(id);
+        return ResponseEntity.ok(new MessageResponse("Profile deactivated successfully"));
+    }
+
+    public record MessageResponse(String message) {
+    }
+
 }
