@@ -1,0 +1,82 @@
+# Maven
+target/
+!target/*.jar
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Gradle (in case someone has both)
+.gradle/
+build/
+gradle/
+gradlew
+gradlew.bat
+
+# IDE files
+.idea/
+*.iml
+*.iws
+*.ipr
+.project
+.classpath
+.settings/
+.vscode/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Documentation
+README.md
+CHANGELOG.md
+docs/
+*.md
+
+# Test files
+src/test/
+test/
+
+# Log files
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+
+# Package files
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Docker files
+Dockerfile
+.dockerignore
+docker-compose*.yml
+
+# Fly.io
+fly.toml
+
+# Environment files
+.env
+.env.*
+application-local.yml
+application-local.properties
