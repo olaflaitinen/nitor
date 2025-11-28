@@ -10,57 +10,57 @@ We pledge to act and interact in ways that contribute to an open, welcoming, div
 
 ## Our Standards
 
-### ✅ Expected Behavior
+### Expected Behavior
 
 Examples of behavior that contributes to a positive environment for our community include:
 
 #### **Academic Excellence**
-- 📚 **Maintaining Scientific Rigor**: All research shared must meet academic standards of evidence and methodology
-- 📝 **Proper Attribution**: Always cite sources and give credit to others' work
-- 🔍 **Transparency**: Declare conflicts of interest, data sources, and methodological limitations
-- 🎯 **Constructive Criticism**: Engage in peer review with professionalism and respect
+- **Maintaining Scientific Rigor**: All research shared must meet academic standards of evidence and methodology
+- **Proper Attribution**: Always cite sources and give credit to others' work
+- **Transparency**: Declare conflicts of interest, data sources, and methodological limitations
+- **Constructive Criticism**: Engage in peer review with professionalism and respect
 
 #### **Professional Conduct**
-- 🤝 **Demonstrating empathy and kindness** toward other community members
-- 💬 **Being respectful** of differing opinions, viewpoints, and experiences
-- ✉️ **Giving and gracefully accepting** constructive feedback
-- 🙏 **Accepting responsibility** and apologizing to those affected by our mistakes
-- 🌱 **Focusing on what is best** not just for us as individuals, but for the overall community
+- **Demonstrating empathy and kindness** toward other community members
+- **Being respectful** of differing opinions, viewpoints, and experiences
+- **Giving and gracefully accepting** constructive feedback
+- **Accepting responsibility** and apologizing to those affected by our mistakes
+- **Focusing on what is best** not just for us as individuals, but for the overall community
 
 #### **Inclusive Collaboration**
-- 🌍 **Using welcoming and inclusive language**
-- 🎓 **Respecting varied educational backgrounds** and research methodologies
-- 👥 **Valuing diverse perspectives** from different disciplines and institutions
-- 🤲 **Supporting early-career researchers** and providing mentorship
+- **Using welcoming and inclusive language**
+- **Respecting varied educational backgrounds** and research methodologies
+- **Valuing diverse perspectives** from different disciplines and institutions
+- **Supporting early-career researchers** and providing mentorship
 
-### ❌ Unacceptable Behavior
+### Unacceptable Behavior
 
 The following behaviors are considered violations of our Code of Conduct:
 
 #### **Scientific Misconduct**
-- 🚫 **Plagiarism**: Direct, mosaic, or self-plagiarism without proper citation
-- 📊 **Data Fabrication or Falsification**: Creating or altering research data
-- 🔬 **P-Hacking**: Selective reporting of statistical analyses
-- 📈 **HARKing**: Hypothesizing After Results are Known
-- 🖼️ **Image Manipulation**: Improper alteration of research images
-- 🤖 **Undisclosed AI Usage**: Failing to declare significant AI-generated content
-- ⚠️ **Failure to Declare Conflicts**: Not disclosing financial or personal conflicts of interest
+- **Plagiarism**: Direct, mosaic, or self-plagiarism without proper citation
+- **Data Fabrication or Falsification**: Creating or altering research data
+- **P-Hacking**: Selective reporting of statistical analyses
+- **HARKing**: Hypothesizing After Results are Known
+- **Image Manipulation**: Improper alteration of research images
+- **Undisclosed AI Usage**: Failing to declare significant AI-generated content
+- **Failure to Declare Conflicts**: Not disclosing financial or personal conflicts of interest
 
 #### **Harassment and Discrimination**
-- 💬 **Trolling, insulting, or derogatory comments**, and personal or political attacks
-- 🔞 **Sexual language or imagery**, and sexual attention or advances of any kind
-- 📧 **Public or private harassment**, including doxxing (publishing private information)
-- 🎯 **Targeted campaigns** against individuals or groups
-- 👁️ **Stalking or following** behavior, online or offline
-- 🗣️ **Discriminatory language** or behavior based on protected characteristics
+- **Trolling, insulting, or derogatory comments**, and personal or political attacks
+- **Sexual language or imagery**, and sexual attention or advances of any kind
+- **Public or private harassment**, including doxxing (publishing private information)
+- **Targeted campaigns** against individuals or groups
+- **Stalking or following** behavior, online or offline
+- **Discriminatory language** or behavior based on protected characteristics
 
 #### **Professional Misconduct**
-- 🎭 **Impersonation** of other researchers or institutions
-- 🤥 **False credentials** or misrepresentation of qualifications
-- 📣 **Citation farming** or manipulating metrics for personal gain
-- 🤐 **Confidentiality violations**: Sharing peer review content without permission
-- 🏢 **Commercial spam** or unauthorized solicitation
-- ⚖️ **Any other conduct** which could reasonably be considered inappropriate in a professional setting
+- **Impersonation** of other researchers or institutions
+- **False credentials** or misrepresentation of qualifications
+- **Citation farming** or manipulating metrics for personal gain
+- **Confidentiality violations**: Sharing peer review content without permission
+- **Commercial spam** or unauthorized solicitation
+- **Any other conduct** which could reasonably be considered inappropriate in a professional setting
 
 ---
 
@@ -123,8 +123,8 @@ This Code also applies when an individual is officially representing the communi
 
 If you experience or witness unacceptable behavior, or have any other concerns, please report it by contacting the community team at:
 
-📧 **Email**: conduct@nitor.com
-🔒 **Anonymous Form**: https://nitor.com/report-conduct *(Coming Soon)*
+**Email**: conduct@nitor.com
+**Anonymous Form**: https://nitor.com/report-conduct *(Coming Soon)*
 
 All complaints will be reviewed and investigated promptly and fairly. All community leaders are obligated to respect the privacy and security of the reporter.
 
@@ -295,9 +295,9 @@ Community Impact Guidelines were inspired by [Mozilla's code of conduct enforcem
 
 If you have questions about this Code of Conduct or wish to report a violation:
 
-📧 **General Inquiries**: conduct@nitor.com
-🚨 **Report Violation**: report@nitor.com
-🔒 **Anonymous Hotline**: https://nitor.com/hotline *(Coming Soon)*
+**General Inquiries**: conduct@nitor.com
+**Report Violation**: report@nitor.com
+**Anonymous Hotline**: https://nitor.com/hotline *(Coming Soon)*
 
 ---
 

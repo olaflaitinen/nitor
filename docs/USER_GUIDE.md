@@ -57,12 +57,12 @@ During onboarding, you'll be asked to:
 
 After onboarding:
 
-- [✓] Complete your profile (Settings → Profile)
-- [✓] Upload a professional photo
-- [✓] Add your ORCID (if available)
-- [✓] Build your CV
-- [✓] Make your first post
-- [✓] Follow researchers in your field
+- [ ] Complete your profile (Settings → Profile)
+- [ ] Upload a professional photo
+- [ ] Add your ORCID (if available)
+- [ ] Build your CV
+- [ ] Make your first post
+- [ ] Follow researchers in your field
 
 ---
 
@@ -181,14 +181,14 @@ $$
 
 ### Best Practices
 
-[✓] **DO:**
+**DO:**
 - Write clear, concise posts
 - Use proper citations
 - Tag content appropriately
 - Engage constructively
 - Maintain professional tone
 
-[✗] **DON'T:**
+**DON'T:**
 - Plagiarize or misrepresent work
 - Share unpublished data without permission
 - Make personal attacks
@@ -650,36 +650,36 @@ A: Credit/debit cards, PayPal (coming soon).
 
 ### Maximize Your Profile
 
-[✓] Complete all profile sections
-[✓] Add professional photo
-[✓] Connect ORCID
-[✓] Upload recent publications
-[✓] Build your CV
-[✓] Write detailed bio
+- Complete all profile sections
+- Add professional photo
+- Connect ORCID
+- Upload recent publications
+- Build your CV
+- Write detailed bio
 
 ### Grow Your Network
 
-[✓] Connect with colleagues
-[✓] Follow thought leaders
-[✓] Join discipline groups
-[✓] Attend virtual events
-[✓] Engage with content
+- Connect with colleagues
+- Follow thought leaders
+- Join discipline groups
+- Attend virtual events
+- Engage with content
 
 ### Increase Engagement
 
-[✓] Post regularly (2-3 times/week)
-[✓] Share research updates
-[✓] Comment thoughtfully
-[✓] Use relevant hashtags
-[✓] Cross-post notable publications
+- Post regularly (2-3 times/week)
+- Share research updates
+- Comment thoughtfully
+- Use relevant hashtags
+- Cross-post notable publications
 
 ### Use AI Effectively
 
-[✓] Review AI suggestions carefully
-[✓] Customize generated content
-[✓] Don't rely solely on AI
-[✓] Maintain your voice
-[✓] Verify technical accuracy
+- Review AI suggestions carefully
+- Customize generated content
+- Don't rely solely on AI
+- Maintain your voice
+- Verify technical accuracy
 
 ---
 
