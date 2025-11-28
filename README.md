@@ -583,6 +583,7 @@ Comprehensive documentation is available in the `/docs` directory:
 
 | Document | Description | Audience |
 |----------|-------------|----------|
+| [**FREE Deployment (TR)**](FREE_DEPLOYMENT_GUIDE.md) | **ÜCRETSİZ deployment - Render, Railway, Vercel** | **Herkes** |
 | [**Production Deployment Guide**](PRODUCTION_DEPLOYMENT_COMPLETE_GUIDE.md) | **Complete production deployment with all credentials and API keys** | **DevOps** |
 | [API Documentation](docs/API_DOCUMENTATION.md) | Complete REST API reference with 121 backend + 54 AI endpoints | Developers |
 | [Local Deployment Guide](docs/LOCAL_DEPLOYMENT.md) | Step-by-step local setup instructions | Developers |
