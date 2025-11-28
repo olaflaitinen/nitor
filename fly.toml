@@ -1,10 +1,10 @@
-# fly.toml app configuration file generated for nitor on 2025-11-28T09:12:22Z
+# fly.toml app configuration file generated for nitor-uoywja on 2025-11-28T10:10:02Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'nitor'
-primary_region = 'gru'
+app = 'nitor-uoywja'
+primary_region = 'arn'
 
 [build]
 
