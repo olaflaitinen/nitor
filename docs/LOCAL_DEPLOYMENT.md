@@ -148,12 +148,12 @@ make start
 
 ```
 [+] Running 6/6
- ✓ Container nitor-postgres     Started
- ✓ Container nitor-redis        Started
- ✓ Container nitor-minio        Started
- ✓ Container nitor-backend      Started
- ✓ Container nitor-ai-service   Started
- ✓ Container nitor-frontend     Started
+ Container nitor-postgres     Started
+ Container nitor-redis        Started
+ Container nitor-minio        Started
+ Container nitor-backend      Started
+ Container nitor-ai-service   Started
+ Container nitor-frontend     Started
 ```
 
 ### Step 4: Verify Deployment
