@@ -6,7 +6,9 @@ app = "nitor"
 primary_region = "iad"
 
 # Build configuration
+# IMPORTANT: Run 'fly deploy' from packages/backend/ directory!
 [build]
+  dockerfile = "Dockerfile"
 
 # HTTP service
 [http_service]
