@@ -583,6 +583,7 @@ Comprehensive documentation is available in the `/docs` directory:
 
 | Document | Description | Audience |
 |----------|-------------|----------|
+| [**Production Deployment Guide**](PRODUCTION_DEPLOYMENT_COMPLETE_GUIDE.md) | **Complete production deployment with all credentials and API keys** | **DevOps** |
 | [API Documentation](docs/API_DOCUMENTATION.md) | Complete REST API reference with 121 backend + 54 AI endpoints | Developers |
 | [Local Deployment Guide](docs/LOCAL_DEPLOYMENT.md) | Step-by-step local setup instructions | Developers |
 | [Deployment Guide](docs/DEPLOYMENT_GUIDE.md) | Production deployment with Kubernetes | DevOps |
@@ -593,7 +594,7 @@ Comprehensive documentation is available in the `/docs` directory:
 
 - [Security Policy](SECURITY.md) - Vulnerability reporting and security practices
 - [Contributing Guide](CONTRIBUTING.md) - How to contribute to NITOR
-- [Code of Conduct](CODE_OF_CONDUCT.md) - Community standards
+- [Code of Conduct](CODE_OF_CONDUCT.md) - Community standards and scientific integrity code
 - [Contributors](CONTRIBUTORS.md) - Project contributors
 - [Deployment Fixes](DEPLOYMENT_FIXES.md) - Common deployment issues and solutions
 - [Nginx Configuration](infrastructure/nginx/README.md) - Reverse proxy setup
