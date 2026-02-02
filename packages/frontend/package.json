@@ -15,7 +15,7 @@
     "axios": "^1.13.2",
     "canvas-confetti": "^1.9.4",
     "dotenv": "^17.2.3",
-    "jspdf": "^3.0.4",
+    "jspdf": "^4.1.0",
     "lucide-react": "^0.554.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
